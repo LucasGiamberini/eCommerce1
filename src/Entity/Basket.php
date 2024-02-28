@@ -16,6 +16,14 @@ class Basket
     #[ORM\Column]
     private ?int $quantity = null;
 
+    #[ORM\ManyToOne(inversedBy: 'baskets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Product $Products = null;
+
+    #[ORM\ManyToOne(inversedBy: 'baskets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Purchase $Purchases = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +37,30 @@ class Basket
     public function setQuantity(int $quantity): static
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getProducts(): ?Product
+    {
+        return $this->Products;
+    }
+
+    public function setProducts(?Product $Products): static
+    {
+        $this->Products = $Products;
+
+        return $this;
+    }
+
+    public function getPurchases(): ?Purchase
+    {
+        return $this->Purchases;
+    }
+
+    public function setPurchases(?Purchase $Purchases): static
+    {
+        $this->Purchases = $Purchases;
 
         return $this;
     }

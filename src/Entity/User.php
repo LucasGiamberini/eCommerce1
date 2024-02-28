@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'user')]
+    private Collection $Purchases;
+
+    #[ORM\ManyToMany(targetEntity: product::class, inversedBy: 'users')]
+    private Collection $Favorite;
+
+    public function __construct()
+    {
+        $this->Purchases = new ArrayCollection();
+        $this->Favorite = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -118,6 +132,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Purchase>
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->Purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): static
+    {
+        if (!$this->Purchases->contains($purchase)) {
+            $this->Purchases->add($purchase);
+            $purchase->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): static
+    {
+        if ($this->Purchases->removeElement($purchase)) {
+            // set the owning side to null (unless already changed)
+            if ($purchase->getUser() === $this) {
+                $purchase->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, product>
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->Favorite;
+    }
+
+    public function addFavorite(product $favorite): static
+    {
+        if (!$this->Favorite->contains($favorite)) {
+            $this->Favorite->add($favorite);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(product $favorite): static
+    {
+        $this->Favorite->removeElement($favorite);
 
         return $this;
     }
