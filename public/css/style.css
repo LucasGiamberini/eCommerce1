@@ -1,0 +1,130 @@
+
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(#00BEE0,rgb(2, 2, 2) );
+    background-repeat: no-repeat;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+    color: white;
+    text-decoration: none;
+    list-style: none;
+    width:98%; 
+}
+
+header{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    width : 100%;
+}
+
+footer{
+    background-color: black;
+}
+
+li{
+    
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+#template{
+    width: 90%;
+    min-height: 80%;
+    background-color: white;
+}
+
+/*////////////////////////formulaire ajout produit///////////////*/
+/*#add_product_Consumable{
+    display: hidden ;
+    color:green;
+}
+/*
+#add_product_Consumable{
+    display:none;
+}
+*/
+/*//////////////////home page et categorie/////////////////////*/
+.ProductBoxs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.ProductBox{
+    background-color: rgba(202, 201, 201, 0.945);
+    width: 20%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.figureNavigation{
+    display: flex;
+    justify-content: center;
+}
+
+.pictureNavigation{
+    display: flex;
+    height: 30%;
+    width: 95%;
+}
+
+/*/////////////////////show product//////////////////*/
+#productShow{
+    display: flex;
+    justify-content: center;
+}
+
+#imgShow{
+    width:30%;
+    overflow: hidden;
+}
+
+
+.pictureShowProduct{
+    max-width: 41%;
+    max-height: 30%;
+}
+
+#presentation{
+    width: 30%;
+}
+
+#buy{
+    width: 20%;
+}
+
+/*////////////////////////////////////Basket//////////////////////////////*/
+
+#pictureBasket{
+    width:100%;
+}
+
+/*///////////////////////////////////////register////////////////////////*/
+
+/*/////////////////////////////////////////invoice//////////////////////////*/
+
+
+#pictureInvoice{
+
+    width: 103%;  
+}
+
+#figureBasket{
+    width:100%;
+}
+
