@@ -64,7 +64,7 @@ class PdfController extends AbstractController
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
 
-        return $this->render("purchase/success.html.twig");
+        return $this->redirectToRoute('app_sendingEmail');
        
     }
 }

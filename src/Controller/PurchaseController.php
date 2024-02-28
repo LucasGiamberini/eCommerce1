@@ -12,11 +12,14 @@ use Stripe\StripeClient;
 use App\Form\AddAdressType;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
+use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -202,5 +205,32 @@ class PurchaseController extends AbstractController
 
     }
 
+    #[Route('/purchase/sendingmail', name: 'app_sendingEmail')]
+    public function sendingEmail(Security $security, MailerInterface $mailer): Response
+    {   //trouver le nom du fichier de facture correspondant 
+        $user=$security->getUser();
+        foreach($user->getPurchases() as $purchase ){
+            $lastPurchasNoOrder = $purchase->getNoOrder();
+        }
+
+        //on indique le chemin du fichier ainsi que le nom du fichier
+        $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/pdf';
+        
+        
+       
+        $email = 
+        (new TemplatedEmail())
+                    ->from(new Address('no-reply@apolloCloud.com', 'AppolloCloud'))
+                    ->to($user->getEmail())
+                    ->subject('confirmation commande')
+                    ->htmlTemplate('purchase/email.html.twig')
+                    //on attache le fichier
+                    ->attachFromPath( $publicDirectory .'/'. $lastPurchasNoOrder.'.pdf');
+       
+        $mailer->send($email);
+
+        return $this->render("purchase/success.html.twig");
+;
+    }
 
 }
