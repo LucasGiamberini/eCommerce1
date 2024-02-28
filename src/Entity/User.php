@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'user')]
     private Collection $Purchases;
 
-    #[ORM\ManyToMany(targetEntity: product::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'users')]
     private Collection $Favorite;
 
     public function __construct()
@@ -174,7 +174,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->Favorite;
     }
 
-    public function addFavorite(product $favorite): static
+    public function addFavorite(Product $favorite): static
     {
         if (!$this->Favorite->contains($favorite)) {
             $this->Favorite->add($favorite);
@@ -183,7 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeFavorite(product $favorite): static
+    public function removeFavorite(Product $favorite): static
     {
         $this->Favorite->removeElement($favorite);
 

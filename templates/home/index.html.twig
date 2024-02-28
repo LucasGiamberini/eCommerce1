@@ -21,7 +21,7 @@
       {{product.price }}<br>
      <a href ="{{ path ('delete_product' , {'id': product.id})}}"> Supprimer</a>
       <a href ="{{ path ('edit_product' , {'id' : product.id})}}">Editer</a><br>
-    {#}  <a href ="{{ path ('add_basket' , {'id' : product.id})}}">Ajouter au panier</a><br>#}
+      <a href ="{{ path ('add_basket' , {'id' : product.id})}}">Ajouter au panier</a><br>
     </div>
 
     {% if loop.index is divisible by(4) %}

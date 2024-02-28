@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+<h1>Panier</h1>
+{% if empty == true  %}
+<h3>Panier vide!</h3>
+
+{% else   %}
+
+
+
+
+<thead>
+    <div class="row">
+        <div class="col-sm">   
+        </div>
+        <div class="col-sm">
+            nom du produit
+        </div>
+        <div class="col-sm">
+            Prix unitaire
+        </div>
+      
+        <div class="col-sm">
+            Quantité
+        </div>
+        <div class="col-sm">   
+        </div>
+        <div class="col-sm">  
+            Total 
+        </div>
+        
+    </div>   
+<br>
+</thead>
+<tbody>
+{% for basket in baskets %}
+<div class="row">
+    <div class="col-sm">
+    {% if basket.product.img[0] is defined %}
+    <figure>
+    <img id="pictureBasket" src="{{ asset('/img/' ~ basket.product.img[0].name) }}" alt="{{ basket.product.name }}">
+    </figure>
+    {% endif %}
+    </div>
+    <div class="col-sm">
+        <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
+            {{basket.product.name}}
+        </a>
+      
+    </div>
+    <div class="col-sm">
+        {{basket.product.price}}
+    </div>
+    <div class="col-sm">
+        <a href="{{path("remove_basket", {id: basket.product.id})}}">
+            <i>-</i>
+        </a>
+        {{basket.quantity}}
+     
+        <a href="{{path("add_basket", {id: basket.product.id})}}">
+            <i >+</i>
+          </a>
+    </div>
+    <div class="col-sm">
+        <a href="{{path("delete_basket", {id: basket.product.id})}}"> Supprimer</a>
+    </div>
+    <div class="col-sm"> 
+        {{basket.product.price * basket.quantity }}  
+    </div>
+ 
+</div>  
+
+<br>
+{% endfor %}
+</tbody>
+
+<tfoot>
+    <div class="row">
+    
+        <div class="col-sm" colspan="2"> 
+        Total Commande:{{total}}
+        </div>
+        <div class="col-sm">
+            <a href="{{path("deleteAll_basket")}}"> Vider le panier</a>
+            </div>
+        <div class="col-sm"> 
+           <a  href="{{path("app_purchase")}}"> Valider la commande</a>
+        </div>
+        
+    </div>
+
+</tfoot>
+{% endif %}
+
+{% endblock %}

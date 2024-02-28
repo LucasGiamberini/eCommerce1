@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recapitulatif{% endblock %}
+
+{% block body %}
+<h1>Recapitulatif</h1>
+
+<div id="adress">
+<h2> Adresse de livraison</h2>
+
+
+{{ address.firstName }}    {{ address.name}}<br>
+{{address.adress}} <br>
+{{address.postalCode}} <br>
+{{address.City}} 
+<a href="{{ path ('edit_adress' )}}">changer l'adresse</a>
+</div>
+<h2> Panier</h2>
+<tbody>
+<div id="basket">
+    
+    {% for basket in baskets %}
+    <div class="products"
+    <div class="row">
+        <div class="col-sm">
+        {% if basket.product.img[0] is defined %}
+        <figure>
+        <img id="pictureBasket" src="{{ asset('/img/' ~ basket.product.img[0].name) }}" alt="{{ basket.product.name }}">
+        </figure>
+        {% endif %}
+        </div>
+        <div class="col-sm">
+            <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
+                {{basket.product.name}}
+            </a>
+          
+        </div>
+        <div class="col-sm">
+            {{basket.product.price}}
+        </div>
+        
+            {{basket.quantity}}
+         
+      
+        <div class="col-sm"> 
+            {{basket.product.price * basket.quantity }}  
+        </div>
+     
+    </div>  
+    
+    <br>
+
+{% endfor %}
+</div>
+
+</tbody>
+ total :{{total}}
+
+
+ <div id="Payement">
+    <form  action="{{ path ('app_pay')}}"  method="post" >
+        <div id="totalPayement">
+
+            <p> {{total}} </p>
+        </div>
+
+        <label for="termsAgreed">
+       {#}     <input type="checkbox" id="termsAgreed" name="termsAgreed" required>
+            En cochant cette case, j'affirme avoir plus de 18 ans, j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a><br>  et les  <a href="{{ path('app_CGV') }}">CGV</a><br>.
+        </label>#}
+        <button type="submit">Payer</button>
+    </form>
+
+
+
+ </div>
+{% endblock %}

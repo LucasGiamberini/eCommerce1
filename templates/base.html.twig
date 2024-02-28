@@ -38,7 +38,24 @@
           </li>
           {% endif %}
         </ul>
+        <ul>
+            <li>
+                <a href="{{path('app_basket')}}">Panier  </a><br>
+                {% set totalQuantity = 0 %}
+                {% for item in app.session.get('basket') %}
+                {% set totalQuantity = totalQuantity + item %}
+                {% endfor %}
+                {% if totalQuantity > 0 %}
+                    
+               
+                {{totalQuantity}} Article{% if totalQuantity > 1 %}s
+                {% endif %}
+                {% endif %}
+            </li>
+        </ul>
     </nav>
+
+
 </header>
 <div id="template">
     {% block body %}{% endblock %}
