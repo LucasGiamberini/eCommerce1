@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PurchaseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PurchaseRepository::class)]
@@ -39,6 +40,12 @@ class Purchase
     #[ORM\ManyToOne(inversedBy: 'Purchases')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $NoOrder = null;
+
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
+    private ?\DateTimeImmutable $PurchaseDate = null;
 
     public function __construct()
     {
@@ -162,5 +169,35 @@ class Purchase
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getNoOrder(): ?string
+    {
+        return $this->NoOrder;
+    }
+
+    public function setNoOrder(string $NoOrder): static
+    {
+        $this->NoOrder = $NoOrder;
+
+        return $this;
+    }
+
+    public function getPurchaseDate(): ?\DateTimeImmutable
+    {
+        return $this->PurchaseDate;
+    }
+
+    public function setPurchaseDate(\DateTimeImmutable $PurchaseDate): static
+    {
+        $this->PurchaseDate = $PurchaseDate;
+
+        return $this;
+    }
+
+    public function getPurchaseDateFormat(): ?string
+
+    {
+        return $this->PurchaseDate->format('d-m-Y');
     }
 }

@@ -1,0 +1,100 @@
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/invoice.css')}}" as="style">
+{% endblock %}
+
+
+<div id="invoiceHeader">
+Appollo Cloud<br>
+7 rue du 14 juillet<br>
+67000 Strasbourg
+
+</div>
+<h1>Facture</h1>
+<div id="topHead">
+
+
+
+<br>
+
+
+<div id="command">
+<p> Commande passer le {{invoice.purchaseDateFormat}}</p>
+<p> Commande no {{invoice.noOrder}}</p>
+</div>
+</div>
+<div id="basket">
+{# <thead> #}
+    <div class="row">
+        <div class="col-sm">   
+        </div>
+        <div class="col-sm">
+            nom du produit
+        </div>
+        <div class="col-sm">
+            Prix unitaire
+        </div>
+      
+        <div class="col-sm">
+            Quantité
+        </div>
+       
+        <div class="col-sm">  
+            Total 
+        </div>
+        
+    </div>   
+
+{# </thead> #}
+<br>
+
+
+{# <tbody> #}
+{% for basket in invoice.baskets %}
+   
+    <div class="row">
+        <div class="col-sm">
+
+   {#} {% if basket.product.img[0] is defined %}
+        <figure >
+            <img class="pictureShowProduct" src="{{ asset('/img/' ~ basket.product.img[0].name) }}" alt="{{ basket.product.name }}">
+            </figure> 
+    {% endif %}
+<#}    </div> 
+    <div class="col-sm">
+         {{basket.products.name}}
+    </div>
+    <div class="col-sm">
+    {{basket.products.price}}&euro;
+    </div>
+    <div class="col-sm">
+        {{basket.quantity}}
+        </div>
+    <div class="col-sm">
+    {{basket.quantity * basket.products.price}}
+    </div>
+    </div><br>
+{% endfor %}
+    {# </tbody> #}
+</div>
+<br>
+
+    <div class="row">
+        <div class="col-sm" >
+
+        </div>
+        <div class="col-sm" >
+
+        </div>
+        <div class="col-sm" colspan="3"> 
+        Total Commande:{{invoice.total}} &euro;
+        </div>
+    </div>    
+    <div id="adress">
+        <h2> Adresse de livraison</h2>
+    {{invoice.firstName}}<br>
+    {{invoice.name}}<br>
+    {{invoice.adress}}<br>
+    {{invoice.postalCode}}<br>
+    {{invoice.city}}<br>
+    </div>
+

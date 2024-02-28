@@ -19,4 +19,19 @@ class HomeController extends AbstractController
             'products' => $product,
         ]);
     }
+
+
+    #[Route('/home/CGV', name: 'app_CGV')]
+    public function CGV( ): Response
+    {  
+ 
+        return $this->render('home/cgv.html.twig');
+}
+
+#[Route('/home/CGU', name: 'app_CGU')]
+public function CGU( ): Response
+{  
+
+    return $this->render('home/cgu.html.twig');
+}
 }

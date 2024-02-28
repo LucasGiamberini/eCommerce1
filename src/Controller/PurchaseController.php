@@ -11,23 +11,17 @@ use App\Entity\Purchase;
 use Stripe\StripeClient;
 use App\Form\AddAdressType;
 use Stripe\Checkout\Session;
-use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
-use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-
 
 class PurchaseController extends AbstractController
 {   #[Route('/purchase/edit', name: 'edit_adress')]
@@ -97,13 +91,13 @@ class PurchaseController extends AbstractController
     ]);
     }
 
-    #[Route('/purchase/pay', name: 'app_pay')]
-    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session, ): Response
+    #[Route('/purchase/pay', name: 'app_success')]
+    public function pay(Security $security ,SessionInterface $sessions, ): Response
     {   
-        $total=$session->get("total");
+        $total=$sessions->get("total");
         $totalStripe= $total*100;
 
-        Stripe::setApiKey("sk_test_51OnlndHnA0hVdX3flNZVqT1rojwqtKP9cE1H5wq5UORVj0FaFLA1r2F4dX3XSRyDA5Rbxrga8AhEdvVGatu5q14o00d0vH3sE0");
+        Stripe::setApiKey(" sk_test_51OnlndHnA0hVdX3flNZVqT1rojwqtKP9cE1H5wq5UORVj0FaFLA1r2F4dX3XSRyDA5Rbxrga8AhEdvVGatu5q14o00d0vH3sE0 ");
 
         $session = Session::create([
             'payment_method_types' => ['card'],
@@ -131,13 +125,13 @@ class PurchaseController extends AbstractController
         return $this->redirect($session->url, Response::HTTP_FOUND);
     }
 
-    #[Route('/purchase/paySuccess', name: 'app_success')]
+    #[Route('/purchase/paySuccess', name: 'app_pay')]
     public function success(Security $security, ProductRepository $productRepository ,SessionInterface $session,UserRepository $userRepository, EntityManagerInterface $em, PurchaseRepository $purchaseRepository): Response
     {   $basket=$session->get("basket");
         $delevry=$session->get("adress");
         $total=$session->get("total");
        
-        //creation de numero de commande
+
         $longueur = 8; // Longueur du numéro de commande
         $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Caractères possibles pour le numéro de commande
         $numberCommand = '';
@@ -154,7 +148,7 @@ class PurchaseController extends AbstractController
         $user=$security->getUser();
         $firstName=$delevry->getFirstName();
         $name=$delevry->getName();
-        $adress=$delevry->getAddress();
+        $adress=$delevry->getAdress();
         $postalCode=$delevry->getPostalCode();
         $city=$delevry->getCity();
 
@@ -164,7 +158,7 @@ class PurchaseController extends AbstractController
         $purchase->setUser($user);
         $purchase->setFirstName($firstName);
         $purchase->setName($name);
-        $purchase->setAddress($adress);
+        $purchase->setAdress($adress);
         $purchase->setPostalCode($postalCode);
         $purchase->setCity($city);
         $purchase->setTotal($total);
@@ -182,8 +176,8 @@ class PurchaseController extends AbstractController
             $dataBaseBasket=new Basket();
             $product=$productRepository->find($id);
 
-            $dataBaseBasket->setPurchase($purchase);
-            $dataBaseBasket->setProduct($product);
+            $dataBaseBasket->setPurchases($purchase);
+            $dataBaseBasket->setProducts($product);
             $dataBaseBasket->setQuantity($quantity);
 
             $em->persist($dataBaseBasket);
@@ -202,34 +196,11 @@ class PurchaseController extends AbstractController
 
 
 
+
+       
+
+
     }
 
 
-    #[Route('/purchase/sendingmail', name: 'app_sendingEmail')]
-    public function sendingEmail(Security $security, MailerInterface $mailer): Response
-    {   //trouver le nom du fichier de facture correspondant 
-        $user=$security->getUser();
-        foreach($user->getPurchases() as $purchase ){
-            $lastPurchasNoOrder = $purchase->getNoOrder();
-        }
-
-        //on indique le chemin du fichier ainsi que le nom du fichier
-        $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/pdf';
-        
-        
-       
-        $email = 
-        (new TemplatedEmail())
-                    ->from(new Address('no-reply@apolloCloud.com', 'AppolloCloud'))
-                    ->to($user->getUsername())
-                    ->subject('confirmation commande')
-                    ->htmlTemplate('purchase/email.html.twig')
-                    //on attache le fichier
-                    ->attachFromPath( $publicDirectory .'/'. $lastPurchasNoOrder.'.pdf');
-       
-        $mailer->send($email);
-
-        return $this->render("purchase/success.html.twig");
-;
-    }
 }
