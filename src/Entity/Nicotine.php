@@ -15,11 +15,13 @@ class Nicotine
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $dosage = null;
+  
 
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Nicotine')]
     private Collection $products;
+
+    #[ORM\Column(length: 255)]
+    private ?string $proportioning = null;
 
     public function __construct()
     {
@@ -31,17 +33,7 @@ class Nicotine
         return $this->id;
     }
 
-    public function getDosage(): ?string
-    {
-        return $this->dosage;
-    }
 
-    public function setDosage(string $dosage): static
-    {
-        $this->dosage = $dosage;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Product>
@@ -69,6 +61,18 @@ class Nicotine
                 $product->setNicotine(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProportioning(): ?string
+    {
+        return $this->proportioning;
+    }
+
+    public function setProportioning(string $proportioning): static
+    {
+        $this->proportioning = $proportioning;
 
         return $this;
     }

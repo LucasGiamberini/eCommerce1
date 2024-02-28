@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+{% block javascripts %}
+<script  src="{{asset('js/gsf.js')}}"></script>
+{% endblock %}
+{% block body %}
+
+<div id="productShow">
+
+<div id="imgShow">
+    {% for picture in product.pictures %}
+       
+   
+<figure>
+    <img class="pictureShowProduct" src="{{ asset('/picture/' ~ picture.name) }}" alt="{{ product.name }}">
+</figure>
+{% endfor %}
+</div>
+<div id="presentation">
+<h2> {{ product.name}}</h2>
+<p>Reference: {{product.reference}}</p>
+<p>{{product.detail}}</p>
+<p>Nicotine: {{product.nicotine.proportioning}}</p>
+<p>Arome: {{product.aroma.categoryName}} </p>
+{{dump(product)}}
+
+
+</div>
+<div id="buy">
+<h3>{{product.price}}</h3>
+
+{#<form action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
+    <button type="button" id="decreaseBtn">-</button>
+    <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
+    <button type="button" id="increaseBtn">+</button>
+    <button type="submit">Ajouter au panier</button>
+</form>
+#}
+
+</div>
+
+</div>
+{% endblock %}

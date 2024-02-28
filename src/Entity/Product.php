@@ -28,7 +28,7 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'Products')]
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'Products' , orphanRemoval: true )]
     private Collection $pictures;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
