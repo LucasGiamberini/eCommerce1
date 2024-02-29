@@ -5,15 +5,22 @@ namespace App\Controller;
 use DateTime;
 use Stripe\Stripe;
 
+use PayPal\Api\Payer;
 use App\Entity\Basket;
 use DateTimeImmutable;
+use PayPal\Api\Amount;
+use PayPal\Api\Payment;
 use App\Entity\Purchase;
 use Stripe\StripeClient;
 use App\Form\AddAdressType;
+use PayPal\Api\Transaction;
+use PayPal\Rest\ApiContext;
+use PayPal\Api\RedirectUrls;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
+use PayPal\Auth\OAuthTokenCredential;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -94,13 +101,13 @@ class PurchaseController extends AbstractController
     ]);
     }
 
-    #[Route('/purchase/pay', name: 'app_success')]
-    public function pay(Security $security ,SessionInterface $sessions, ): Response
+    #[Route('/purchase/pay', name: 'app_pay')]
+    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session, ): Response
     {   
-        $total=$sessions->get("total");
+        $total=$session->get("total");
         $totalStripe= $total*100;
 
-        Stripe::setApiKey(" sk_test_51OnlndHnA0hVdX3flNZVqT1rojwqtKP9cE1H5wq5UORVj0FaFLA1r2F4dX3XSRyDA5Rbxrga8AhEdvVGatu5q14o00d0vH3sE0 ");
+        Stripe::setApiKey("sk_test_51OosdzCmZ8F0ibT38qCeNaBVbmiDqMuPF6yuwXce8A3oOIs9ki2w9CgllEUve9SoBLG8BkLnoQndmNBHfzjowYhY00ePXbUauc");
 
         $session = Session::create([
             'payment_method_types' => ['card'],
@@ -128,7 +135,9 @@ class PurchaseController extends AbstractController
         return $this->redirect($session->url, Response::HTTP_FOUND);
     }
 
-    #[Route('/purchase/paySuccess', name: 'app_pay')]
+
+
+    #[Route('/purchase/paySuccess', name: 'app_success')]
     public function success(Security $security, ProductRepository $productRepository ,SessionInterface $session,UserRepository $userRepository, EntityManagerInterface $em, PurchaseRepository $purchaseRepository): Response
     {   $basket=$session->get("basket");
         $delevry=$session->get("adress");
