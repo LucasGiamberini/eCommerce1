@@ -101,7 +101,58 @@ class PurchaseController extends AbstractController
     ]);
     }
 
-    #[Route('/purchase/pay', name: 'app_pay')]
+    #[Route('/purchase/paypal', name: 'app_paypal')]
+    public function paypal(SessionInterface $session): Response
+    {   
+        // Récupérer le montant total de la session
+        $total = $session->get("total");
+      
+
+        // Configuration de l'API PayPal
+        $apiContext = new ApiContext(
+            new OAuthTokenCredential(
+                'AVyXSqJ1aSmvGtSG-5LEhYgukmY1lGhoOvnP9BR7U4unZlkxB6y6-VSApffmyeRNVgelAsKRK7USgXZ0',     // Remplacer par votre client ID
+                'EBgucnR-884XWJ0RC2VluTrIO6BFObB43Onkjhv5kn_kVpgEvEb55W-iaKFXFwtlvbeMAi-OYqqvPG2N'  // Remplacer par votre client secret
+            )
+        );
+        
+        // Configurer le mode (sandbox ou live)
+        $apiContext->setConfig(['mode' => 'sandbox']); // Changez pour 'live' en production
+
+        // Création d'un paiement PayPal
+        $payment = new Payment();
+        $payment->setIntent('sale');
+
+        // Configuration du payeur
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+        $payment->setPayer($payer);
+
+        // Configuration du montant
+        $amount = new Amount();
+        $amount->setTotal( $total);
+        $amount->setCurrency('EUR');
+        
+        // Configuration de la transaction
+        $transaction = new Transaction();
+        $transaction->setAmount($amount);
+        $payment->setTransactions([$transaction]);
+
+        // Configuration des URLs de redirection
+        $redirectUrls = new RedirectUrls();
+        $redirectUrls->setReturnUrl($this->generateUrl('app_success', [], UrlGeneratorInterface::ABSOLUTE_URL));
+        $redirectUrls->setCancelUrl($this->generateUrl('app_home', [], UrlGeneratorInterface::ABSOLUTE_URL));
+        $payment->setRedirectUrls($redirectUrls);
+
+        // Création du paiement
+        $payment->create($apiContext);
+
+        // Redirection vers PayPal pour compléter le paiement
+        return $this->redirect($payment->getApprovalLink());
+    }
+
+
+        #[Route('/purchase/pay', name: 'app_pay')]
     public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session, ): Response
     {   
         $total=$session->get("total");
@@ -131,10 +182,9 @@ class PurchaseController extends AbstractController
         ]);
 
 
-        // Rediriger l'utilisateur vers la page de paiement Stripe
-        return $this->redirect($session->url, Response::HTTP_FOUND);
+      // Rediriger l'utilisateur vers la page de paiement Stripe
+      return $this->redirect($session->url, Response::HTTP_FOUND);
     }
-
 
 
     #[Route('/purchase/paySuccess', name: 'app_success')]
