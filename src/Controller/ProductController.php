@@ -37,45 +37,50 @@ class ProductController extends AbstractController
        if ($form->isSubmitted() && $form->isValid()) {
         $aroma=$form->get('Aroma')->getData();
         $nicotine=$form->get('Nicotine')->getData();
-        $capacity=$form->get('capacity')->getData();
+
         $pictures = $form->get('picture')->getData();
         
         $product-> setAroma($aroma);
         $product->setNicotine($nicotine);
-        $product->addCapacity($capacity);
+      
 
+        foreach($product as $products ){
+            $capacity=$form->get('capacity')->getData();
+            $products->addCapacity($capacity);
+            
+        }
 
         
         $entityManager->persist($product);
 
         $entityManager->flush();
 
-        if ($pictures) {
-              
-            foreach($pictures as $picture){
-                // On génère un nouveau nom de fichier
-                $name = md5(uniqid()).'.'.$picture->guessExtension();
-                
-                // On copie le fichier dans le dossier uploads
-                $picture->move(
-                    $this->getParameter('pictures_directory'),
-                    $name
-                );
-                // On crée l'image dans la base de données
-                $img = new Picture();
-                $img->setName( $name);
-                $img->setProducts($product);
-                $product->addPicture($img);
+                if ($pictures) {
+                    
+                    foreach($pictures as $picture){
+                        // On génère un nouveau nom de fichier
+                        $name = md5(uniqid()).'.'.$picture->guessExtension();
+                        
+                        // On copie le fichier dans le dossier uploads
+                        $picture->move(
+                            $this->getParameter('pictures_directory'),
+                            $name
+                        );
+                        // On crée l'image dans la base de données
+                        $img = new Picture();
+                        $img->setName( $name);
+                        $img->setProducts($product);
+                        $product->addPicture($img);
 
-                      $entityManager->persist($img); //prepare les donner
-                      $entityManager->flush();
+                            $entityManager->persist($img); //prepare les donner
+                            $entityManager->flush();
 
+                    }
+                }
+
+
+            return  $this->redirectToRoute('app_home');
             }
-        }
-
-
-      return  $this->redirectToRoute('app_home');
-       }
 
 
        return $this->render('product\addProduct.html.twig',[ 

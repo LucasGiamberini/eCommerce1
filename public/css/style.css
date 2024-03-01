@@ -19,12 +19,7 @@ nav{
     width:98%; 
 }
 
-header{
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    width : 100%;
-}
+
 
 footer{
     background-color: black;
@@ -46,17 +41,72 @@ a{
     background-color: white;
 }
 
-/*////////////////////////formulaire ajout produit///////////////*/
-/*#add_product_Consumable{
-    display: hidden ;
-    color:green;
+/*////////////////////////header///////////////*/
+
+header{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    width : 100%;
+    background-image:url(/pictureHeader/milky-way-2695569_1280.jpg) ;
+    background-size: cover;
+    filter:brightness(0);
+    transition: filter 0.7s ease-in-out;
+    height: 12vw;
 }
-/*
-#add_product_Consumable{
-    display:none;
+
+header:hover{
+    filter:brightness(1.5);
+ 
 }
-*/
-/*//////////////////home page et categorie/////////////////////*/
+
+/*///////////////////////////home page////////////////////////////////*/
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 55vh; 
+  }
+  
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .carousel-item {
+    flex: 0 0 100%;
+  }
+  
+  .carousel-item img {
+    width: 100%;
+    height: 54vh;
+  }
+  
+  .carousel-item:not(.active) {
+    display: none;
+  }
+  
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+
+/*////////////////// navigation produit home page et categorie/////////////////////*/
 .ProductBoxs{
     display: flex;
     flex-direction: row;

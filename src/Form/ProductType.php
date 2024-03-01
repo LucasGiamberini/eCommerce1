@@ -30,12 +30,13 @@ class ProductType extends AbstractType
             ->add('Nicotine', EntityType::class, [
                 'class' => Nicotine::class,
                 'choice_label' => 'proportioning',
+                
             ])
             ->add('capacity', EntityType::class, [
                 'class' => Height::class,
                 'choice_label' => 'milliliter',
-                'mapped' => false
-            
+                'mapped' => false,
+                'multiple' => true,
             ])
             ->add('picture', FileType::class,[
                 'label' => 'image',
