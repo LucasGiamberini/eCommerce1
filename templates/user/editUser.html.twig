@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+<script  src="{{asset('js/gsf.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+{% endblock %}
+{% block title %}Editer les informations{% endblock %}
+
+{% block body %}
+<h1>Editer les informations</h1>
+
+
+
+{{form_start(registrationForm)}}
+
+{{form_end(registrationForm)}}
+
+<a href="#" id="deleteProfile" data-delete-url="{{ path('delete_user', {'id': app.user.id} ) }}">Se désinscrire</a>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+<script  src="{{asset('js/gsf.js')}}"></script>
+{% endblock %}
+{% block title %}Profile{% endblock %}
+
+
+    
+
+{% block body %}
+
+<a href="{{path('app_orderHistory')}}"> Historique des commandes</a><br>
+<a href="{{path('app_editUser' , {'id':app.user.id} )}}"> editer les informations du profil</a><br>
+
+
+{% endblock %}

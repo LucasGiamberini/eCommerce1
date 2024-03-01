@@ -30,13 +30,13 @@
 <div id="buy">
 <h3>{{product.price}}</h3>
 
-{#<form action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
+<form action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
     <button type="button" id="decreaseBtn">-</button>
     <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
     <button type="button" id="increaseBtn">+</button>
     <button type="submit">Ajouter au panier</button>
 </form>
-#}
+
 
 </div>
 

@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande no  {{invoice.noOrder}} {% endblock %}
+
+
+
+{% block body %}
+
+
+
+<div id="adress">
+{{invoice.firstName}}<br>
+{{invoice.name}}<br>
+{{invoice.adress}}<br>
+{{invoice.postalCode}}<br>
+{{invoice.City}}<br>
+</div>
+
+<a href="{{ path ('app_downloadInvoice' , {'noOrder':invoice.noOrder })}}"> telecharger facture</a>
+
+
+<p> Commande du {{invoice.purchaseDateFormat}}</p>
+<p> Commande no {{invoice.noOrder}}</p>
+<div id="basket">
+<thead>
+    <div class="row">
+        <div class="col-sm">   
+        </div>
+        <div class="col-sm">
+            nom du produit
+        </div>
+        <div class="col-sm">
+            Prix unitaire
+        </div>
+      
+        <div class="col-sm">
+            Quantité
+        </div>
+       
+        <div class="col-sm">  
+            Total 
+        </div>
+        
+    </div>   
+
+</thead>
+<br>
+
+
+<tbody>
+{% for basket in invoice.baskets %}
+   
+    <div class="row">
+        <div class="col-sm">
+
+    {% if basket.products.pictures[0] is defined %}
+        <figure >
+            <img class="pictureShowProduct" src="{{ asset('/img/' ~ basket.products.pictures[0].name) }}" alt="{{ basket.products.name }}">
+            </figure> 
+    {% endif %}
+    </div>
+    <div class="col-sm">
+        <a href="{{ path ('show_product' , {'id': basket.products.id})}}">  {{basket.products.name}}</a>
+    </div>
+    <div class="col-sm">
+        {{basket.products.price}}
+    </div>
+    <div class="col-sm">
+        {{basket.quantity}}
+        </div>
+    <div class="col-sm">
+        {{basket.quantity * basket.products.price}}
+    </div>
+    </div>
+{% endfor %}
+    </tbody>
+</div>
+<tfoot>
+    <div class="row">
+        <div class="col-sm" >
+
+        </div>
+        <div class="col-sm" >
+
+        </div>
+        <div class="col-sm" colspan="2"> 
+        Total Commande:{{invoice.total}}
+        </div>
+    </div>    
+</tfoot> 
+{% endblock %}
