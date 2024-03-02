@@ -5,12 +5,21 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            
+        
+        
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
         <link rel="stylesheet" href="{{asset('css/style.css')}}" as="style">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('scss/style.scss') }}">
+        <link rel="stylesheet" href="{{ asset('scss/app.scss') }}">
         <link href="" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
         {% endblock %}
         {% block javascripts %}
+          
+        <script  src="{{asset('js/script')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
       
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -19,23 +28,35 @@
     <body>
         <header>
         <nav>
+            <ul>
+                <li class="header-links">
+                    <i class="bi bi-search text-white-icon fs-2"></i>
+                    <a href="#"> recherche</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#"> Produit</a>
+                </li>
+            </ul>
         <ul>
             <li>
                 <a href="{{path('app_home')}}"> Home</a>
             </li>
         </ul>
         <ul>
+             
         {% if  app.user  %}
 
                       
         {{app.user.email}}<br>
-          <a href="{{path('app_user')}}"> Profil</a>
+          <a href="{{path('app_user')}}"> <i class="bi bi-person-fill text-white-icon fs-2 "></i>  Profil</a>
           <li>
               <a href="{{path('app_logout')}}"> deconnexion</a>
           </li>  
           {% else %}
-          <li>
-              <a href="{{path('app_register')}}"> s'inscrire</a>
+          <li> 
+              <a class="header-links" href="{{path('app_register')}}"><i class="bi bi-person-fill text-white-icon fs-2 "></i>  s'inscrire</a>
           </li>
           <li>
               <a href="{{path('app_login')}}"> se connecter</a>
@@ -44,7 +65,9 @@
         </ul>
         <ul>
             <li>
-                <a href="{{path('app_basket')}}">Panier  </a><br>
+                
+                <a class="header-links" href="{{path('app_basket')}}"><i class="bi bi-basket2  text-white-icon fs-2"></i>              Panier  
+                <div id="quantityBasket">
                 {% set totalQuantity = 0 %}
                 {% for item in app.session.get('basket') %}
                 {% set totalQuantity = totalQuantity + item %}
@@ -55,11 +78,13 @@
                 {{totalQuantity}} Article{% if totalQuantity > 1 %}s
                 {% endif %}
                 {% endif %}
+            </a>
+            </div>
             </li>
         </ul>
     </nav>
 
-
+    <i class="bi bi-basket2"></i>
 </header>
 <div id="template">
     {% block body %}{% endblock %}
