@@ -42,15 +42,17 @@ nav a{
     width: 90%;
     min-height: 80%;
     background-color: white;
+  
 }
 
 /*////////////////////////header///////////////*/
+
 
 header{
     background-color: black;
     display: flex;
     justify-content: center;
-    width : 100%;
+    width: 100vw;
     background-image:url(/pictureHeader/milky-way-2695569_1280.jpg) ;
     background-size: cover;
     filter:brightness(1);
@@ -76,6 +78,56 @@ header:hover{
     flex-direction: column;
     align-items: center;
 }
+
+
+
+/*///////////////////////img cloud////////////////////////////*/
+#cloudLeft{
+/* display: none; */
+    position: absolute;
+    z-index: 1;
+    width: 80vw;
+    bottom: 33vw;
+    right: 33vw;
+ /*   animation: cloud1 1s  forwards;*/
+ 
+}
+
+#cloudRight{
+ /*   display: none; */
+    position: absolute;
+    z-index: 3;
+    width: 80vw;
+    bottom: 60vh;
+    left: 27vw;
+/*   animation: cloud2 1s  forwards;*/
+}
+
+
+
+
+
+.cloudFigure{
+    margin:0;
+}
+
+@keyframes cloud1 {
+    0%{
+        transform: translateX(0vw)
+       }
+100%{
+    transform: translateX(-50vw)
+}
+  }
+
+
+@keyframes cloud2 {
+   to{
+    transform: translateX(50vw)
+   }
+  }
+  
+  
 /*///////////////////////////home page////////////////////////////////*/
 
 .carousel {

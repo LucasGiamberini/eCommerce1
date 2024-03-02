@@ -26,7 +26,9 @@
         {% endblock %}
     </head>
     <body>
+        <div id="top">
         <header>
+          
         <nav>
             <ul>
                 <li class="header-links">
@@ -84,8 +86,14 @@
         </ul>
     </nav>
 
-    <i class="bi bi-basket2"></i>
 </header>
+<figure class="cloudFigure">
+    <img id="cloudLeft" src="{{ asset('/pictureHeader/nuage1.png') }}">
+</figure>
+<figure class="cloudFigure">
+    <img id="cloudRight" src="{{ asset('/pictureHeader/nuage2.png') }}">
+</figure>
+</div>
 <div id="template">
     {% block body %}{% endblock %}
 </div>

@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     
     if (window.location.href.includes('home')) {
+
+
+//carousel
+
     const carousel = document.querySelector('.carousel');
     const prevBtn = carousel.querySelector('.prev');
     const nextBtn = carousel.querySelector('.next'); 
@@ -78,6 +82,66 @@ prevBtn.addEventListener('click', () => {
 
 
   interval = setInterval(nextSlide, 4000);
+
+
+
+
+
+
+
+// header
+
+
+
+
+  const cloudLeft = document.getElementById("cloudLeft");
+  const cloudRight = document.getElementById("cloudRight");
+
+  // Fonction pour démarrer l'animation cloud1
+  function startCloud1Animation() {
+    cloudLeft.style.animation = "cloud1 2s  forwards";
+  }
+
+  // Fonction pour démarrer l'animation cloud2
+  function startCloud2Animation() {
+    cloudRight.style.animation = "cloud2 2s forwards";
+  }
+
+
+  
+  // Fonction pour réinitialiser l'animation cloud1
+  function resetCloud1Animation() {
+    cloudLeft.style.animation = "cloud1 2s  backwards";
+  }
+
+  // Fonction pour réinitialiser l'animation cloud2
+  function resetCloud2Animation() {
+    cloudRight.style.animation = "cloud2 2s backwards";
+  }
+
+  // Événement de défilement de la souris
+  document.addEventListener("mousemove", function(event) {
+    // Position verticale du curseur
+    const mouseY = event.clientY;
+    // Hauteur à laquelle vous voulez déclencher l'animation
+   const triggerHeight = 100 ; // Vous pouvez ajuster cette valeur selon vos besoins
+
+  // Si la position du curseur dépasse la hauteur de déclenchement
+  if (mouseY > triggerHeight) {
+    startCloud1Animation();
+    startCloud2Animation();
+  }
+});
+
+// Événement quand la souris quitte la zone de déclenchement
+document.addEventListener("mouseleave", function(event) {
+  // Réinitialiser les animations
+  resetCloud1Animation();
+  resetCloud2Animation();
+});
+
+
+
 
     }});
     
