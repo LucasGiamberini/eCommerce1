@@ -9,6 +9,7 @@ body{
     background-image: linear-gradient(#00BEE0,rgb(2, 2, 2) );
     background-repeat: no-repeat;
     min-height: 100vh;
+    max-width: 100vw;
 }
 nav{
     display: flex;
@@ -87,8 +88,8 @@ header:hover{
     position: absolute;
     z-index: 1;
     width: 80vw;
-    bottom: 33vw;
-    right: 33vw;
+    bottom: 31vw;
+    right: 30vw;
   /*  animation: cloud1 1s  forwards; */
    
 }
@@ -98,8 +99,8 @@ header:hover{
     position: absolute;
     z-index: 3;
     width: 80vw;
-    bottom: 66vh;
-    left: 27vw;
+    bottom: 64vh;
+    left: 24vw;
  /* animation: cloud2 1s ease  forwards;*/
 
 }
@@ -134,19 +135,22 @@ header:hover{
         transform: translateX(0vw);
     }
     100% {
-        transform: translateX(-50vw);
+        transform: translateX(-60vw);
     }
 }
 
 @keyframes cloud2 {
-    to {
-        transform: translateX(50vw);
+    0% {
+        transform: translateX(0vw);
+    }
+    100% {
+        transform: translateX(65vw);
     }
 }
 
 @keyframes cloud1Reverse {
     0% {
-        transform: translateX(-50vw);
+        transform: translateX(-60vw);
     }
     100% {
         transform: translateX(0vw);
@@ -155,7 +159,7 @@ header:hover{
 
 @keyframes cloud2Reverse {
     from {
-        transform: translateX(50vw);
+        transform: translateX(60vw);
     }
     to {
         transform: translateX(0vw);

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
   
     
-    const topAreaHeight = 300; // Hauteur de la zone en pixels
+    const topAreaHeight = 350; // Hauteur de la zone en pixels
     const effectElement = document.createElement('div');
 
     effectElement.classList.add('top-area-effect');

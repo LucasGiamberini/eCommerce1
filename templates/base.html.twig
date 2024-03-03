@@ -51,8 +51,9 @@
         {% if  app.user  %}
 
                       
-        {{app.user.email}}<br>
+      
           <a href="{{path('app_user')}}"> <i class="bi bi-person-fill text-white-icon fs-2 "></i>  Profil</a>
+          <p class=" text-white-icon">{{app.user.email}}</p><br>
           <li>
               <a href="{{path('app_logout')}}"> deconnexion</a>
           </li>  
