@@ -80,6 +80,34 @@ header:hover{
     align-items: center;
 }
 
+/*///////////////////////logo////////////////////////*/
+
+#figureLogo{
+    border-radius: 50 vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoBefore{
+    width: 47%;
+    z-index: 20;
+}
+
+.logoAfter{
+    background-image: url();
+}
+    
+
+#logo{
+    position: absolute;
+    top: -6vh;
+    width: 21%;
+    z-index: 2;
+}
+
 
 
 /*///////////////////////img cloud////////////////////////////*/
@@ -100,7 +128,7 @@ header:hover{
     z-index: 3;
     width: 80vw;
     bottom: 64vh;
-    left: 24vw;
+    left: 27vw;
  /* animation: cloud2 1s ease  forwards;*/
 
 }
@@ -158,7 +186,7 @@ header:hover{
         transform: translateX(0vw);
     }
     100% {
-        transform: translateX(-60vw);
+        transform: translateX(-66vw);
     }
 }
 

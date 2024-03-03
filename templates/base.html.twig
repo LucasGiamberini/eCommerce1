@@ -43,7 +43,7 @@
             </ul>
         <ul>
             <li>
-                <a href="{{path('app_home')}}"> Home</a>
+               
             </li>
         </ul>
         <ul>
@@ -53,7 +53,7 @@
                       
       
           <a href="{{path('app_user')}}"> <i class="bi bi-person-fill text-white-icon fs-2 "></i>  Profil</a>
-          <p class=" text-white-icon">{{app.user.email}}</p><br>
+          <p class=" text-white-icon">{{app.user.email}}</p>
           <li>
               <a href="{{path('app_logout')}}"> deconnexion</a>
           </li>  
@@ -95,7 +95,10 @@
 <figure class="cloudFigure">
     <img id="cloudRight" class="cloudRight" src="{{ asset('/pictureHeader/nuage2.png') }}">
 </figure>
-
+<a class="home" href="{{path('app_home')}}">
+    <figure id="figureLogo">
+        <img id="logo" class="logoBefore" src="{{ asset('/pictureHeader/logo1.png') }}">
+    </figure> </a>
 </div>
 <div id="template">
     {% block body %}{% endblock %}
