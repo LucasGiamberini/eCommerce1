@@ -82,6 +82,9 @@ header:hover{
 }
 
 /*///////////////////////logo////////////////////////*/
+#top{
+height: 0px;
+}
 
 #figureLogo{
     border-radius: 50 vw;
