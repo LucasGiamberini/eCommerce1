@@ -141,7 +141,7 @@ header:hover{
         width: 80vw;
         bottom: 31vw;
         right: 24vw;
-      /*  animation: cloud1 1s  forwards; */
+        animation: cloud1 1s  forwards; 
        
     }
     
@@ -151,8 +151,8 @@ header:hover{
         z-index: 3;
         width: 80vw;
         bottom: 64vh;
-        left: 24vw;
-     /* animation: cloud2 1s ease  forwards;*/
+        left: 27vw;
+      animation: cloud2 1s ease  forwards;
     
     }
 

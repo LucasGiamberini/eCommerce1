@@ -30,12 +30,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function() {
   
-    //animation nuage header
-    const topAreaHeight = 350; // Hauteur de la zone en pixels
+    
+
+
+   
+
+
+
+
+
+
+
+
+
+    if (window.location.href.includes('home')) {
+
+
+    //animation nuage header//
+
+
+
+    const topAreaHeight = 350; // Hauteur de la zone de passage de la souris en pixels
     const effectElement = document.createElement('div');
 
     effectElement.classList.add('top-area-effect');
     document.body.appendChild(effectElement);
+
+
 
     document.addEventListener('mousemove', function(event) {
         const y = event.pageY;
@@ -55,17 +76,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-   
 
 
 
-
-
-
-
-
-
-    if (window.location.href.includes('home')) {
 
         //choix de la classe pour animation des nuages
         var currentPage = window.location.pathname;
@@ -74,9 +87,9 @@ document.addEventListener("DOMContentLoaded", function() {
       var element2= document.getElementById('cloudRight')
    
       element1.classList.remove ( "cloudLeft");
-      element2.classList.remove ( 'CloudRight');
+      element2.classList.remove ( 'cloudRight');
         element1.classList.add ( "cloudLeft-home");
-        element2.classList.add ( 'CloudRight-home');
+        element2.classList.add ( 'cloudRight-home');
     
     }
 //carousel
