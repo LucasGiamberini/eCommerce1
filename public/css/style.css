@@ -10,6 +10,7 @@ body{
     background-repeat: no-repeat;
     min-height: 100vh;
     max-width: 100vw;
+    overflow-x: hidden;
 }
 nav{
     display: flex;
@@ -111,6 +112,7 @@ header:hover{
 
 
 /*///////////////////////img cloud////////////////////////////*/
+
 .cloudLeft-home{
 /* display: none; */
     position: absolute;
@@ -223,8 +225,9 @@ header:hover{
 .carousel {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    height: 55vh; 
+    width: 99vw;
+    height: 60vh;
+    right: 5vw;
   }
   
   .carousel-inner {
@@ -238,7 +241,7 @@ header:hover{
   
   .carousel-item img {
     width: 100%;
-    height: 54vh;
+    height: 60vh;
   }
   
   .carousel-item:not(.active) {
