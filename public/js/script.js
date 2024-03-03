@@ -29,10 +29,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+  
     
+    const topAreaHeight = 300; // Hauteur de la zone en pixels
+    const effectElement = document.createElement('div');
+
+    effectElement.classList.add('top-area-effect');
+    document.body.appendChild(effectElement);
+
+    document.addEventListener('mousemove', function(event) {
+        const y = event.pageY;
+
+        if (y <= topAreaHeight) {
+            console.log("enhaut")
+            cloudLeft.classList.add('animate-cloudLeft');
+            cloudRight.classList.add('animate-cloudRight');
+            cloudLeft.classList.remove('reverse-cloudLeft');
+            cloudRight.classList.remove('reverse-cloudRight');
+        } else {
+            console.log("enbas")
+            cloudLeft.classList.add('reverse-cloudLeft');
+            cloudRight.classList.add('reverse-cloudRight');
+        }
+    });
+
+
+   
+
+
+
+
+
+
+
+
+
     if (window.location.href.includes('home')) {
 
-
+        console.log('hello')
 //carousel
 
     const carousel = document.querySelector('.carousel');
@@ -89,90 +123,38 @@ prevBtn.addEventListener('click', () => {
 
 
 
-// header
 
 
 
 
-  const cloudLeft = document.getElementById("cloudLeft");
-  const cloudRight = document.getElementById("cloudRight");
-
-  // Fonction pour démarrer l'animation cloud1
-  function startCloud1Animation() {
-    cloudLeft.style.animation = "cloud1 2s  forwards";
-  }
-
-  // Fonction pour démarrer l'animation cloud2
-  function startCloud2Animation() {
-    cloudRight.style.animation = "cloud2 2s forwards";
-  }
-
-
-  
-  // Fonction pour réinitialiser l'animation cloud1
-  function resetCloud1Animation() {
-    cloudLeft.style.animation = "cloud1 2s  backwards";
-  }
-
-  // Fonction pour réinitialiser l'animation cloud2
-  function resetCloud2Animation() {
-    cloudRight.style.animation = "cloud2 2s backwards";
-  }
-
-  // Événement de défilement de la souris
-  document.addEventListener("mousemove", function(event) {
-    // Position verticale du curseur
-    const mouseY = event.clientY;
-    // Hauteur à laquelle vous voulez déclencher l'animation
-   const triggerHeight = 100 ; // Vous pouvez ajuster cette valeur selon vos besoins
-
-  // Si la position du curseur dépasse la hauteur de déclenchement
-  if (mouseY > triggerHeight) {
-    startCloud1Animation();
-    startCloud2Animation();
-  }
-});
-
-// Événement quand la souris quitte la zone de déclenchement
-document.addEventListener("mouseleave", function(event) {
-  // Réinitialiser les animations
-  resetCloud1Animation();
-  resetCloud2Animation();
-});
-
-
-
-
-    }});
+    };});
     
    
 
 
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Récupérer les boutons radio
- 
-// bouton ajouter
-if (window.location.href.includes('Show')) {
-
-    var tempo = 2000;
- 
-    setTimeout(function() {
-        console.log('hello2')
-    document.getElementById('increaseBtn').addEventListener('click', function() {
-        var qttInput = document.getElementById('qtt');
-        qttInput.value = parseInt(qttInput.value) + 1;
-    });
-
-    document.getElementById('decreaseBtn').addEventListener('click', function() {
-        var qttInput = document.getElementById('qtt');
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Récupérer les boutons radio
+     
+    // bouton ajouter
+    if (window.location.href.includes('Show')) {
     
-        if (parseInt(qttInput.value) > 1) {
-            qttInput.value = parseInt(qttInput.value) - 1;
-        }
+        var tempo = 2000;
+     
+        setTimeout(function() {
+            console.log('hello2')
+        document.getElementById('increaseBtn').addEventListener('click', function() {
+            var qttInput = document.getElementById('qtt');
+            qttInput.value = parseInt(qttInput.value) + 1;
+        });
+    
+        document.getElementById('decreaseBtn').addEventListener('click', function() {
+            var qttInput = document.getElementById('qtt');
+        
+            if (parseInt(qttInput.value) > 1) {
+                qttInput.value = parseInt(qttInput.value) - 1;
+            }
+        });
+        })}
+
     });
-    })}
-
-
-
-});

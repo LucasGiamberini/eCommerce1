@@ -89,8 +89,8 @@ header:hover{
     width: 80vw;
     bottom: 33vw;
     right: 33vw;
- /*   animation: cloud1 1s  forwards;*/
- 
+  /*  animation: cloud1 1s  forwards; */
+   
 }
 
 #cloudRight{
@@ -98,34 +98,69 @@ header:hover{
     position: absolute;
     z-index: 3;
     width: 80vw;
-    bottom: 60vh;
+    bottom: 66vh;
     left: 27vw;
-/*   animation: cloud2 1s  forwards;*/
+ /* animation: cloud2 1s ease  forwards;*/
+
 }
 
+
+.animate-cloudLeft {
+    animation: cloud1 2s forwards;
+}
+
+.animate-cloudRight {
+    animation: cloud2 2s  forwards;
+}
+
+.reverse-cloudLeft {
+    animation: cloud1Reverse 2s forwards;
+}
+
+.reverse-cloudRight {
+    animation: cloud2Reverse 2s  forwards;
+}
 
 
 
 
 .cloudFigure{
     margin:0;
+    height: 0;
 }
 
 @keyframes cloud1 {
-    0%{
-        transform: translateX(0vw)
-       }
-100%{
-    transform: translateX(-50vw)
+    0% {
+        transform: translateX(0vw);
+    }
+    100% {
+        transform: translateX(-50vw);
+    }
 }
-  }
-
 
 @keyframes cloud2 {
-   to{
-    transform: translateX(50vw)
-   }
-  }
+    to {
+        transform: translateX(50vw);
+    }
+}
+
+@keyframes cloud1Reverse {
+    0% {
+        transform: translateX(-50vw);
+    }
+    100% {
+        transform: translateX(0vw);
+    }
+}
+
+@keyframes cloud2Reverse {
+    from {
+        transform: translateX(50vw);
+    }
+    to {
+        transform: translateX(0vw);
+    }
+}
   
   
 /*///////////////////////////home page////////////////////////////////*/
