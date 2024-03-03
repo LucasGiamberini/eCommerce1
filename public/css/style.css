@@ -83,18 +83,18 @@ header:hover{
 
 
 /*///////////////////////img cloud////////////////////////////*/
-#cloudLeft{
+.cloudLeft-home{
 /* display: none; */
     position: absolute;
     z-index: 1;
     width: 80vw;
     bottom: 31vw;
-    right: 30vw;
+    right: 24vw;
   /*  animation: cloud1 1s  forwards; */
    
 }
 
-#cloudRight{
+.cloudRight-home{
  /*   display: none; */
     position: absolute;
     z-index: 3;
@@ -104,6 +104,29 @@ header:hover{
  /* animation: cloud2 1s ease  forwards;*/
 
 }
+
+
+.cloudLeft{
+    /* display: none; */
+        position: absolute;
+        z-index: 1;
+        width: 80vw;
+        bottom: 31vw;
+        right: 24vw;
+      /*  animation: cloud1 1s  forwards; */
+       
+    }
+    
+    .cloudRight{
+     /*   display: none; */
+        position: absolute;
+        z-index: 3;
+        width: 80vw;
+        bottom: 64vh;
+        left: 24vw;
+     /* animation: cloud2 1s ease  forwards;*/
+    
+    }
 
 
 .animate-cloudLeft {

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function() {
   
-    
+    //animation nuage header
     const topAreaHeight = 350; // Hauteur de la zone en pixels
     const effectElement = document.createElement('div');
 
@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("enbas")
             cloudLeft.classList.add('reverse-cloudLeft');
             cloudRight.classList.add('reverse-cloudRight');
+
         }
     });
 
@@ -66,7 +67,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (window.location.href.includes('home')) {
 
-        console.log('hello')
+        //choix de la classe pour animation des nuages
+        var currentPage = window.location.pathname;
+    if (currentPage === '/home'|| currentPage === '/') {
+      var element1 = document.getElementById('cloudLeft');
+      var element2= document.getElementById('cloudRight')
+   
+      element1.classList.remove ( "cloudLeft");
+      element2.classList.remove ( 'CloudRight');
+        element1.classList.add ( "cloudLeft-home");
+        element2.classList.add ( 'CloudRight-home');
+    
+    }
 //carousel
 
     const carousel = document.querySelector('.carousel');
@@ -142,7 +154,7 @@ prevBtn.addEventListener('click', () => {
         var tempo = 2000;
      
         setTimeout(function() {
-            console.log('hello2')
+         
         document.getElementById('increaseBtn').addEventListener('click', function() {
             var qttInput = document.getElementById('qtt');
             qttInput.value = parseInt(qttInput.value) + 1;
