@@ -144,7 +144,7 @@ header:hover{
         transform: translateX(0vw);
     }
     100% {
-        transform: translateX(65vw);
+        transform: translateX(68vw);
     }
 }
 
@@ -159,7 +159,7 @@ header:hover{
 
 @keyframes cloud2Reverse {
     from {
-        transform: translateX(60vw);
+        transform: translateX(68vw);
     }
     to {
         transform: translateX(0vw);
