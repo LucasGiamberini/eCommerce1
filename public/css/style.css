@@ -225,6 +225,8 @@ height: 0px;
   
 /*///////////////////////////home page////////////////////////////////*/
 
+
+/*//////////////////////////////carousel////////////////////////////*/
 .carousel {
     position: relative;
     overflow: hidden;
@@ -270,11 +272,89 @@ height: 0px;
     right: 10px;
   }
 
+/*/////////////////////////////paralax et blog homepage////////////////////////*/
+
+/*paralax*/
+#paralaxFigure{
+    width: 100%;
+    height: 50vh;
+    
+    display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#pictureParalax{
+    overflow: hidden;
+    background-attachment: fixed;
+    width: 100%;
+    height: 50vh;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: top center;
+background-image: url('/HomePicture/ad5699a8-5720-4b07-8366-fc6e648ed14c.jpg');
+}
+
+/*article*/
+/*pourquoi la cigarrette electronique*/
+
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.boxHomeBlog{
+    display: flex;
+    justify-content: space-around;
+    margin: 5vw;
+}
+
+
+#textWhyVapoting{
+    text-align: justify;
+}
+
+.figureHomeBlog{
+    display: flex;
+    align-items: center;
+}
+
+#pictureWhyVapoting{
+    width: 30vw;
+    margin-left: 7vw;
+    border-radius: 15vw;
+    transition: transform  1s  ;
+    
+}
+
+#pictureWhyVapoting:hover{
+    filter: hue-rotate(307deg);
+    
+    transform: scale(1.1);
+}
+
+/*  Qui somme nous? */
+
+#pictureWhoWeAre{
+    width: 40vw;
+    margin-right: 7vw;
+}
+
+#textWhoAreWe{
+    text-align: end;
+}
+
+#titleWhoAreWe{
+    text-align: justify;
+}
+
 /*////////////////// navigation produit home page et categorie/////////////////////*/
 .ProductBoxs{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding: 5vh 0vw
 }
 
 .ProductBox{
