@@ -1,6 +1,8 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
-
+*{
+    font-family: "Red Rose", serif;
+}
 
 body{
     display: flex;
@@ -23,11 +25,15 @@ nav{
     justify-content: space-around
 }
 
-
-
-footer{
-    background-color: black;
+.blue{
+    color:#00BEE0;
 }
+
+.white{
+    color:white
+}
+
+
 
 li{
     
@@ -35,14 +41,25 @@ li{
 }
 
 nav a{
+    display: flex;
     text-decoration: none;
-    color:white;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav a:hover{
+    color: #00BEE0; 
+}
+
+nav a:hover i{
+    color: #00BEE0;
 }
 
 
 #template{
     width: 90%;
-    min-height: 80%;
+    min-height: 80vh;
     background-color: white;
   
 }
@@ -56,6 +73,7 @@ header{
     justify-content: center;
     width: 100vw;
     background-image:url(/pictureHeader/milky-way-2695569_1280.jpg) ;
+    
     background-size: cover;
     filter:brightness(1);
     transition: filter 0.7s ease-in-out;
@@ -63,7 +81,7 @@ header{
 }
 
 header:hover{
-    filter:brightness(1.5);
+    filter:brightness(1.4);
  
 }
 
@@ -273,7 +291,12 @@ height: 0px;
   }
 
 /*/////////////////////////////paralax et blog homepage////////////////////////*/
-
+.homeTitle{
+    text-align: center;
+    width: 90%;
+    border-top: solid #00BEE0;
+    border-bottom: solid #00BEE0 ;
+}
 /*paralax*/
 #paralaxFigure{
     width: 100%;
@@ -339,6 +362,7 @@ article{
 #pictureWhoWeAre{
     width: 40vw;
     margin-right: 7vw;
+    border-radius: 1vw;
 }
 
 #textWhoAreWe{
@@ -348,6 +372,29 @@ article{
 #titleWhoAreWe{
     text-align: justify;
 }
+
+
+#socialHome{
+    text-align: center;
+    background-color:#00BEE0 ;
+    border-bottom-left-radius: 2vw;
+    border-bottom-right-radius: 2vw;
+}
+
+#socialHomeIcons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#socialHomeIcons a{
+    color: white;
+}
+
+
+#socialHomeIcons a:hover{
+    color: rgb(5, 5, 5);
+}
+
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
 .ProductBoxs{
@@ -364,17 +411,41 @@ article{
     display: flex;
     align-items: center;
     flex-direction: column;
+    border-radius: 1vw;
 }
 
-.figureNavigation{
-    display: flex;
-    justify-content: center;
-}
+
 
 .pictureNavigation{
     display: flex;
     height: 30%;
     width: 95%;
+}
+
+.figureNavigation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1vh;
+}
+
+.addToBasketNavigate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#00BEE0 ;
+    color: white;
+    width: 15vw;
+    text-align: center;
+    border-radius: 1vw;
+    text-decoration: none;
+    height: 5vh;
+    
+
+}
+
+.addToBasketNavigate:hover{
+    background-color: black ;
 }
 
 /*/////////////////////show product//////////////////*/
@@ -420,5 +491,51 @@ article{
 
 #figureBasket{
     width:100%;
+}
+
+
+/*////////////////////////////////////////footer////////////////////////////////*/
+
+footer{
+    background-color: black;
+    height:20vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#footerLegal{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#footerLegal a{
+    color:white;
+
+} 
+
+#footerSocial{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#socialFooterIcons{
+ display: flex;
+ flex-direction: row;
+ width: 30vw;
+ justify-content: space-evenly;
+ color: white;
+}
+
+#socialFooterIcons a {
+    color: white;  
+}
+
+#socialFooterIcons a:hover {
+    color: #00BEE0;  
 }
 
