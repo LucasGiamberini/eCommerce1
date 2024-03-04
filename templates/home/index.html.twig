@@ -30,7 +30,7 @@
     {% for product in products %}
 <div class="ProductBox">
    
-  
+  <div class="productPrice"> {{product.price }} &euro;</div>
     {% if product.pictures[0] is defined %}
     <figure class="figureNavigation">
         
@@ -38,7 +38,7 @@
   </figure>
 {% endif %}
       <a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br> 
-     <div id="productPrice"> {{product.price }}</div><br>
+     <br>
      <a href ="{{ path ('delete_product' , {'id': product.id})}}"> Supprimer</a>
       <a href ="{{ path ('edit_product' , {'id' : product.id})}}">Editer</a><br>
       <a  class="addToBasketNavigate" href ="{{ path ('add_basket' , {'id' : product.id})}}">Ajouter au panier</a><br>
