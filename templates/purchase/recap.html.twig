@@ -18,9 +18,30 @@
 <h2> Panier</h2>
 <tbody>
 <div id="basket">
-    
+    <thead>
+        <div class="row">
+            <div class="col-sm">   
+            </div>
+            <div class="col-sm">
+                nom du produit
+            </div>
+            <div class="col-sm">
+                Prix unitaire
+            </div>
+          
+            <div class="col-sm">
+                Quantité
+            </div>
+        
+            <div class="col-sm">  
+                Total 
+            </div>
+            
+        </div>   
+    <br>
+    </thead>
     {% for basket in baskets %}
-    <div class="products"
+    <div class="products">
     <div class="row">
         <div class="col-sm">
         {% if basket.product.img[0] is defined %}
@@ -36,14 +57,14 @@
           
         </div>
         <div class="col-sm">
-            {{basket.product.price}}
+            {{ '%0.2f'|format(basket.product.price) }} &euro;
         </div>
-        
+        <div class="col-sm">
             {{basket.quantity}}
          
-      
+        </div>
         <div class="col-sm"> 
-            {{basket.product.price * basket.quantity }}  
+            {{ '%0.2f'|format(basket.product.price * basket.quantity) }} &euro; 
         </div>
      
     </div>  
@@ -54,20 +75,24 @@
 </div>
 
 </tbody>
- total :{{total}}
+ Total Commande :{{ '%0.2f'|format(total) }} &euro;
 
 
  <div id="Payement">
-    <form  action="{{ path ('app_pay')}}"  method="post" >
+    <form  id="termsRecap"action="{{ path ('app_pay')}}"  method="post" >
         <div id="totalPayement">
 
-            <p> {{total}} </p>
+           
         </div>
-
+        <label for="heighteen">
+            <input type="checkbox" id="heighteen" name="heighteen" required>
+            J'affirme avoir plus de 18 ans.<br>.
+         </label>
         <label for="termsAgreed">
            <input type="checkbox" id="termsAgreed" name="termsAgreed" required>
             En cochant cette case, j'affirme avoir plus de 18 ans, j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a><br>  et les  <a href="{{ path('app_CGV') }}">CGV</a><br>.
         </label>
+
         <button type="submit">Payer</button>
     </form>
 

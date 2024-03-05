@@ -33,18 +33,17 @@ document.addEventListener("DOMContentLoaded", function() {
     
 
 
-   
+    if (window.location.href.includes('home')    ) {
 
 
 
 
 
+ // changement de style du template lorsque l'on est sur home
+        var template = document.getElementById('template');
 
-
-
-
-    if (window.location.href.includes('home')) {
-
+        template.classList.remove('template');
+        template.classList.add('templateHome');
 
     //animation nuage header//
 
@@ -101,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const carouselItems = carousel.querySelectorAll('.carousel-item');
 
         var currentSlide = 0;
-//var carouselItems = document.querySelectorAll('.carousel-item');
+
     let currentIndex = 0;
     let interval;
 
@@ -118,7 +117,7 @@ function previousSlide() {
       
   }
 
- // Défilement automatique toutes les 3 secondes (ajustez selon vos besoins)
+
 
 prevBtn.addEventListener('click', () => {
     previousSlide();
@@ -158,15 +157,107 @@ prevBtn.addEventListener('click', () => {
 
 
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // Récupérer les boutons radio
+    document.addEventListener("DOMContentLoaded", function() {
      
-    // bouton ajouter
+     
     if (window.location.href.includes('Show')) {
     
-        var tempo = 2000;
+        
+        //carousel
+
+
+
+        const carousel = document.querySelector('.carouselShow');
+        const prevBtn = carousel.querySelector('.previousShow');
+        const nextBtn = carousel.querySelector('.nextShow'); 
+        const carouselInner = carousel.querySelector('.carouselShow-inner');
+        const carouselItems = carousel.querySelectorAll('.carouselShow-item');
+       
+
+      
+
+
+        var currentSlide = 0;
+    
+        let currentIndex = 0;
+        let interval;
+    
+    function nextSlide() {
+      carouselItems[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % carouselItems.length;
+      carouselItems[currentSlide].classList.add('active');
+    }
+    
+    function previousSlide() {
+        carouselItems[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide- 1 +  carouselItems.length) % carouselItems.length;
+        carouselItems[currentSlide].classList.add('active')
+          
+      }
+    
+
+    
+
+
+
+
+        
+    
+    prevBtn.addEventListener('click', () => {
+        previousSlide();
+        resetInterval()
+       
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < carouselItems.length - 1) {
+      
+          nextSlide();
+          resetInterval()
+       
+        }
+      });
+      
+      function resetInterval() {
+        clearInterval(intervalId); // Arrête l'intervalle actuel
+        intervalId = setInterval(nextSlide, 4000); // Redémarre le défilement automatique
+      }
+      
+    
+    
+      interval = setInterval(nextSlide, 4000);
+    
+
+
+
+      // zoom image
+      const pictures= document.querySelectorAll('.pictureShowProduct');
+      const modal = document.getElementById('modal');
+    const modalPicture = document.getElementById('modalPicture');
+    const closeBtn = document.getElementsByClassName('closeModal')[0];
+
+  
+
+
+
+      pictures.forEach(picture => {
+        picture.addEventListener('click',()=>{
+        
+       
+        modal.style.display = 'block';
+        modalPicture.src = picture.src;
+          });
+      });
+
+
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+
      
-        setTimeout(function() {
+       //bouton ajouter 
          
         document.getElementById('increaseBtn').addEventListener('click', function() {
             var qttInput = document.getElementById('qtt');
@@ -180,6 +271,14 @@ prevBtn.addEventListener('click', () => {
                 qttInput.value = parseInt(qttInput.value) - 1;
             }
         });
-        })}
+
+
+
+     
+    
+
+
+
+        }
 
     });

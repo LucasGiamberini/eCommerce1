@@ -30,7 +30,7 @@
     {% for product in products %}
 <div class="ProductBox">
    
-  <div class="productPrice"> {{product.price }} &euro;</div>
+  <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
     {% if product.pictures[0] is defined %}
     <figure class="figureNavigation">
         

@@ -6,33 +6,72 @@
 
 <div id="productShow">
 
-<div id="imgShow">
-    {% for picture in product.pictures %}
-       
+
+    <div  class="carouselShow " >
+        <div class="carouselShow-inner">
+            <div class="carouselShow-item active">
+                <figure>
+                <img id="picture" class="pictureShowProduct" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt=" Slide 1 ">
+            </figure>
+            </div>
    
-<figure>
-    <img class="pictureShowProduct" src="{{ asset('/picture/' ~ picture.name) }}" alt="{{ product.name }}">
-</figure>
-{% endfor %}
-</div>
+            {% if product.pictures|length > 1 %}
+            {% set slide = 1 %}
+           
+           
+    {% for picture in product.pictures|slice(1) %}
+   
+
+   
+    {% set slide = slide + 1   %}
+    <div class="carouselShow-item">
+        <figure>
+        <img id="picture" class="pictureShowProduct" src="{{ asset('/picture/' ~ picture.name) }}" alt=" Slide {{ slide }}">
+    </figure>
+    </div>
+
+    
+
+
+    {% endfor %}
+    {% endif %}
+    
+    <button id="prev" class="carousel-control previousShow" aria-label="Previous">&#10094;</button>
+  <button id="next" class="carousel-control nextShow" aria-label="Next">&#10095;</button>
+
+        </div>
+    </div>
+
+    <div id="modal" class="modalZoom">
+        <span class="closeModal">&times;</span>
+        <img class="modalContent" id="modalPicture">
+      </div>
+
+
+
+
 <div id="presentation">
 <h2> {{ product.name}}</h2>
 <p>Reference: {{product.reference}}</p>
 <p>{{product.detail}}</p>
 <p>Nicotine: {{product.nicotine.proportioning}}</p>
 <p>Arome: {{product.aroma.categoryName}} </p>
-{{dump(product)}}
+
 
 
 </div>
 <div id="buy">
-<h3>{{product.price}}</h3>
+<p id="showPrice">{{ '%0.2f'|format(product.price) }} &euro;</p>
 
-<form action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
-    <button type="button" id="decreaseBtn">-</button>
+<form id="formShow" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
+    <p>Quantité:</p>
+    <div id="quantity">
+      
+    <button  class="qttButton"type="button" id="decreaseBtn">-</button>
     <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
-    <button type="button" id="increaseBtn">+</button>
-    <button type="submit">Ajouter au panier</button>
+    <button class="qttButton" type="button" id="increaseBtn">+</button>
+</div>
+    <button id="addToBasket" type="submit">Ajouter au panier</button>
 </form>
 
 

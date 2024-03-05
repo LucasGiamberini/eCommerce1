@@ -57,12 +57,20 @@ nav a:hover i{
 }
 
 
-#template{
+.template{
     width: 90%;
     min-height: 80vh;
     background-color: white;
-  
+    padding-top: 5vh;
 }
+
+.templateHome{
+    width: 90%;
+    min-height: 80vh;
+    background-color: white;
+    
+}
+
 
 /*////////////////////////header///////////////*/
 
@@ -424,8 +432,9 @@ article{
     color:white;
     padding-right: 1vw;
     font-size: 3vh;
-    bottom: -6vh;
+    bottom: -4vh;
     left: -30%;
+    margin:-1vw;
 }
 
 .pictureNavigation{
@@ -441,7 +450,7 @@ article{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 1vh;
+ 
 }
 
 .addToBasketNavigate{
@@ -486,7 +495,142 @@ article{
 
 #buy{
     width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(202, 201, 201, 0.945);
+    justify-content: space-around;
+    height: 29vh;
+
 }
+
+#quantity{
+    display: flex;
+    justify-content: center;
+    ;
+}
+
+#formShow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addToBasket{
+    margin-top: 2vh;
+    border:none;
+    background-color: #00BEE0;
+    color: white;
+    height: 6vh;
+    width: 15vw;
+    border-radius: 2vh;
+}
+
+#addToBasket:hover{
+    background-color: black;
+}
+
+#qtt{
+    width: 12vw;
+}
+
+.qttButton{
+    border: unset;
+    width: 2vw;
+    color: white;
+    background-color: black;
+}
+
+#increaseBtn{
+    border: unset;
+}
+
+#showPrice{
+    font-size: 3rem;
+}
+/*//////carousel show//////////*/
+
+.carouselShow{
+    position: relative;
+    overflow: hidden;
+    width: 30%;
+    height: 30vh;
+    /*right: 5vw;*/
+}
+
+
+  
+  .carouselShow-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 46vw;
+  }
+  
+  .carouselShow-item {
+    flex: 0 0 100%;
+    cursor: pointer;
+  }
+  
+  .carouselShow-item img {
+    width: 30vh;
+    height: 30vh;
+  }
+
+
+ 
+  
+  .carouselShow-item:not(.active) {
+    display: none;
+  }
+  
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+
+  .pictureShowProduct.zoom{
+    transform:scale(2);
+    transition: transform 0,3s ease;
+  }
+
+  .prev {
+    left: 10px;
+  }
+  
+  .nextShow {
+    left: 14vw;
+  }
+
+/*///////zoom image///////////////*/
+  
+.modalZoom{
+    display: none;
+    position: fixed;
+    z-index: 4;
+    color: black;
+    width: 100%;
+    height: 100%;
+    left: 32%;
+    top: 5%;
+    
+  }
+
+  .modalContent{
+    width:50%;
+     
+  }
+.closeModal{
+    font-size: 3vw;
+    cursor: pointer;
+    position: absolute;
+}  
 
 /*////////////////////////////////////Basket//////////////////////////////*/
 
@@ -508,6 +652,14 @@ article{
     width:100%;
 }
 
+
+/*////////////////////////////////recap////////////////////////////*/
+
+#termsRecap{
+    display: flex;
+    flex-direction: column;
+
+}
 
 /*////////////////////////////////////////footer////////////////////////////////*/
 
