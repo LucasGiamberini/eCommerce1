@@ -9,21 +9,27 @@
 
     <div  class="carouselShow " >
         <div class="carouselShow-inner">
-            <div class="carouselShow-item active">
+            <div class="carouselShow-item active">{#}      premiere image visible   grace a la classe 'active' (voir javascript ligne 163 )           #}
                 <figure>
                 <img id="picture" class="pictureShowProduct" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt=" Slide 1 ">
+                
+                {# asset fait reference au fichier statique tel que les fichier css, javascript #}
+                {#    .product.picture[0].name affiche le nom de la premiere image a la suite du chemin ou sont les images     #}
             </figure>
             </div>
    
+            
             {% if product.pictures|length > 1 %}
+            {#  si le produit a plus d'une image , alors  j'afiche les images une a une  grace a la classe 'active' (voir javascript ligne 163 )    #}
             {% set slide = 1 %}
-           
+           {# je definis la variable slide a 1 car la premiere slide est slide 1#}
            
     {% for picture in product.pictures|slice(1) %}
-   
+   {# je fait une boucle pour le nom des images sans inclure la premiere image  #}
 
    
     {% set slide = slide + 1   %}
+    {# pour definir le nombre de la slide de la slide en courant, je rajoute une unité par rapport a l'image precedente  #}
     <div class="carouselShow-item">
         <figure>
         <img id="picture" class="pictureShowProduct" src="{{ asset('/picture/' ~ picture.name) }}" alt=" Slide {{ slide }}">
