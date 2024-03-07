@@ -38,24 +38,24 @@ class PurchaseController extends AbstractController
     #[Route('/purchase', name: 'app_purchase')]
     public function index(Security $security, SessionInterface $session, Request $request): Response
     {
-        $userOnline=$security->getUser();
+        $userOnline=$security->getUser();// recupere l'utilisateur qui est connecter
        
 
-        if($userOnline == NULL){
+        if($userOnline == NULL){// si il n'y pas d'utilisateur connecter
             $this->addFlash('success', 'Vous devez etre connecter pour passer commande');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_login');// redirige vers la page de connection
         }
 
-        else{
-     //       $adress=new Purchase();
-            $form = $this->createForm(AddAdressType::class);
+        else{// si un utilisateur est connecter
+
+            $form = $this->createForm(AddAdressType::class);// crée le formulaire pour l'adresse 
            $form->handleRequest($request);
           
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {// si le formulaire est envoyer et valide
               
-                $adress = $form->getData();
+                $adress = $form->getData();// recupere les infos du formulaire
              
-                $session->set("adress", $adress);
+                $session->set("adress", $adress);// sauvegarde dans la session l'adresse
                 return $this->redirectToRoute('app_recap');
             }
 
@@ -68,16 +68,17 @@ class PurchaseController extends AbstractController
 
     }
 
-
+// recapitulatif de commande avant le paiement
     #[Route('/purchase/recap', name: 'app_recap')]
     public function recap(Security $security, SessionInterface $session, ProductRepository $productRepository): Response
-    {
+    {   
+        // recupere toute les donnée enregistrer en session
         $basket=$session->get("basket");
         $adress=$session->get("adress");
         $total=$session->get("total");
 
   
-         
+         // voir basket controller ligne 23
             $dataBasket= [];
             
             $totalQuantity= 0;
@@ -101,6 +102,7 @@ class PurchaseController extends AbstractController
     ]);
     }
 
+    // payement par paypal
     #[Route('/purchase/paypal', name: 'app_paypal')]
     public function paypal(SessionInterface $session): Response
     {   
@@ -117,7 +119,7 @@ class PurchaseController extends AbstractController
         );
         
         // Configurer le mode (sandbox ou live)
-        $apiContext->setConfig(['mode' => 'sandbox']); // Changez pour 'live' en production
+        $apiContext->setConfig(['mode' => 'sandbox']); 
 
         // Création d'un paiement PayPal
         $payment = new Payment();
@@ -152,32 +154,38 @@ class PurchaseController extends AbstractController
     }
 
 
+
+
+
+
+
+// payement par stripe
         #[Route('/purchase/pay', name: 'app_pay')]
     public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session, ): Response
     {   
-        $total=$session->get("total");
-        $totalStripe= $total*100;
+        $total=$session->get("total");// recuperation du montant present en session
+        $totalStripe= $total*100;// multiplication par 100 pour avoir le montant en centime
 
         Stripe::setApiKey("sk_test_51OosdzCmZ8F0ibT38qCeNaBVbmiDqMuPF6yuwXce8A3oOIs9ki2w9CgllEUve9SoBLG8BkLnoQndmNBHfzjowYhY00ePXbUauc");
 
         $session = Session::create([
-            'payment_method_types' => ['card'],
+            'payment_method_types' => ['card'],// payement par carte
             'line_items' => [
                 [
                     'price_data' => [
-                        'currency' => 'eur',
+                        'currency' => 'eur',// choix de la monnaie
                         'unit_amount' =>  $totalStripe , // Montant total en centimes (par exemple, 50 EUR)
                         'product_data' => [
-                            'name' => 'Votre produit ou service', // Nom de votre produit ou service
-                            // Autres détails du produit...
+                            'name' => 'Commande', // Nom de votre produit ou service
+                            
                         ],
                     ],
                     'quantity' => 1,
                 ],
             ],
             'mode' => 'payment',
-            'success_url' => $this->generateUrl('app_success', [], UrlGeneratorInterface::ABSOLUTE_URL), // Redirection vers app_home après un paiement réussi
-            'cancel_url' => $this->generateUrl('app_home', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => $this->generateUrl('app_success', [], UrlGeneratorInterface::ABSOLUTE_URL), // Redirection vers app_success après un paiement réussi
+            'cancel_url' => $this->generateUrl('app_home', [], UrlGeneratorInterface::ABSOLUTE_URL),// redirection après anuller payement
            
         ]);
 
@@ -186,29 +194,36 @@ class PurchaseController extends AbstractController
       return $this->redirect($session->url, Response::HTTP_FOUND);
     }
 
-
+// si le paiement est reussi
     #[Route('/purchase/paySuccess', name: 'app_success')]
     public function success(Security $security, ProductRepository $productRepository ,SessionInterface $session,UserRepository $userRepository, EntityManagerInterface $em, PurchaseRepository $purchaseRepository): Response
-    {   $basket=$session->get("basket");
+    {   
+        
+        // recuperation des données presente en session
+        $basket=$session->get("basket");
         $delevry=$session->get("adress");
         $total=$session->get("total");
        
-
+        //creation du numero de commande
         $longueur = 8; // Longueur du numéro de commande
         $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Caractères possibles pour le numéro de commande
         $numberCommand = '';
 
-        for ($i = 0; $i < $longueur; $i++) {
+        for ($i = 0; $i < $longueur; $i++) {//$i < $longueur: la boucle s'execute tant que le numero de commande est inferieur au nombre de caractère
+            //$i++ a chaque itération de la boucle, $i est incrementé de 1
         $numberCommand .= $caracteres[rand(0, strlen($caracteres) - 1)];
+       // a chaque itération , $numberCommand a un nouveau carractère
+        // rand()  est une fonction php qui randomise  une valeur
+        //  strlen permet de transformer des chaines de caractère en nombre entié
         }
 
         
 
 
-        $commandDateTime= new DateTimeImmutable();
+        $commandDateTime= new DateTimeImmutable();// creation de la date de commande en immutable, empechant la modification future 
 
-        $user=$security->getUser();
-        $firstName=$delevry->getFirstName();
+        $user=$security->getUser();// recuperation de l'entité user connecter
+        $firstName=$delevry->getFirstName();// le reste est la recuperation des donnée de livraison sauvegarder en session
         $name=$delevry->getName();
         $adress=$delevry->getAdress();
         $postalCode=$delevry->getPostalCode();
@@ -216,8 +231,8 @@ class PurchaseController extends AbstractController
 
 
 
-        $purchase= new Purchase();
-        $purchase->setUser($user);
+        $purchase= new Purchase();// instanciation de la classe purchase
+        $purchase->setUser($user);// le reste est  l'association des different information au nouvelle objet 
         $purchase->setFirstName($firstName);
         $purchase->setName($name);
         $purchase->setAdress($adress);
@@ -227,34 +242,39 @@ class PurchaseController extends AbstractController
         $purchase->setNoOrder($numberCommand);
         $purchase->setPurchaseDate($commandDateTime);
 
-        $em->persist($purchase);
-        $em->flush();
+        $em->persist($purchase);//  preparation du nouvelle objet
+        $em->flush();//et injection dans la base de donnée
 
         
 
  
-        foreach($basket as $id=>$quantity)
+        foreach($basket as $id=>$quantity)// boucle pour faire l'association des produits
         {
-            $dataBaseBasket=new Basket();
-            $product=$productRepository->find($id);
+            $dataBaseBasket=new Basket();// instanciation d'un nouvel objet basket
+            $product=$productRepository->find($id);// recherche du produit dans la base de donnée
 
-            $dataBaseBasket->setPurchases($purchase);
+            $dataBaseBasket->setPurchases($purchase);// association des valeurs a l'objet
             $dataBaseBasket->setProducts($product);
             $dataBaseBasket->setQuantity($quantity);
 
-            $em->persist($dataBaseBasket);
-            $em->flush();
+            $em->persist($dataBaseBasket);// preparation des l'objet
+            $em->flush();// et injection dans la base de donnée
             
 
         }
 
-        $session->remove('basket');
+        $session->remove('basket');// suppression du panier,de l'adresse present en session
         $session->remove('adress');
         $session->remove('total');
         
+       
+       
         $invoice= $purchaseRepository->findOneBy([] ,["id" => "DESC"]);
     
-         return $this->redirectToRoute('app_invoice');
+        
+        
+        
+        return $this->redirectToRoute('app_invoice');// renvoie vers le pdf controller
 
 
 
@@ -266,9 +286,10 @@ class PurchaseController extends AbstractController
 
     #[Route('/purchase/sendingmail', name: 'app_sendingEmail')]
     public function sendingEmail(Security $security, MailerInterface $mailer): Response
-    {   //trouver le nom du fichier de facture correspondant 
-        $user=$security->getUser();
-        foreach($user->getPurchases() as $purchase ){
+    {   
+        //trouver le nom du fichier de facture correspondant 
+        $user=$security->getUser();// recuperation de l'utilisateur connecter
+        foreach($user->getPurchases() as $purchase ){// recuperation du numero de la derniere commande 
             $lastPurchasNoOrder = $purchase->getNoOrder();
         }
 
@@ -278,17 +299,17 @@ class PurchaseController extends AbstractController
         
        
         $email = 
-        (new TemplatedEmail())
-                    ->from(new Address('no-reply@apolloCloud.com', 'AppolloCloud'))
-                    ->to($user->getEmail())
-                    ->subject('confirmation commande')
-                    ->htmlTemplate('purchase/email.html.twig')
-                    //on attache le fichier
-                    ->attachFromPath( $publicDirectory .'/'. $lastPurchasNoOrder.'.pdf');
+        (new TemplatedEmail())// creation d'un nouveau mail au format twig
+                    ->from(new Address('no-reply@apolloCloud.com', 'AppolloCloud'))// on indique de quelle expediteur en instanciant un nouvelle objet Adress de mailer
+                    ->to($user->getEmail())// on precise a qui ont l'envoie, ici en l'occurance l'utilisateur qui est  connecter
+                    ->subject('confirmation commande')// on precise le sujet
+                    ->htmlTemplate('purchase/email.html.twig')// chemin vers le template du modèle de mail que l'on veux envoyer
+                    //on attache le fichier de la facture associer a la commande
+                    ->attachFromPath( $publicDirectory .'/'. $lastPurchasNoOrder.'.pdf');// 
        
-        $mailer->send($email);
+        $mailer->send($email);// on envoie le mail avec mailer
 
-        return $this->render("purchase/success.html.twig");
+        return $this->render("purchase/success.html.twig");// redirection vers la page de succcès
 ;
     }
 

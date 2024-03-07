@@ -87,18 +87,19 @@ class UserController extends AbstractController
 
     #[Route('/editUser/{id}', name: 'app_editUser')]
     public function editUser($id, User $user ,Request $request, SessionInterface $session, UserPasswordHasherInterface $passwordHasher ,UserRepository $userRepository, EntityManagerInterface $entityManager, Security $security) : Response
-    {   $user1 = $security->getUser()->getEmail();
+    {  
+        
+        $user1 = $security->getUser()->getEmail();
       
-        $form = $this->createForm(UserEditType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);// creation du formulaire pour editer le mot de passe et email
         $form->handleRequest($request);
         $userId = $session->get('id');
-      //  $oldEmail=$security->getUser()->getUsername();
         $actualUserId=$security->getUser()->getId();
-        $idUrl=intval($id);
+        $idUrl=intval($id);// convertit la chaine de caractère en nombre entier
       
     
 
-        if($idUrl  !==  $actualUserId ){
+        if($idUrl  !==  $actualUserId ){// securité: si l'utilisateur en ligne modifie l'url  ,il ne peux pas acceder a la page  de modification d'un autre 
 
             $this->addFlash('danger', 'You dont have access to this page.');
             return $this->redirectToRoute('app_home');
@@ -106,14 +107,14 @@ class UserController extends AbstractController
         
       
         if ($form->isSubmitted() && $form->isValid()) {
-            $password=$form->get('plainPassword')->getData();
+            $password=$form->get('plainPassword')->getData();// recuperation des donée du formulaire
              $newEmail=$form->get('email')->getData();
             
         
         
           
-          $security->getUser()->setEmail($newEmail);
-           $entityManager->flush();
+          $security->getUser()->setEmail($newEmail);// mise en place du nouvelle email pour l'utilisateur en ligne
+           $entityManager->flush();// envoie dans la base de donnée
                 
       
 
@@ -121,12 +122,12 @@ class UserController extends AbstractController
 
 
 
-            if($password){
-                $encodedPassword = $passwordHasher->hashPassword(
+            if($password){// si le $password n'est pas null
+                $encodedPassword = $passwordHasher->hashPassword(// achage du mot de passe 
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('plainPassword')->getData()// recuperation du nouveau mot de passe dans le formulaire
                 );    
-            $user->setPassword($encodedPassword);
+            $user->setPassword($encodedPassword);// implementation du nouveau mot de passe
             $entityManager->flush();
 
 
@@ -143,47 +144,63 @@ class UserController extends AbstractController
         ]);
     }
 
+
+
+// menu affichant tout les commandes qui on été passer
     #[Route('/orderHistory', name: 'app_orderHistory')]
     public function orderHistory(Security $security) : response
     {
-        $orders = $security->getUser()->getPurchases();
+        $orders = $security->getUser()->getPurchases();//recupere tous les achats de l'utilisateur connecter 
 
         return $this->render('user/orderHistory.html.twig', [ 'orders' => $orders ]);
 
 
     }
 
+// voir le detail de la commande
     #[Route('/orderHistoryDetail/{noOrder}', name: 'app_orderHistoryDetail')]
     public function orderHistoryDetail($noOrder,Security $security,PurchaseRepository $purchaseRepository, BasketRepository $basketRepository) : response
-    {
-        $invoice= $purchaseRepository->findBy([ 'NoOrder' => $noOrder]);
+    {   
+       
 
-        if ($invoice== null){
-            return $this->redirectToRoute('app_user');
+        $invoice= $purchaseRepository->findBy([ 'NoOrder' => $noOrder]);// trouve les details de la commande en cherchant par le numero de commande
+     
+        if ($invoice== null){// si la facture n'existe pas
+            return $this->redirectToRoute('app_orderHistory');// on  redirige vers l historique 
         } 
+        else{
+         $ordersUser= $security->getUser()->getId();// on recupere l'id de l'utilisateur en ligne
+        $userOfInvoice = $invoice[0]->getUser()->getId();// on recupere l'id de l'utilisateur liée a la facture
+      
+     
+        if ( $ordersUser !==  $userOfInvoice    ){// securité : si l'id de l'utilisateur de la facture et l'id de l'utilisateur qui est connecter n'est pas egale
+            return $this->redirectToRoute('app_orderHistory');// je  renvoie vers le menu 
+        }
+        else{
+      
+        return $this->render('user\showOrder.html.twig' , ['invoice' => $invoice[0] ]);// affichage du premier resultat 
 
-
-        return $this->render('user\showOrder.html.twig' , ['invoice' => $invoice[0] ]);
+    }}
     }
 
 
 
 
 
-
+// telechargement de facture 
     #[Route('/orderHistoryDetail/downloadInvoice/{noOrder}', name: 'app_downloadInvoice')]
     public function downloadInvoice($noOrder) : response
    {
    
-    $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/pdf';
+    $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/pdf';// chemin vers le dossier du pdf
 
-    $pdfFilepath =  $publicDirectory . '/'.$noOrder.'.pdf';
+    $pdfFilepath =  $publicDirectory . '/'.$noOrder.'.pdf';// precise le nom du fichier avec le chemin du dossier du pdf
 
 
 
     $response = new BinaryFileResponse($pdfFilepath);
 
-    return $this->file($pdfFilepath);
+    return $this->file($pdfFilepath);// telechargement du fichier
    
    
    }

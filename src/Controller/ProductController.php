@@ -113,25 +113,22 @@ class ProductController extends AbstractController
        $nameimgDelete=array_column($nameimgDeleteQuery, 'name');// recuperation des noms des fichier image a supprimer
         
        foreach($nameimgDelete as $img){// pour supprimer le ou les fichier image
-         
-        
+          
            $imgPath=$pathImg.'/'.$img;// definition du chemin de l'image avec le nom du fichier a supprimer
            if (file_exists($imgPath)) {
-               unlink($imgPath);// suppression du fichier
+               unlink($imgPath);// suppression du fichier image
            } 
           
-         
-          
       }
-      foreach($product as $products){
-      $imgBdd=$products->getPicture();
+      foreach($product as $products){// boucle pour suppression des associations dans la base de donnée
+      $imgBdd=$products->getPicture();// prend l'image associer a l'objet
       
-      $imgBdd->removeProducts();
-      $product->removePicture( $imgBdd);
+      $imgBdd->removeProducts();// supprime le produit dans l'entité image
+      $product->removePicture( $imgBdd);// supprime l'objet image dans l'entité  produit
       
       }
-           $entityManager->remove($product);
-           $entityManager->flush();
+           $entityManager->remove($product);//enleve produit dans la base de donnée
+           $entityManager->flush();// execute la requete
     
            return $this->redirectToRoute('app_home');
        }
