@@ -166,21 +166,21 @@ class UserController extends AbstractController
         $invoice= $purchaseRepository->findBy([ 'NoOrder' => $noOrder]);// trouve les details de la commande en cherchant par le numero de commande
      
         if ($invoice== null){// si la facture n'existe pas
-            return $this->redirectToRoute('app_orderHistory');// on  redirige vers l historique 
+            return $this->redirectToRoute('app_orderHistory');// on  redirige vers l historique des facture
         } 
         else{
          $ordersUser= $security->getUser()->getId();// on recupere l'id de l'utilisateur en ligne
         $userOfInvoice = $invoice[0]->getUser()->getId();// on recupere l'id de l'utilisateur liée a la facture
       
      
-        if ( $ordersUser !==  $userOfInvoice    ){// securité : si l'id de l'utilisateur de la facture et l'id de l'utilisateur qui est connecter n'est pas egale
+            if ( $ordersUser !==  $userOfInvoice    ){// securité : si l'id de l'utilisateur de la facture et l'id de l'utilisateur qui est connecter n'est pas egale
             return $this->redirectToRoute('app_orderHistory');// je  renvoie vers le menu 
-        }
-        else{
+            }
+            else{
       
-        return $this->render('user\showOrder.html.twig' , ['invoice' => $invoice[0] ]);// affichage du premier resultat 
+             return $this->render('user\showOrder.html.twig' , ['invoice' => $invoice[0] ]);// affichage du premier resultat 
 
-    }}
+        }}
     }
 
 

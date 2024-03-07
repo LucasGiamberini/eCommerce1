@@ -23,9 +23,9 @@ class PdfController extends AbstractController
     #[Route('/pdf/invoice', name: 'app_invoice')]
     public function invoice(PurchaseRepository $purchaseRepository): Response
     {   
-        $invoice= $purchaseRepository->findOneBy([] ,["id" => "DESC"]);
+        $invoice= $purchaseRepository->findOneBy([] ,["id" => "DESC"]);// on recupere la facture de la base de donnée
       
-        $numberCommand=$invoice->getNoOrder();
+        $numberCommand=$invoice->getNoOrder();// on prend le numero de commande
        
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
