@@ -26,21 +26,23 @@ class ProductController extends AbstractController
     #[Route('/product/new', name: 'add_product')]
     public function add(Product $product=NULL , EntityManagerInterface $entityManager,  Request $request): Response
     {
-         if(!$product){
-            $product = new Product();
+         if(!$product){// pour l'edition, si aucun objet n'est trouver
+            $product = new Product();// creé un nouveau produit
        }
 
-       $form=$this->createForm(ProductType::class,$product);
+       $form=$this->createForm(ProductType::class,$product);// creation du formulaire
 
-       $form->handleRequest($request);
+       $form->handleRequest($request);// 
 
-       if ($form->isSubmitted() && $form->isValid()) {
+       if ($form->isSubmitted() && $form->isValid()) {// si le formulaire est envoyé et est valide
         $aroma=$form->get('Aroma')->getData();
         $nicotine=$form->get('Nicotine')->getData();
+       
 
         $pictures = $form->get('picture')->getData();
-        
-        $product-> setAroma($aroma);
+         //on recupere les données differentes entrée
+       
+         $product-> setAroma($aroma);
         $product->setNicotine($nicotine);
       
 
@@ -49,47 +51,50 @@ class ProductController extends AbstractController
             $products->addCapacity($capacity);
             
         }
-
+        // et on les definits dans le nouveau produit
         
-        $entityManager->persist($product);
+        $entityManager->persist($product);// on prepare le produit pour la base de donnée
 
-        $entityManager->flush();
+        $entityManager->flush();// et on l'envoie dans la base de donnée
 
-                if ($pictures) {
+                if ($pictures) {//
                     
-                    foreach($pictures as $picture){
+                    foreach($pictures as $picture){// on fait une boucle pour faire les image une par une
                         // On génère un nouveau nom de fichier
                         $name = md5(uniqid()).'.'.$picture->guessExtension();
                         
                         // On copie le fichier dans le dossier uploads
                         $picture->move(
-                            $this->getParameter('pictures_directory'),
+                            $this->getParameter('pictures_directory'),// recuperation du parametre present dans service.yalm
                             $name
                         );
                         // On crée l'image dans la base de données
                         $img = new Picture();
-                        $img->setName( $name);
-                        $img->setProducts($product);
-                        $product->addPicture($img);
+                        $img->setName( $name);// on ajoute un nom
+                        $img->setProducts($product);// on associe le produit a l'image
+                        $product->addPicture($img);//on ajoute l'image au produit
 
                             $entityManager->persist($img); //prepare les donner
-                            $entityManager->flush();
+                            $entityManager->flush();//et envoie dans la base de donnée
 
                     }
                 }
 
 
-            return  $this->redirectToRoute('app_home');
+            return  $this->redirectToRoute('app_home');//redirection vers home
             }
 
 
-       return $this->render('product\addProduct.html.twig',[ 
+       return $this->render('product\addProduct.html.twig',[ // affichage de la page avec le formulaire
         'form' => $form
        ]);
 
        }
 
-       #[Route('/product/{id}/Show', name: 'show_product')]
+
+
+       //pour afficher un produit
+       #[Route('/product/{id}/Show', name: 'show_product')]//on recupere l'id du produit
        public function show(Product $product): Response
        {    
           
@@ -97,27 +102,30 @@ class ProductController extends AbstractController
        [ 'product' => $product]);
        }
 
-
-       #[Route('/product/{id}/delete', name: 'delete_product')]
+       // pour supprimer un produit
+       #[Route('/product/{id}/delete', name: 'delete_product')]// on recupere l'id du prduit
        public function delete(Product $product,EntityManagerInterface $entityManager,ProductRepository $productRepo ): Response
-    {           $pathImg= $this->getParameter('pictures_directory');
-       $idProduct=$product->getId();
-       $nameimgDeleteQuery= $productRepo->nameImgDelete($idProduct);
-       $nameimgDelete=array_column($nameimgDeleteQuery, 'name');
-         foreach($nameimgDelete as $img){
+    {         
+        
+        $pathImg= $this->getParameter('pictures_directory');//recuperation du chemin des images
+       $idProduct=$product->getId();// recuperation de l'id du produit a suprimer
+       $nameimgDeleteQuery= $productRepo->nameImgDelete($idProduct);// lancement de la fonction pour trouver toute les images avec l'id du produit
+       $nameimgDelete=array_column($nameimgDeleteQuery, 'name');// recuperation des noms des fichier image a supprimer
+        
+       foreach($nameimgDelete as $img){// pour supprimer le ou les fichier image
          
-        // dd($nameimgDelete);
-           $imgPath=$pathImg.'/'.$img;
+        
+           $imgPath=$pathImg.'/'.$img;// definition du chemin de l'image avec le nom du fichier a supprimer
            if (file_exists($imgPath)) {
-               unlink($imgPath);
+               unlink($imgPath);// suppression du fichier
            } 
-          // unlink($imgPath ) ;
+          
          
           
       }
       foreach($product as $products){
       $imgBdd=$products->getPicture();
-      $consumable=$product->getConsumable();
+      
       $imgBdd->removeProducts();
       $product->removePicture( $imgBdd);
       

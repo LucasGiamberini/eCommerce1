@@ -17,11 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
         }
     });
    
-    if (window.location.href.includes('edit')) {
-
-
-    }
-
+   
 
 }});
 
@@ -126,16 +122,16 @@ prevBtn.addEventListener('click', () => {
   });
   
   nextBtn.addEventListener('click', () => {
-    if (currentIndex < carouselItems.length - 1) {
+ 
   
       nextSlide();
       resetInterval()
-    }
+ 
   });
   
   function resetInterval() {
-    clearInterval(intervalId); // Arrête l'intervalle actuel
-    intervalId = setInterval(nextSlide, 4000); // Redémarre le défilement automatique
+    clearInterval(interval); // Arrête l'intervalle actuel
+    interval = setInterval(nextSlide, 4000); // Redémarre le défilement automatique
   }
   
 
