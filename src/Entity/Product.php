@@ -35,8 +35,11 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Aroma $Aroma = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
-    private ?Nicotine $Nicotine = null;
+    // #[ORM\ManyToOne(inversedBy: 'products')]
+    //private ?Nicotine $Nicotine = null;
+
+ 
+
 
     #[ORM\ManyToMany(targetEntity: Height::class, inversedBy: 'products')]
     private Collection $capacity;
@@ -47,12 +50,16 @@ class Product
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Favorite')]
     private Collection $users;
 
+    #[ORM\ManyToMany(targetEntity: Nicotine::class, inversedBy: 'products')]
+    private Collection $Nicotines;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
         $this->capacity = new ArrayCollection();
         $this->baskets = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->Nicotines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,19 +156,25 @@ class Product
 
         return $this;
     }
+//one-to-many
+ //   public function getNicotine(): ?Nicotine
+ //   {
+  //      return $this->Nicotine;
+  //  }
 
-    public function getNicotine(): ?Nicotine
-    {
-        return $this->Nicotine;
-    }
+ //   public function setNicotine(?Nicotine $Nicotine): static
+  //  {
+ //       $this->Nicotine = $Nicotine;
 
-    public function setNicotine(?Nicotine $Nicotine): static
-    {
-        $this->Nicotine = $Nicotine;
+//        return $this;
+ //   }
 
-        return $this;
-    }
 
+
+
+
+
+ 
     /**
      * @return Collection<int, Height>
      */
@@ -239,6 +252,30 @@ class Product
         if ($this->users->removeElement($user)) {
             $user->removeFavorite($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Nicotine>
+     */
+    public function getNicotines(): Collection
+    {
+        return $this->Nicotines;
+    }
+
+    public function addNicotine(Nicotine $nicotine): static
+    {
+        if (!$this->Nicotines->contains($nicotine)) {
+            $this->Nicotines->add($nicotine);
+        }
+
+        return $this;
+    }
+
+    public function removeNicotine(Nicotine $nicotine): static
+    {
+        $this->Nicotines->removeElement($nicotine);
 
         return $this;
     }

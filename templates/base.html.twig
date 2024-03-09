@@ -75,7 +75,7 @@
                 <div id="quantityBasket">
                 {% set totalQuantity = 0 %}
                 {% for item in app.session.get('basket') %}
-                {% set totalQuantity = totalQuantity + item %}
+                {% set totalQuantity = totalQuantity + item.quantity %}
                 {% endfor %}
                 {% if totalQuantity > 0 %}
                     

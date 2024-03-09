@@ -60,9 +60,11 @@
 <h2> {{ product.name}}</h2>
 <p>Reference: {{product.reference}}</p>
 <p>{{product.detail}}</p>
-<p>Nicotine: {{product.nicotine.proportioning}}</p>
-<p>Arome: {{product.aroma.categoryName}} </p>
 
+<p>Arome: {{product.aroma.categoryName}} </p>
+{% for products in product.nicotines %}
+{{dump (products)}} 
+{% endfor %}
 
 
 </div>
@@ -70,6 +72,16 @@
 <p id="showPrice">{{ '%0.2f'|format(product.price) }} &euro;</p>
 
 <form id="formShow" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
+    
+    
+    <select name="nicotine" id="nicotine">
+        
+        {% for nicotine in product.nicotines %}
+            <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>
+        {% endfor %}
+    </select>
+
+
     <p>Quantité:</p>
     <div id="quantity">
       

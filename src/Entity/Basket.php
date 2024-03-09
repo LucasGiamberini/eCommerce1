@@ -24,6 +24,9 @@ class Basket
     #[ORM\JoinColumn(nullable: false)]
     private ?Purchase $Purchases = null;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $Nicotine = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Basket
     public function setPurchases(?Purchase $Purchases): static
     {
         $this->Purchases = $Purchases;
+
+        return $this;
+    }
+
+    public function getNicotine(): ?string
+    {
+        return $this->Nicotine;
+    }
+
+    public function setNicotine(?string $Nicotine): static
+    {
+        $this->Nicotine = $Nicotine;
 
         return $this;
     }

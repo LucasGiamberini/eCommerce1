@@ -21,6 +21,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use PayPal\Auth\OAuthTokenCredential;
+use App\Repository\NicotineRepository;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -70,7 +71,7 @@ class PurchaseController extends AbstractController
 
 // recapitulatif de commande avant le paiement
     #[Route('/purchase/recap', name: 'app_recap')]
-    public function recap(Security $security, SessionInterface $session, ProductRepository $productRepository): Response
+    public function recap(Security $security, SessionInterface $session, ProductRepository $productRepository, NicotineRepository $nicotineRepository): Response
     {   
         // recupere toute les donnée enregistrer en session
         $basket=$session->get("basket");
@@ -83,17 +84,21 @@ class PurchaseController extends AbstractController
             
             $totalQuantity= 0;
     
-            foreach($basket as $id=>$quantity)
-            {
-            $product = $productRepository->find($id);
-            $dataBasket[] = [
-                "product" => $product,
-                "quantity" => $quantity
-            ];
-            
-            $totalQuantity += $quantity;
+            foreach ($basket as $id => $data) {
+                $product = $productRepository->find($id);
+                $nicotine = $nicotineRepository->find($data['nicotine_id']);
+                $quantity= $data['quantity'];
+    
+                $dataBasket[] = [
+                    "product" => $product,
+                    "quantity" => $quantity,
+                    "nicotine" => $nicotine
+                ];
+           
+            $totalQuantity += $quantity;// on ajoute a la quantité total la quantité du produit
             }
         
+
           
         return $this->render('purchase/recap.html.twig', 
         [ 'address' => $adress,
@@ -196,7 +201,7 @@ class PurchaseController extends AbstractController
 
 // si le paiement est reussi
     #[Route('/purchase/paySuccess', name: 'app_success')]
-    public function success(Security $security, ProductRepository $productRepository ,SessionInterface $session,UserRepository $userRepository, EntityManagerInterface $em, PurchaseRepository $purchaseRepository): Response
+    public function success(Security $security, ProductRepository $productRepository ,SessionInterface $session,UserRepository $userRepository, EntityManagerInterface $em, PurchaseRepository $purchaseRepository, NicotineRepository $nicotineRepository ): Response
     {   
         
         // recuperation des données presente en session
@@ -247,20 +252,20 @@ class PurchaseController extends AbstractController
 
         
 
- 
-        foreach($basket as $id=>$quantity)// boucle pour faire l'association des produits
-        {
-            $dataBaseBasket=new Basket();// instanciation d'un nouvel objet basket
-            $product=$productRepository->find($id);// recherche du produit dans la base de donnée
+        foreach ($basket as $item) {
+            $dataBaseBasket = new Basket();
+            $product = $productRepository->find($item['product_id']);
+            $nicotine = $nicotineRepository->find($item['nicotine_id'])->getProportioning();
 
-            $dataBaseBasket->setPurchases($purchase);// association des valeurs a l'objet
+
+        
+            $dataBaseBasket->setPurchases($purchase);
             $dataBaseBasket->setProducts($product);
-            $dataBaseBasket->setQuantity($quantity);
-
-            $em->persist($dataBaseBasket);// preparation des l'objet
-            $em->flush();// et injection dans la base de donnée
-            
-
+            $dataBaseBasket->setNicotine($nicotine);
+            $dataBaseBasket->setQuantity($item['quantity']);
+        
+            $em->persist($dataBaseBasket);
+            $em->flush();
         }
 
         $session->remove('basket');// suppression du panier,de l'adresse present en session

@@ -47,16 +47,16 @@
     </div>
     <div class="col-sm">
         <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
-            {{basket.product.name}}
-        </a>
-      
+            {{basket.product.name}}  
+        </a>nicotine:{{basket.nicotine.proportioning}}
+      {{dump (basket.nicotine.proportioning)}}
     </div>
     <div class="col-sm">
         {{ '%0.2f'|format(basket.product.price) }} &euro;
       
     </div>
     <div class="col-sm">
-        <a href="{{path("remove_basket", {id: basket.product.id})}}">
+        <a href="{{path("remove_basket", {id: basket.product.id ,nicotine: basket.nicotine.id })}}">
             <i>-</i>
         </a>
         {{basket.quantity}}
@@ -66,7 +66,7 @@
           </a>
     </div>
     <div class="col-sm">
-        <a href="{{path("delete_basket", {id: basket.product.id})}}"> Supprimer</a>
+        <a href="{{path("delete_basket", {id: basket.product.id , nicotine: basket.nicotine.id})}}"> Supprimer</a>
     </div>
     <div class="col-sm"> 
        

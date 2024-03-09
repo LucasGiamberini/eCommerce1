@@ -17,11 +17,14 @@ class Nicotine
 
   
 
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Nicotine')]
-    private Collection $products;
+  //  #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Nicotine')]
+ //   private Collection $products;
 
     #[ORM\Column(length: 255)]
     private ?string $proportioning = null;
+
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'Nicotines')]
+    private Collection $products;
 
     public function __construct()
     {
@@ -35,6 +38,48 @@ class Nicotine
 
 
 
+ //   /**
+ //    * @return Collection<int, Product>
+ //    */
+ //   public function getProducts(): Collection
+ //   {
+ //       return $this->products;
+ //  }
+
+ //   public function addProduct(Product $product): static
+  //  {
+ //       if (!$this->products->contains($product)) {
+ //           $this->products->add($product);
+//            $product->setNicotine($this);
+ //       }
+
+  //      return $this;
+  //  }
+
+ //   public function removeProduct(Product $product): static
+ //   {
+  //      if ($this->products->removeElement($product)) {
+ //           // set the owning side to null (unless already changed)
+ //           if ($product->getNicotine() === $this) {
+ //               $product->setNicotine(null);
+   //         }
+  //      }
+
+  //      return $this;
+ //   }
+
+    public function getProportioning(): ?string
+    {
+        return $this->proportioning;
+    }
+
+    public function setProportioning(string $proportioning): static
+    {
+        $this->proportioning = $proportioning;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Product>
      */
@@ -47,7 +92,7 @@ class Nicotine
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->setNicotine($this);
+            $product->addNicotine($this);
         }
 
         return $this;
@@ -56,23 +101,8 @@ class Nicotine
     public function removeProduct(Product $product): static
     {
         if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getNicotine() === $this) {
-                $product->setNicotine(null);
-            }
+            $product->removeNicotine($this);
         }
-
-        return $this;
-    }
-
-    public function getProportioning(): ?string
-    {
-        return $this->proportioning;
-    }
-
-    public function setProportioning(string $proportioning): static
-    {
-        $this->proportioning = $proportioning;
 
         return $this;
     }

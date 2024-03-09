@@ -60,7 +60,7 @@
     {% endif %}
     </div>
     <div class="col-sm">
-        <a href="{{ path ('show_product' , {'id': basket.products.id})}}">  {{basket.products.name}}</a>
+        <a href="{{ path ('show_product' , {'id': basket.products.id})}}">  {{basket.products.name}}</a>Nicotine:{{basket.nicotine}}
     </div>
     <div class="col-sm">
         {{basket.products.price}}

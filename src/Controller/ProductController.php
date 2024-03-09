@@ -36,19 +36,23 @@ class ProductController extends AbstractController
 
        if ($form->isSubmitted() && $form->isValid()) {// si le formulaire est envoyé et est valide
         $aroma=$form->get('Aroma')->getData();
-        $nicotine=$form->get('Nicotine')->getData();
+      
        
 
         $pictures = $form->get('picture')->getData();
          //on recupere les données differentes entrée
        
          $product-> setAroma($aroma);
-        $product->setNicotine($nicotine);
+       
       
 
         foreach($product as $products ){
             $capacity=$form->get('capacity')->getData();
             $products->addCapacity($capacity);
+            
+            
+            $nicotine=$form->get('nicotines')->getData();
+            $products->addNicotine($nicotine);
             
         }
         // et on les definits dans le nouveau produit
