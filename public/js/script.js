@@ -26,7 +26,26 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
   
-    
+     //bouton ajouter 
+         
+     var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
+     const incrBtn = document.getElementById('increaseBtn');
+     const decrsBtn = document.getElementById('decreaseBtn');
+
+     incrBtn.addEventListener('click', function() {
+           
+           qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
+           // additionne  une unité a la quantité total du chiffre present dans le input
+       });
+   
+       decrsBtn.addEventListener('click', function() {
+           
+       
+           if (parseInt(qttInput.value) > 1) {// si la valeur est superieur a un
+               qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
+           }
+       });
+
 
 
     if (window.location.href.includes('home')    ) {// si l'url contient le mot home

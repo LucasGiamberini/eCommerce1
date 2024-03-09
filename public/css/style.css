@@ -472,6 +472,18 @@ article{
     background-color: black ;
 }
 
+.formNav{
+    display: none;
+    
+}
+
+.ProductBox:hover .formNav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  /*  bottom: -61vh; */
+}
 /*/////////////////////show product//////////////////*/
 #productShow{
     display: flex;
