@@ -49,7 +49,7 @@
         <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
             {{basket.product.name}}  
         </a>nicotine:{{basket.nicotine.proportioning}}
-      {{dump (basket.nicotine.proportioning)}}
+     
     </div>
     <div class="col-sm">
         {{ '%0.2f'|format(basket.product.price) }} &euro;

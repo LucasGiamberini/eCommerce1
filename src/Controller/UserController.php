@@ -91,20 +91,26 @@ class UserController extends AbstractController
         
         $user1 = $security->getUser()->getEmail();
       
-        $form = $this->createForm(UserEditType::class, $user);// creation du formulaire pour editer le mot de passe et email
-        $form->handleRequest($request);
+       
         $userId = $session->get('id');
-        $actualUserId=$security->getUser()->getId();
+        $actualUserId=$security->getUser()->getId();// recupere l'id de l'utilisateur actuellement connecter
         $idUrl=intval($id);// convertit la chaine de caractère en nombre entier
       
-    
-
-        if($idUrl  !==  $actualUserId ){// securité: si l'utilisateur en ligne modifie l'url  ,il ne peux pas acceder a la page  de modification d'un autre 
+       
+        
+        if($idUrl  !==  $actualUserId  ){// securité: si l'utilisateur en ligne modifie l'url  ,il ne peux pas acceder a la page  de modification d'un autre 
 
             $this->addFlash('danger', 'You dont have access to this page.');
             return $this->redirectToRoute('app_home');
         }
         
+
+        $form = $this->createForm(UserEditType::class, $user);// creation du formulaire pour editer le mot de passe et email
+        $form->handleRequest($request);
+
+       
+
+
       
         if ($form->isSubmitted() && $form->isValid()) {
             $password=$form->get('plainPassword')->getData();// recuperation des donée du formulaire

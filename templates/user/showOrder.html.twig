@@ -63,13 +63,13 @@
         <a href="{{ path ('show_product' , {'id': basket.products.id})}}">  {{basket.products.name}}</a>Nicotine:{{basket.nicotine}}
     </div>
     <div class="col-sm">
-        {{basket.products.price}}
+        {{basket.products.price}}  &euro;
     </div>
     <div class="col-sm">
         {{basket.quantity}}
         </div>
     <div class="col-sm">
-        {{basket.quantity * basket.products.price}}
+        {{basket.quantity * basket.products.price}}  &euro;
     </div>
     </div>
 {% endfor %}
@@ -84,7 +84,7 @@
 
         </div>
         <div class="col-sm" colspan="2"> 
-        Total Commande:{{invoice.total}}
+        Total Commande:{{invoice.total}}  &euro;
         </div>
     </div>    
 </tfoot> 

@@ -9,12 +9,13 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+    
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            
+          
             lazy: true
             login_throttling:
                 max_attempts: 3 
@@ -43,7 +44,12 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-
+  
+      #  - { path: '^/secure', roles: ROLE_ADMIN, requires_channel: https }
+      #  - { path: '^/login', roles: PUBLIC_ACCESS, requires_channel: https }
+        # catch all other URLs
+         - { path: '^/', roles: PUBLIC_ACCESS, requires_channel: http }
+         - { path: '^/', roles: ROLE_USER, requires_channel: http } # mettre https avant de mettre en ligne
 when@test:
     security:
         password_hashers:
