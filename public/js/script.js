@@ -62,45 +62,51 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
        // Requette Ajax avec jQuery pour favoris
        
        const favoriteBtn = document.querySelectorAll('a.addFavorite');
-    
-       $(favoriteBtn).click(function(event) {
-        const productId = $(this).data('product-id') ;
-        const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
+
+$(favoriteBtn).click(function(event) {
+  const productId = $(this).data('product-id');
+  const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
+  const classfavoriteIcon = favoriteIcon.attr('class');
+  console.log(classfavoriteIcon );
+
+  event.preventDefault();
+
+  if (classfavoriteIcon === "bi bi-heart fs-2") {
+    $.ajax({
       
-        event.preventDefault();
-       
+      url: "/user/addfavorite/" + productId,
+      method: 'POST',
+      contentType: "application/json; charset=utf-8",
+      data: {id: productId},
+      success: function(response) {
+        console.log('Ajouté aux favoris avec succès !');
+        favoriteIcon.removeClass('bi-heart fs-2');
+        favoriteIcon.addClass('bi-heart-fill fs-2');
+      },
+      error: function (xhr, status, error) {
+        console.error('Erreur lors de l\'ajout aux favoris:', error);
+      }
+    });
+  } 
+  else {
+    $.ajax({
+      url: "/user/removeFavorite/" + productId,
+      method: 'POST',
+      contentType: "application/json; charset=utf-8",
+      data: {id: productId},
+      success: function(response) {
+        console.log('Retiré des favoris avec succès !');
+        favoriteIcon.removeClass('bi-heart-fill fs-2');
+        favoriteIcon.addClass('bi-heart fs-2');
+      },
+      error: function (xhr, status, error) {
+        console.error('Erreur lors du retrait des favoris:', error);
+      }
+    });
+  }
 
-        if (fa)
-        $.ajax({
-          url:"/user/addfavorite/"+ productId  ,
-          method: 'POST',
-         contentType: "application/json; charset=utf-8",
-          data: {id: productId},
-          success: function(response) {
-            console.log('Ajouté aux favoris avec succès !');
-          
+});
 
-            console.log('i#favoriteIcon' + productId);
-          // const favoriteIcon= document.querySelectorAll('i.addFavorite');
-          favoriteIcon.removeClass('bi-heart');
-          favoriteIcon.addClass('bi-heart-fill');
-          
-            // Gérer la réponse du serveur si nécessaire
-        },
-          _error: function (_xhr, _status, error) {
-            console.error('Erreur lors de l\'ajout aux favoris:', error);
-          },
-        get error() {
-          return this._error;
-        },
-        set error(value) {
-          this._error = value;
-        },
-        })
-       })
-
-
-     
 
 
 

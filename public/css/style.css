@@ -405,6 +405,27 @@ article{
 
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
+.bi-heart{
+    color: rgba(255, 0, 0, 0.74);
+    position: absolute;
+    bottom: -15vh;
+    left: 56vw;
+    height: 0vh;
+    width: 0vw;
+}
+
+.bi-heart-fill{
+    color: rgba(255, 0, 0, 0.74);
+    position: absolute;
+    bottom: -15vh;
+    left: 56vw;
+    height: 0vh;
+    width: 0vw;
+
+}
+
+
+
 .ProductBoxs{
     display: flex;
     flex-direction: row;

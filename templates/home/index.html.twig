@@ -38,7 +38,7 @@
     <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
   </figure>
 {% endif %}
-<a  class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id})}}"     data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart  fs-2"></i> </a>
+<a  class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id})}}"     data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2"></i> </a>
 
       <a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br> 
      <br>

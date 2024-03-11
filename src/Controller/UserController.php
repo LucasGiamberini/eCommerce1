@@ -57,6 +57,44 @@ class UserController extends AbstractController
     }
 
 
+
+    #[Route('/user/removeFavorite/{id}', name: 'remove_favorite')]
+    public function RemoveFavorite(Request $request,ProductRepository $productRepository,SessionInterface $session, Security $security, EntityManagerInterface $entityManager): JsonResponse
+    {$flashes = $session->getFlashBag();
+    
+        $user= $security->getUser();
+       
+
+        $id = $request->get('id');
+
+
+        $product= $productRepository->findOneBy(['id' => $id]);;
+
+        if ($user instanceof User){
+        $user->removeFavorite($product);
+        
+        $entityManager->flush();
+
+        $flashes->add('success', 'Produit suprimer favoris avec succès !');
+        }
+      
+       // return $this->redirectToRoute('app_home');
+        return new JsonResponse(['success' => true]);
+    }
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
     #[Route('/user/showFavorite', name: 'show_favorite')]
     public function showFavorite(Security $security): Response
     {
