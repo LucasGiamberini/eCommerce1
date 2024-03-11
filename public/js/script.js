@@ -60,25 +60,42 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
        // Requette Ajax avec jQuery pour favoris
-       var productId = $(this).data('product-id') ;
-       var favoriteBtn = document.querySelectorAll('a.addFavorite');
-
-       $(favoriteBtn).click(function(event) {
        
+       const favoriteBtn = document.querySelectorAll('a.addFavorite');
+    
+       $(favoriteBtn).click(function(event) {
+        const productId = $(this).data('product-id') ;
+        const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
+      
         event.preventDefault();
        
+
+        if (fa)
         $.ajax({
-          url:" /user/addfavorite/{id} ",
+          url:"/user/addfavorite/"+ productId  ,
           method: 'POST',
+         contentType: "application/json; charset=utf-8",
           data: {id: productId},
           success: function(response) {
             console.log('Ajouté aux favoris avec succès !');
+          
+
+            console.log('i#favoriteIcon' + productId);
+          // const favoriteIcon= document.querySelectorAll('i.addFavorite');
+          favoriteIcon.removeClass('bi-heart');
+          favoriteIcon.addClass('bi-heart-fill');
+          
             // Gérer la réponse du serveur si nécessaire
         },
-        error: function(xhr, status, error) {
+          _error: function (_xhr, _status, error) {
             console.error('Erreur lors de l\'ajout aux favoris:', error);
-            // Gérer les erreurs si nécessaire
-        }
+          },
+        get error() {
+          return this._error;
+        },
+        set error(value) {
+          this._error = value;
+        },
         })
        })
 

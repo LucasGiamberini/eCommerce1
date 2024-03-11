@@ -33,20 +33,26 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/addfavorite/{id}', name: 'add_favorite')]
-    public function AddFavorite($id,ProductRepository $productRepository,SessionInterface $session, Security $security, EntityManagerInterface $entityManager): JsonResponse
+    public function AddFavorite(Request $request,ProductRepository $productRepository,SessionInterface $session, Security $security, EntityManagerInterface $entityManager): JsonResponse
     {$flashes = $session->getFlashBag();
     
         $user= $security->getUser();
        
+
+        $id = $request->get('id');
+
+
         $product= $productRepository->findOneBy(['id' => $id]);;
 
-        if ($user){
+        if ($user instanceof User){
         $user->addFavorite($product);
         
         $entityManager->flush();
+
+        $flashes->add('success', 'Produit ajouté aux favoris avec succès !');
         }
       
-
+       // return $this->redirectToRoute('app_home');
         return new JsonResponse(['success' => true]);
     }
 
