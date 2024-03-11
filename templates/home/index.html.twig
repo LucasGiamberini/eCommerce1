@@ -39,16 +39,30 @@
   </figure>
 {% endif %}
 
+
+
+
+
+
+{% set favoriteIds = [] %}
 {% for favorite in app.user.Favorite %}
-{{dump(favorite.id)}}
-{% if product.id is same as favorite  %}
-<a  class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id})}}"     data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2"></i> </a>
-
-
-{% endif %}
-{% else %}
-<a  class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id})}}"     data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2"></i> </a>
+    {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
 {% endfor %}
+
+{% for product in products %}
+    {% if product.id in favoriteIds %}
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
+    {% else %}
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2 favoriteIconNavigation"></i> </a>
+    {% endif %}
+{% endfor %}
+
+
+
+
+
+
+
 {{dump(app.user.Favorite)}}
 
 

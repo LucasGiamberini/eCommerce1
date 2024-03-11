@@ -58,6 +58,21 @@
 
 <div id="presentation">
 <h2> {{ product.name}}</h2>
+
+{% set favoriteIds = [] %}
+{% for favorite in app.user.Favorite %}
+    {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
+{% endfor %}
+
+
+    {% if product.id in favoriteIds %}
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconShow"></i> </a>
+    {% else %}
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2 favoriteIconShow"></i> </a>
+    {% endif %}
+
+
+
 <p>Reference: {{product.reference}}</p>
 <p>{{product.detail}}</p>
 

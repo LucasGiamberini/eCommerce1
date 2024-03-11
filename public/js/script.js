@@ -71,7 +71,7 @@ $(favoriteBtn).click(function(event) {
 
   event.preventDefault();
 
-  if (classfavoriteIcon === "bi bi-heart fs-2") {
+  if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconNavigation") {
     $.ajax({
       
       url: "/user/addfavorite/" + productId,
@@ -80,8 +80,8 @@ $(favoriteBtn).click(function(event) {
       data: {id: productId},
       success: function(response) {
         console.log('Ajouté aux favoris avec succès !');
-        favoriteIcon.removeClass('bi-heart fs-2');
-        favoriteIcon.addClass('bi-heart-fill fs-2');
+        favoriteIcon.removeClass('bi-heart fs-2 favoriteIconNavigation');
+        favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconNavigation');
       },
       error: function (xhr, status, error) {
         console.error('Erreur lors de l\'ajout aux favoris:', error);
@@ -96,8 +96,8 @@ $(favoriteBtn).click(function(event) {
       data: {id: productId},
       success: function(response) {
         console.log('Retiré des favoris avec succès !');
-        favoriteIcon.removeClass('bi-heart-fill fs-2');
-        favoriteIcon.addClass('bi-heart fs-2');
+        favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconNavigation');
+        favoriteIcon.addClass('bi-heart fs-2 favoriteIconNavigation');
       },
       error: function (xhr, status, error) {
         console.error('Erreur lors du retrait des favoris:', error);
@@ -335,6 +335,57 @@ prevBtn.addEventListener('click', () => {
     });
 
 
+
+
+
+           // Requette Ajax avec jQuery pour favoris
+       
+           const favoriteBtn = document.querySelectorAll('a.addFavorite');
+
+           $(favoriteBtn).click(function(event) {
+             const productId = $(this).data('product-id');
+             const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
+             const classfavoriteIcon = favoriteIcon.attr('class');
+             console.log(classfavoriteIcon );
+           
+             event.preventDefault();
+           
+             if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconShow") {
+               $.ajax({
+                 
+                 url: "/user/addfavorite/" + productId,
+                 method: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 data: {id: productId},
+                 success: function(response) {
+                   console.log('Ajouté aux favoris avec succès !');
+                   favoriteIcon.removeClass('bi-heart fs-2 favoriteIconShow');
+                   favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconShow');
+                 },
+                 error: function (xhr, status, error) {
+                   console.error('Erreur lors de l\'ajout aux favoris:', error);
+                 }
+               });
+             } 
+             else {
+               $.ajax({
+                 url: "/user/removeFavorite/" + productId,
+                 method: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 data: {id: productId},
+                 success: function(response) {
+                   console.log('Retiré des favoris avec succès !');
+                   favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconShow');
+                   favoriteIcon.addClass('bi-heart fs-2 favoriteIconShow');
+                 },
+                 error: function (xhr, status, error) {
+                   console.error('Erreur lors du retrait des favoris:', error);
+                 }
+               });
+             }
+           
+           });
+           
      
        //bouton ajouter 
          
