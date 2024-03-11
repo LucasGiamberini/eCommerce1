@@ -26,7 +26,13 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
   
-     //bouton ajouter 
+    
+
+
+
+    if (window.location.href.includes('home')    ) {// si l'url contient le mot home
+
+       //bouton ajouter - retirer quantité
          
      var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
      const incrBtn = document.getElementById('increaseBtn');
@@ -48,12 +54,44 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
 
-    if (window.location.href.includes('home')    ) {// si l'url contient le mot home
 
 
 
 
 
+       // Requette Ajax avec jQuery pour favoris
+       var productId = $(this).data('product-id') ;
+       var favoriteBtn = document.querySelectorAll('a.addFavorite');
+
+       $(favoriteBtn).click(function(event) {
+       
+        event.preventDefault();
+       
+        $.ajax({
+          url:" /user/addfavorite/{id} ",
+          method: 'POST',
+          data: {id: productId},
+          success: function(response) {
+            console.log('Ajouté aux favoris avec succès !');
+            // Gérer la réponse du serveur si nécessaire
+        },
+        error: function(xhr, status, error) {
+            console.error('Erreur lors de l\'ajout aux favoris:', error);
+            // Gérer les erreurs si nécessaire
+        }
+        })
+       })
+
+
+     
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////
  
         var template = document.getElementById('template');// changement de style du template lorsque l'on est sur home
 

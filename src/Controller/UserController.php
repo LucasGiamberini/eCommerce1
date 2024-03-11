@@ -6,12 +6,14 @@ use App\Entity\User;
 use App\Form\UserEditType;
 use App\Repository\UserRepository;
 use App\Repository\BasketRepository;
+use App\Repository\ProductRepository;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -22,12 +24,41 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
-    public function index(Session $session, Security $security): Response
+    public function index(): Response
     {$flashes = $session->getFlashBag();
     
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
         ]);
+    }
+
+    #[Route('/user/addfavorite/{id}', name: 'add_favorite')]
+    public function AddFavorite($id,ProductRepository $productRepository,SessionInterface $session, Security $security, EntityManagerInterface $entityManager): JsonResponse
+    {$flashes = $session->getFlashBag();
+    
+        $user= $security->getUser();
+       
+        $product= $productRepository->findOneBy(['id' => $id]);;
+
+        if ($user){
+        $user->addFavorite($product);
+        
+        $entityManager->flush();
+        }
+      
+
+        return new JsonResponse(['success' => true]);
+    }
+
+
+    #[Route('/user/showFavorite', name: 'show_favorite')]
+    public function showFavorite(Security $security): Response
+    {
+        $userFavorites= $security->getUser()->getFavorite();
+        foreach($userFavorites as $userFavorite){
+       // dd($userFavorite);
+        }
+        return $this->render('user/showFavorite.html.twig' , ['favorites' => $userFavorites]);
     }
   
 

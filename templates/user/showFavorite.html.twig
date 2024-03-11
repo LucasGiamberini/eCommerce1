@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique de commande{% endblock %}
+
+{% block body  %}
+<h1> Mes favoris</h1>
+{% for product in favorites %}
+<a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br>
+{% endfor %}
+
+
+
+
+
+
+
+
+{%  endblock %}
