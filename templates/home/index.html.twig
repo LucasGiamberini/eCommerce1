@@ -38,7 +38,19 @@
     <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
   </figure>
 {% endif %}
+
+{% for favorite in app.user.Favorite %}
+{{dump(favorite.id)}}
+{% if product.id is same as favorite  %}
+<a  class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id})}}"     data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2"></i> </a>
+
+
+{% endif %}
+{% else %}
 <a  class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id})}}"     data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2"></i> </a>
+{% endfor %}
+{{dump(app.user.Favorite)}}
+
 
       <a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br> 
      <br>
