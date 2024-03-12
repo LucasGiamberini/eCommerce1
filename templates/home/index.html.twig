@@ -24,88 +24,23 @@
 
   
 
-<a href="{{path('add_product')}}">Ajouter un produit</a>
+<a href="{{path('add_product')}}">Ajouter un produit</a><br>
 
 
-<div class="ProductBoxs">
-    {% for product in products %}
-<div class="ProductBox">
-   
-  <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
-    {% if product.pictures[0] is defined %}
-    <figure class="figureNavigation">
-        
-    <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
-  </figure>
-{% endif %}
-
-
-
-
-
-
-{% set favoriteIds = [] %}
-{% for favorite in app.user.Favorite %}
-    {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
+<form id="filter">
+{% for  category in categorys %}
+ <input type="radio"  id="category{{category.id}}" name="category" value="{{category.id}}" data-category-id="{{category.id}} " {% if loop.first %} checked {% endif %}{# pour que la#}> {{category.categoryName}} </a>
 {% endfor %}
+</form>
 
-{% for product in products %}
-    {% if product.id in favoriteIds %}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
-    {% else %}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2 favoriteIconNavigation"></i> </a>
-    {% endif %}
-{% endfor %}
+<div id="ResultBoxHome">{# affiche les resultat des requetes ajax pour les filtres#}
 
 
 
-
-
-
-
-{{dump(app.user.Favorite)}}
-
-
-      <a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br> 
-     <br>
-    
-     <a href ="{{ path ('delete_product' , {'id': product.id})}}"> Supprimer</a>
-      <a href ="{{ path ('edit_product' , {'id' : product.id})}}">Editer</a><br>
-     
-    
-      <form class="formNav" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
-    
-    
-        <select name="nicotine" id="nicotine">
-            
-            {% for nicotine in product.nicotines %}
-                <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>
-            {% endfor %}
-        </select>
-    
-    
-        <p>Quantité:</p>
-        <div id="quantity">
-          
-        <button  class="qttButton"type="button" id="decreaseBtn">-</button>
-        <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
-        <button class="qttButton" type="button" id="increaseBtn">+</button>
-    </div>
-        <button id="addToBasket" type="submit">Ajouter au panier</button>
-    </form>
-    
-    
-    
-    
-    
-    </div>
-
-    {% if loop.index is divisible by(4) %}
-      </div><br>
-      <div class="ProductBoxs">
-    {% endif %}
-  {% endfor %} 
 </div>
+
+
+
 
 
 <div id="blog">
@@ -117,15 +52,15 @@
 <div class="boxHomeBlog">
 <div id="textWhyVapoting">
   <h2> Pourquoi la cigarrette electronique? </h2><br>
-  <p>La cigarette est associée à un nombre alarmant de décès chaque année dans le monde entier. Selon l'Organisation mondiale de la santé (OMS), le tabagisme est la principale cause évitable de décès, responsable de plus de 8 millions de décès par an à l'échelle mondiale. Cela inclut à la fois les décès des fumeurs eux-mêmes et les décès dus à l'exposition à la fumée secondaire.</p>
+  
   <p>En passant a la cigarrette electronique, vous benefecirer des avantages suivant:<br> <br>
-  <strong> Réduction des risques pour la santé :</strong><br> La cigarette électronique ne produit pas de fumée nocive comme la cigarette traditionnelle. En vapotant, vous evitez l'inhalation de milliers de substances chimiques nocives présentes dans la fumée de tabac, ce qui réduit considérablement les risques pour la santé associés au tabagisme.
+  <strong> Réduction des risques pour la santé :</strong><br>  En vapotant, vous evitez l'inhalation de milliers de substances chimiques nocives présentes dans la fumée de tabac, ce qui réduit considérablement les risques pour la santé associés au tabagisme.
     <br><br>
-  <strong> Contrôle de la nicotine :</strong><br> Les cigarettes électroniques offrent une flexibilité quant au choix du taux de nicotine. Vous pouvez choisir parmi une gamme de concentrations de nicotine, voire opter pour des e-liquides sans nicotine du tout, ce qui permet de mieux contrôler sa consommation de nicotine et de faciliter une éventuelle réduction progressive.
+  <strong> Contrôle de la nicotine :</strong><br>  Vous pouvez choisir parmi une gamme de concentrations de nicotine, voire opter pour des e-liquides sans nicotine du tout, ce qui permet de mieux contrôler sa consommation de nicotine et de faciliter une éventuelle réduction progressive.
   <br><br>
   <strong>Moins d'odeurs et de résidus :</strong><br> Contrairement à la cigarette traditionnelle qui laisse une odeur persistante sur les vêtements, les meubles et les cheveux, la vapeur produite par la cigarette électronique est souvent inodore ou présente des arômes agréables. De plus, il n'y a pas de cendres, de mégots ou de résidus à éliminer.
   <br><br>
-  <strong>Économique à long terme :</strong><br> Bien que l'investissement initial puisse être plus élevé pour l'achat d'un dispositif de vapotage et d'e-liquides, à long terme, la cigarette électronique peut être beaucoup moins coûteuse que la cigarette traditionnelle. Les recharges d'e-liquide et les bobines de rechange sont souvent moins chères que les paquets de cigarettes.</p>
+  <strong>Économique à long terme :</strong><br> Bien que l'investissement initial puisse être plus élevé pour l'achat d'un dispositif de vapotage et d'e-liquides, à long terme, la cigarette électronique peut être beaucoup moins coûteuse que la cigarette traditionnelle. </p>
 </div>
 <figure class="figureHomeBlog">
   <img id="pictureWhyVapoting" src="{{ asset('/HomePicture/a3221638-08b1-4eb2-a6ce-a3097945faad.jpg') }}" alt="stop ecrit avec des megots">

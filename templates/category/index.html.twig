@@ -1,0 +1,96 @@
+{#{% extends 'home.html.twig' %} #}
+
+
+
+{% block body %}
+
+
+<div class="ProductBoxs">
+    {% for product in products %}
+  <div class="ProductBox">
+    <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
+  <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
+    {% if product.pictures[0] is defined %}
+    <figure class="figureNavigation">
+        
+    <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
+  </figure>
+{% endif %}
+
+
+
+
+
+{% if app.user %}{#     si un utilisateur est connecter                  #}
+  
+
+{% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
+{% for favorite in app.user.Favorite %}{# on fait une boucle pour les favoris de l'utilisateur en ligne   #}
+    {% set favoriteIds = favoriteIds|merge([favorite.id]) %}{# on fusione les deux tableau en utilisant merge, remplissant ainsi favoriteIds      #}
+{% endfor %}
+
+
+    {% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
+   {# data-favorite-id est utiliser pour recuperer l'id du produit      #}
+        {% else %}{#  si le produit n'est pas dans les favoris            #}
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2 favoriteIconNavigation"></i> </a>
+    {% endif %}
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+      {{product.name }}
+    </a> <br> 
+     <br>
+    
+     <a href ="{{ path ('delete_product' , {'id': product.id})}}"> Supprimer</a>
+      <a href ="{{ path ('edit_product' , {'id' : product.id})}}">Editer</a><br>
+     
+    
+      <form class="formNav" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
+    
+    
+        <select name="nicotine" id="nicotine">
+            
+            {% for nicotine in product.nicotines %}
+                <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>
+            {% endfor %}
+        </select>
+    
+    
+        <p>Quantité:</p>
+        <div id="quantity">
+          
+        <button  class="qttButton"type="button" id="decreaseBtn">-</button>
+        <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
+        <button class="qttButton" type="button" id="increaseBtn">+</button>
+    </div>
+        <button id="addToBasket" type="submit">Ajouter au panier</button>
+    </form>
+    
+    
+    
+    
+    
+    </div>
+
+    {% if loop.index is divisible by(4) %}
+      </div><br>
+      <div class="ProductBoxs">
+    {% endif %}
+  {% endfor %} 
+</div>
+
+
+
+
+
+{% endblock %}

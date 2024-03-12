@@ -24,80 +24,78 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
 
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
-  
+  if (window.location.href.includes('searchProductByCategory')    ) {
     
-
-
-
-    if (window.location.href.includes('home')    ) {// si l'url contient le mot home
-
-       //bouton ajouter - retirer quantité
+ //bouton ajouter - retirer quantité
          
-     var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
-     const incrBtn = document.getElementById('increaseBtn');
-     const decrsBtn = document.getElementById('decreaseBtn');
+ var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
+ const incrBtn = document.getElementById('increaseBtn');//bouton pour ajouter une quantité
+ const decrsBtn = document.getElementById('decreaseBtn');// bouton pour reduire la quantité
 
-     incrBtn.addEventListener('click', function() {
-           
-           qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
-           // additionne  une unité a la quantité total du chiffre present dans le input
-       });
+ incrBtn.addEventListener('click', function() {//
+       
+       qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
+       // additionne  une unité a la quantité total du chiffre present dans le input
+   });
+
+   decrsBtn.addEventListener('click', function() {
+       
    
-       decrsBtn.addEventListener('click', function() {
-           
+       if (parseInt(qttInput.value) > 1) {// si la valeur est superieur a un
+           qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
+       }
+   });
+
+
+
+  // Requette Ajax avec jQuery pour favoris
        
-           if (parseInt(qttInput.value) > 1) {// si la valeur est superieur a un
-               qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
-           }
-       });
+       const favoriteBtn = document.querySelectorAll('a.addFavorite');// selection toute les balises <a> avec la classe addFavorite
 
+$(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de favoris
+  //$ est un raccourcis pour jQuery
+  // event est un objet passer a la fonction lorsque le bouton est cliquer
+  const productId = $(this).data('product-id');// ce sont les donnée transmise dans data-product-id(voir ligne 56 ) 
+  const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);// pour trouver l'id correspondant sur le document
+  const classfavoriteIcon = favoriteIcon.attr('class');// pour recueillir la class de favorite icon
+  
 
+  event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
 
-
-
-
-
-
-       // Requette Ajax avec jQuery pour favoris
-       
-       const favoriteBtn = document.querySelectorAll('a.addFavorite');
-
-$(favoriteBtn).click(function(event) {
-  const productId = $(this).data('product-id');
-  const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
-  const classfavoriteIcon = favoriteIcon.attr('class');
-  console.log(classfavoriteIcon );
-
-  event.preventDefault();
-
-  if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconNavigation") {
-    $.ajax({
+  if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
+    $.ajax({//appelle de la fonction ajax de jQuery
       
-      url: "/user/addfavorite/" + productId,
-      method: 'POST',
-      contentType: "application/json; charset=utf-8",
-      data: {id: productId},
-      success: function(response) {
+      url: "/user/addfavorite/" + productId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+      method: 'POST',// pour envoyer une requette http "Post"
+      contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+      data: {id: productId},// les données qui seront envoyer
+      success: function(response) {// lorsque la requete est un succès
         console.log('Ajouté aux favoris avec succès !');
-        favoriteIcon.removeClass('bi-heart fs-2 favoriteIconNavigation');
-        favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconNavigation');
+        favoriteIcon.removeClass('bi-heart fs-2 favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
+        favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconNavigation');// et on le remplace avec l'icone coeur plein
       },
-      error: function (xhr, status, error) {
-        console.error('Erreur lors de l\'ajout aux favoris:', error);
+      error: function (xhr, status, error) {// lorqu'une erreur se produit, 
+        console.error('Erreur lors de l\'ajout aux favoris:', error);//on affiche les erreur dans
       }
     });
   } 
-  else {
+  else {// si l'icone est un coeur plein
     $.ajax({
-      url: "/user/removeFavorite/" + productId,
+      url: "/user/removeFavorite/" + productId,// on utilise la fonction pour enlever le produit des favoris
       method: 'POST',
       contentType: "application/json; charset=utf-8",
       data: {id: productId},
-      success: function(response) {
+      success: function(response) {// lorsque le produit a été enlever des favoris
         console.log('Retiré des favoris avec succès !');
-        favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconNavigation');
-        favoriteIcon.addClass('bi-heart fs-2 favoriteIconNavigation');
+        favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconNavigation');// on enleve l'icone avec le coeur plein
+        favoriteIcon.addClass('bi-heart fs-2 favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
       },
       error: function (xhr, status, error) {
         console.error('Erreur lors du retrait des favoris:', error);
@@ -106,6 +104,66 @@ $(favoriteBtn).click(function(event) {
   }
 
 });
+
+
+
+
+
+  }
+
+
+
+    if (window.location.href.includes('home')    ) {// si l'url contient le mot home
+
+
+
+      // requette ajax avec jQuery pour categorie
+
+       const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
+       
+       const resultDiv = $('#ResultBoxHome');// on determine la div du resultat du filtre avec l'id ResultBoxHome
+
+
+       
+       function executeAjaxCategory(categoryId){
+        $.ajax({
+          url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+          method: 'POST',// pour envoyer une requette http "Post"
+          contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+          data: {id: categoryId},// les données qui seront envoyer
+          success: function(response) {
+            // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+            resultDiv.html(response);
+          },
+        })
+      }
+       
+      
+       document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
+       
+        const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
+        executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
+
+
+
+
+        
+        input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
+      
+          const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
+          executeAjaxCategory(categoryId);
+          event.preventDefault();//on empeche la redirection vers la page complete page
+          
+       
+        })
+       })
+
+
+
+
+
+
+     
 
 
 

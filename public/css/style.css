@@ -83,13 +83,13 @@ header{
     background-image:url(/pictureHeader/milky-way-2695569_1280.jpg) ;
     
     background-size: cover;
-    filter:brightness(1);
+    filter:brightness(0.8);
     transition: filter 0.7s ease-in-out;
     height: 12vw;
 }
 
 header:hover{
-    filter:brightness(1.4);
+    filter:brightness(1);
  
 }
 
@@ -417,7 +417,9 @@ article{
 
 }
 
-
+.navigationToShowProduct{
+    text-decoration: none;
+}
 
 
 .ProductBoxs{
@@ -448,7 +450,7 @@ article{
     padding-right: 1vw;
     font-size: 3vh;
     bottom: -4vh;
-    left: -30%;
+    left: 6%;
     margin:-1vw;
 }
 
