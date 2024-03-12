@@ -22,6 +22,9 @@ class HomeController extends AbstractController
     }
 
 
+   
+
+
     #[Route('/home/CGV', name: 'app_CGV')]
     public function CGV( ): Response
     {  

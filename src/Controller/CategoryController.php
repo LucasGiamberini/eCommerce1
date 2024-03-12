@@ -32,6 +32,18 @@ class CategoryController extends AbstractController
     #[Route('/category/newProducts', name: 'new_product')]
     public function newProducts(ProductRepository $productRepo, AromaRepository $AromaRepo ): Response
     {  
+        $products= $productRepo->findBy([],["id" => "Desc"]);
+       
+       
+        return $this->render('category/index.html.twig', [
+            'products' => $products,
+        ]);
+    }
+
+
+    #[Route('/category/showCategory', name: 'show_category')]
+    public function ShowCategory(ProductRepository $productRepo, AromaRepository $AromaRepo ): Response
+    {  
         $products= $productRepo->findBy([],["name" => "ASC"]);
        
        

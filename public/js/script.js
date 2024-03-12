@@ -115,7 +115,30 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
     if (window.location.href.includes('home')    ) {// si l'url contient le mot home
 
+      //afficher les nouveauté sur la page d'accueil
 
+
+      const ButtonnewProduct = $('#newProduct');
+      
+      $(ButtonnewProduct).click(function(event) {
+      
+        event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
+      
+        $.ajax({//appelle de la fonction ajax de jQuery
+      
+          url: "/category/newProducts" ,//pour executer l'action avec cette url  
+          method: 'POST',// pour envoyer une requette http "Post"
+          contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+         
+          success: function(response) {// lorsque la requete est un succès
+            resultDiv.html(response);
+          },
+          
+        });
+       
+
+
+      })
 
       // requette ajax avec jQuery pour categorie
 
