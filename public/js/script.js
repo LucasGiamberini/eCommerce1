@@ -175,8 +175,7 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
 
       const ButtonnewProduct = $('#newProduct');
-      ButtonnewProduct.focus();
-      $(ButtonnewProduct).click();
+    
       $(ButtonnewProduct).click(function(event) {
       
         event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
