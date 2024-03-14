@@ -12,7 +12,9 @@
 
 <form id="filter">
   {% for  category in categorys %}
-   <input type="radio"  id="category{{category.id}}" name="category" value="{{category.id}}" data-category-id="{{category.id}} " {% if loop.first %} checked {% endif %}{# pour que la#}> {{category.categoryName}} </a>
+  
+  <input type="radio"  id="category{{category.id}}" name="category" value="{{category.id}}" data-category-id="{{category.id}} " {% if loop.first %} checked {% endif %}{# pour que la#}>  </a>
+  <label for="category{{category.id}}">{{category.categoryName}} </label>
   {% endfor %}
   </form>
 

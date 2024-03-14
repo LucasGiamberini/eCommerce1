@@ -38,11 +38,14 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
  
- 
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////// fenetre de requette ajax home/////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
-  if (window.location.href.includes('searchProductByCategory')    ) {
     
- // requette ajax avec jQuery pour categorie
+  if (window.location.href.includes('searchProductByCategory'|| 'newProducts' )    ) {
+    
+ //////////////////////////////////////////// requette ajax avec jQuery pour categorie/////////////////////////////////////
 
  const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
        
@@ -89,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
 
- //bouton ajouter - retirer quantité
+ /////////////////////////////////////////bouton ajouter - retirer quantité///////////////////////////////////////
          
  var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
  const incrBtn = document.getElementById('increaseBtn');//bouton pour ajouter une quantité
@@ -111,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
 
-  // Requette Ajax avec jQuery pour favoris
+ ////////////////////////////////////////////// Requette Ajax avec jQuery pour favoris////////////////////////////////////////////
        
        const favoriteBtn = document.querySelectorAll('a.addFavorite');// selection toute les balises <a> avec la classe addFavorite
 
@@ -121,11 +124,12 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
   const productId = $(this).data('product-id');// ce sont les donnée transmise dans data-product-id(voir ligne 56 ) 
   const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);// pour trouver l'id correspondant sur le document
   const classfavoriteIcon = favoriteIcon.attr('class');// pour recueillir la class de favorite icon
-  
+  console.log(favoriteIcon);
 
   event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
 
   if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
+    
     $.ajax({//appelle de la fonction ajax de jQuery
       
       url: "/user/addfavorite/" + productId,//pour executer l'action avec cette url  et en transmettant l'id du produit
@@ -143,6 +147,7 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
     });
   } 
   else {// si l'icone est un coeur plein
+    
     $.ajax({
       url: "/user/removeFavorite/" + productId,// on utilise la fonction pour enlever le produit des favoris
       method: 'POST',
@@ -163,21 +168,37 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
 
 
-
-
   }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////script home//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (window.location.href.includes('home')    ) {// si l'url contient le mot home
+
+      
+
+
+
+
 
       //afficher les nouveauté sur la page d'accueil
 
 
-      const ButtonnewProduct = $('#newProduct');
-    
-      $(ButtonnewProduct).click(function(event) {
+      const ButtonnewProduct = $('input[type="radio"]#newProduct');
+      const categoryLabel = document.querySelector('label[for="category"]');
       
+
+      
+      
+      
+      
+      function executeAjaxNew(){
         event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
       
         $.ajax({//appelle de la fonction ajax de jQuery
@@ -191,14 +212,25 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
           },
           
         });
+      }
+ //ButtonnewProduct.onclick = function(){executeAjaxNew()};
+ 
+ 
+ 
+ $(ButtonnewProduct).click(function(event) {
+  executeAjaxNew()
+
+ })
+
+      if (ButtonnewProduct.prop('checked') )  {
+      
+        executeAjaxNew()
        
-
-
-      })
+      }
 
 
 
-      // requette ajax avec jQuery pour categorie
+ /////////////////////// requette ajax avec jQuery pour categorie//////////////////////////////////////////////////////////
 
        const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
        
@@ -294,21 +326,19 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
 
 
-       
 
 
 
-
-
-
-/////////////////////////////////////////////////////////////////////
+/////////////////////////////// pour changer de style quand on est sur home   //////////////////////////////////////
  
         var template = document.getElementById('template');// changement de style du template lorsque l'on est sur home
 
         template.classList.remove('template');
         template.classList.add('templateHome');// changement de style pour la template lorque l'on est sur la homepage
 
-    //animation nuage header//
+
+
+///////////////////////////////////////////////animation nuage header///////////////////////////////////////////////////
 
 
 
@@ -343,7 +373,7 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
 
 
-        //choix de la classe pour animation  et style des nuages des nuages
+//////////////////////////////////choix de la classe pour animation  et style des nuages des nuages////////////////////////////////////////////
         
     
       var element1 = document.getElementById('cloudLeft');
@@ -355,7 +385,7 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
         element2.classList.add ( 'cloudRight-home');
     
     
-//carousel
+//////////////////////////////////////////////////////////carousel///////////////////////////////////////////////////////////////////////
 
     const carousel = document.querySelector('.carousel');
     const prevBtn = carousel.querySelector('.prev');
@@ -405,19 +435,12 @@ prevBtn.addEventListener('click', () => {
 
 
 
-
-
-
-
-
-
-
-
     };});
     
    
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// show product/////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
      
@@ -425,7 +448,7 @@ prevBtn.addEventListener('click', () => {
     if (window.location.href.includes('Show')) {// si l'url contient le mot show, alors le script qui suit s'execute
     
         
-        //carousel
+ ////////////////////////////////////////////////////////carousel/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -494,7 +517,7 @@ prevBtn.addEventListener('click', () => {
 
 
 
-      // zoom image
+  //////////////////////////////////////////// zoom image////////////////////////////////////////////
       const pictures= document.querySelectorAll('.pictureShowProduct');
       const modal = document.getElementById('modal');// fenetre modal pour afficher l'image
     const modalPicture = document.getElementById('modalPicture');// image de la fenetre modal
@@ -523,7 +546,7 @@ prevBtn.addEventListener('click', () => {
 
 
 
-           // Requette Ajax avec jQuery pour favoris
+///////////////////////////////////// Requette Ajax avec jQuery pour favoris/////////////////////////////////////////////////
        
            const favoriteBtn = document.querySelectorAll('a.addFavorite');
 
@@ -575,7 +598,7 @@ prevBtn.addEventListener('click', () => {
            });
            
      
-       //bouton ajouter 
+//////////////////////////////bouton ajouter/////////////////////////////////////////////////////////////////////////// 
          
        var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
       const incrBtn = document.getElementById('increaseBtn');

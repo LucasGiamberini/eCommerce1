@@ -405,13 +405,20 @@ article{
 
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
+input[type="radio"] {
+    display: none;
+    
+  }
 
+ label{
+    cursor: pointer;
+ } 
 
 .favoriteIconNavigation{
     color: rgba(255, 0, 0, 0.74);
-    position: absolute;
-    bottom: -15vh;
-    left: 56vw;
+    position: relative;
+    bottom: 36vh;
+   /* right: 56vw; */
     height: 0vh;
     width: 0vw;
 
