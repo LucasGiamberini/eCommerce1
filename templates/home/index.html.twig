@@ -26,15 +26,12 @@
 
 <a href="{{path('add_product')}}">Ajouter un produit</a><br>
 
-<a id="newProduct" href="{{path('new_product')}}">Nouveauté </a>
-<a href="{{path('show_category')}}">Categorie</a>
+<input name="productCategory" type="radio" id="newProduct" href="{{path('new_product')}}" >Nouveauté </input>
+<label for="newProduct">Option 1</label>
+<input  name="productCategory" type="radio" id="category"href="{{path('show_category')}}" >Categorie</input>
 
 
-<form id="filter">
-{% for  category in categorys %}
- <input type="radio"  id="category{{category.id}}" name="category" value="{{category.id}}" data-category-id="{{category.id}} " {% if loop.first %} checked {% endif %}{# pour que la#}> {{category.categoryName}} </a>
-{% endfor %}
-</form>
+
 
 <div id="ResultBoxHome">{# affiche les resultat des requetes ajax pour les filtres#}
 

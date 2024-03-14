@@ -106,6 +106,10 @@ class ProductController extends AbstractController
        [ 'product' => $product]);
        }
 
+
+
+
+       
        // pour supprimer un produit
        #[Route('/product/{id}/delete', name: 'delete_product')]// on recupere l'id du prduit
        public function delete(Product $product,EntityManagerInterface $entityManager,ProductRepository $productRepo ): Response

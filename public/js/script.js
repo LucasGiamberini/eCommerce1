@@ -31,8 +31,64 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
+
+  
+  
+
+
+
+ 
+ 
+  
   if (window.location.href.includes('searchProductByCategory')    ) {
     
+ // requette ajax avec jQuery pour categorie
+
+ const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
+       
+ const resultDiv = $('#ResultBoxHome');// on determine la div du resultat du filtre avec l'id ResultBoxHome
+
+ event.preventDefault();
+ 
+ function executeAjaxCategory(categoryId){
+  $.ajax({
+    url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+    method: 'POST',// pour envoyer une requette http "Post"
+    contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+    data: {id: categoryId},// les données qui seront envoyer
+    success: function(response) {
+      // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+      resultDiv.html(response);
+    },
+  })
+}
+ 
+
+ document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
+ 
+  const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
+  executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
+
+
+
+
+  
+  input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
+
+    const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
+    executeAjaxCategory(categoryId);
+    event.preventDefault();//on empeche la redirection vers la page complete page
+    
+ 
+  })
+ })
+
+
+
+
+
+
+
  //bouton ajouter - retirer quantité
          
  var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
@@ -119,7 +175,8 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
 
       const ButtonnewProduct = $('#newProduct');
-      
+      ButtonnewProduct.focus();
+      $(ButtonnewProduct).click();
       $(ButtonnewProduct).click(function(event) {
       
         event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
@@ -140,27 +197,78 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
 
       })
 
+
+
       // requette ajax avec jQuery pour categorie
 
        const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
        
        const resultDiv = $('#ResultBoxHome');// on determine la div du resultat du filtre avec l'id ResultBoxHome
 
-
+       const ButtonCategory = $('#category');
        
-       function executeAjaxCategory(categoryId){
+       
+       $(ButtonCategory).click(function(event) { 
+       event.preventDefault();
+       console.log('hello')
+   
         $.ajax({
-          url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+          url: "/category/showCategory" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
           method: 'POST',// pour envoyer une requette http "Post"
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
-          data: {id: categoryId},// les données qui seront envoyer
+         
           success: function(response) {
             // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
             resultDiv.html(response);
+
+
+            const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
+       
+            const resultDivAjax = $('#ResultBox');// on determine la div du resultat du filtre avec l'id ResultBoxHome
+        
+            
+            function executeAjaxCategory(categoryId){
+             $.ajax({
+               url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+               method: 'POST',// pour envoyer une requette http "Post"
+               contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+               data: {id: categoryId},// les données qui seront envoyer
+               success: function(response) {
+                 // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+                 resultDivAjax.html(response);
+               },
+             })
+           }
+            
+           
+            document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
+            
+             const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
+             executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
+        
+             
+        
+        
+             
+             input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
+              
+               const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
+               executeAjaxCategory(categoryId);
+               event.preventDefault();//on empeche la redirection vers la page complete page
+               
+            
+             })
+            })
+        
+        
+
+
+
+            
           },
         })
-      }
-       
+      
+
       
        document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
        
@@ -182,13 +290,12 @@ $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de fa
        })
 
 
+      })
 
 
 
 
-     
-
-
+       
 
 
 
@@ -283,8 +390,6 @@ prevBtn.addEventListener('click', () => {
   });
   
   nextBtn.addEventListener('click', () => {
- 
-  
       nextSlide();
       resetInterval()
  
@@ -432,7 +537,9 @@ prevBtn.addEventListener('click', () => {
              event.preventDefault();
            
              if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconShow") {
-               $.ajax({
+              
+               
+              $.ajax({
                  
                  url: "/user/addfavorite/" + productId,
                  method: 'POST',
@@ -449,6 +556,7 @@ prevBtn.addEventListener('click', () => {
                });
              } 
              else {
+              
                $.ajax({
                  url: "/user/removeFavorite/" + productId,
                  method: 'POST',

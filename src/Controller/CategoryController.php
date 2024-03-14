@@ -24,8 +24,9 @@ class CategoryController extends AbstractController
         
         $products = $productRepo->findBy(["Aroma" => $category ]);
        
-        return $this->render('category/index.html.twig', [
+        return $this->render('category/category.html.twig', [
             'products' => $products,
+            
         ]);
     }
 
@@ -35,20 +36,21 @@ class CategoryController extends AbstractController
         $products= $productRepo->findBy([],["id" => "Desc"]);
        
        
-        return $this->render('category/index.html.twig', [
+        return $this->render('category/new.html.twig', [
             'products' => $products,
         ]);
     }
 
 
     #[Route('/category/showCategory', name: 'show_category')]
-    public function ShowCategory(ProductRepository $productRepo, AromaRepository $AromaRepo ): Response
+    public function ShowCategory(ProductRepository $productRepo, AromaRepository $aromaRepo ): Response
     {  
-        $products= $productRepo->findBy([],["name" => "ASC"]);
        
+        $category=$aromaRepo->findBy([], ["categoryName" => "ASC"]);
        
         return $this->render('category/index.html.twig', [
-            'products' => $products,
+            
+            'categorys'=> $category,
         ]);
     }
 }

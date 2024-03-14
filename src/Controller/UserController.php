@@ -25,7 +25,7 @@ class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
     public function index(): Response
-    {$flashes = $session->getFlashBag();
+    {//$flashes = $session->getFlashBag();
     
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
