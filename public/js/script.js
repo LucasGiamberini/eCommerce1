@@ -25,7 +25,61 @@ console.log(divProductBoxs);
 
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
 
-  
+
+
+  //fonction pour ajouter au favoris 
+  function favorite(){
+    const favoriteBtn = document.querySelectorAll('a.addFavorite');// selection toute les balises <a> avec la classe addFavorite
+
+$(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de favoris
+//$ est un raccourcis pour jQuery
+// event est un objet passer a la fonction lorsque le bouton est cliquer
+const productId = $(this).data('product-id');// ce sont les donnée transmise dans data-product-id(voir ligne 56 ) 
+const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);// pour trouver l'id correspondant sur le document
+const classfavoriteIcon = favoriteIcon.attr('class');// pour recueillir la class de favorite icon
+console.log(favoriteIcon);
+
+event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
+
+if (classfavoriteIcon === "bi-heart fs-2 favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
+ 
+ $.ajax({//appelle de la fonction ajax de jQuery
+   
+   url: "/user/addfavorite/" + productId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+   method: 'POST',// pour envoyer une requette http "Post"
+   contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+   data: {id: productId},// les données qui seront envoyer
+   success: function(response) {// lorsque la requete est un succès
+     console.log('Ajouté aux favoris avec succès !');
+     favoriteIcon.removeClass('bi-heart fs-2 favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
+     favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconNavigation');// et on le remplace avec l'icone coeur plein
+   },
+   error: function (xhr, status, error) {// lorqu'une erreur se produit, 
+     console.error('Erreur lors de l\'ajout aux favoris:', error);//on affiche les erreur dans
+   }
+ });
+} 
+else {// si l'icone est un coeur plein
+ 
+ $.ajax({
+   url: "/user/removeFavorite/" + productId,// on utilise la fonction pour enlever le produit des favoris
+   method: 'POST',
+   contentType: "application/json; charset=utf-8",
+   data: {id: productId},
+   success: function(response) {// lorsque le produit a été enlever des favoris
+     console.log('Retiré des favoris avec succès !');
+     favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconNavigation');// on enleve l'icone avec le coeur plein
+     favoriteIcon.addClass('bi-heart fs-2 favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
+   },
+   error: function (xhr, status, error) {
+     console.error('Erreur lors du retrait des favoris:', error);
+   }
+ });
+}
+
+});
+
+}
   
 
 
@@ -38,9 +92,18 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
     
   if (window.location.href.includes("searchProductByCategory" )
  || window.location.href.includes("newProducts" )
- ) {
+ || window.location.href.includes("search" )) {
     
+
+  favorite();//appelle de la fonction favorite
+
+
+
+
+
  //////////////////////////////////////////// requette ajax avec jQuery pour categorie/////////////////////////////////////
+
+
 
  const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
        
@@ -126,58 +189,7 @@ console.log('hehy');
     if (window.location.href.includes('home')    ) {// si l'url contient le mot home
 
     
-      function favoriteHome(){
-        const favoriteBtn = document.querySelectorAll('a.addFavorite');// selection toute les balises <a> avec la classe addFavorite
- 
- $(favoriteBtn).click(function(event) {// lorsque l'on clique sur le bouton de favoris
-   //$ est un raccourcis pour jQuery
-   // event est un objet passer a la fonction lorsque le bouton est cliquer
-   const productId = $(this).data('product-id');// ce sont les donnée transmise dans data-product-id(voir ligne 56 ) 
-   const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);// pour trouver l'id correspondant sur le document
-   const classfavoriteIcon = favoriteIcon.attr('class');// pour recueillir la class de favorite icon
-   console.log(favoriteIcon);
- 
-   event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
- 
-   if (classfavoriteIcon === "bi-heart fs-2 favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
-     
-     $.ajax({//appelle de la fonction ajax de jQuery
-       
-       url: "/user/addfavorite/" + productId,//pour executer l'action avec cette url  et en transmettant l'id du produit
-       method: 'POST',// pour envoyer une requette http "Post"
-       contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
-       data: {id: productId},// les données qui seront envoyer
-       success: function(response) {// lorsque la requete est un succès
-         console.log('Ajouté aux favoris avec succès !');
-         favoriteIcon.removeClass('bi-heart fs-2 favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
-         favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconNavigation');// et on le remplace avec l'icone coeur plein
-       },
-       error: function (xhr, status, error) {// lorqu'une erreur se produit, 
-         console.error('Erreur lors de l\'ajout aux favoris:', error);//on affiche les erreur dans
-       }
-     });
-   } 
-   else {// si l'icone est un coeur plein
-     
-     $.ajax({
-       url: "/user/removeFavorite/" + productId,// on utilise la fonction pour enlever le produit des favoris
-       method: 'POST',
-       contentType: "application/json; charset=utf-8",
-       data: {id: productId},
-       success: function(response) {// lorsque le produit a été enlever des favoris
-         console.log('Retiré des favoris avec succès !');
-         favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconNavigation');// on enleve l'icone avec le coeur plein
-         favoriteIcon.addClass('bi-heart fs-2 favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
-       },
-       error: function (xhr, status, error) {
-         console.error('Erreur lors du retrait des favoris:', error);
-       }
-     });
-   }
- 
- });
- 
-   }
+
     
     
     
@@ -240,7 +252,7 @@ console.log('hehy');
          
           success: function(response) {// lorsque la requete est un succès
             resultDiv.html(response);
-            favoriteHome();
+            favorite();
             buttonQuantity()
           },
           
@@ -301,7 +313,7 @@ console.log('hehy');
                  // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
                  resultDivAjax.html(response);
                  buttonQuantity();
-                 favoriteHome();
+                 favorite();
                },
              })
            }

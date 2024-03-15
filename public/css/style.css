@@ -107,6 +107,21 @@ header:hover{
     align-items: center;
 }
 
+/*//////////////////////////recherche/////////////////*/
+form#searchBar >button{
+    margin-top: 2vh;
+    border: none;
+    background-color: #00BEE0;
+    color: white;  
+    border-radius: 2vh;
+
+}
+
+form#searchBar >button:hover{
+background-color: black;
+
+}
+
 /*///////////////////////logo////////////////////////*/
 #top{
 height: 0px;

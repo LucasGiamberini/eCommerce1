@@ -35,11 +35,11 @@
             <ul>
                 <li class="header-links">
                     <i class="bi bi-search text-white-icon fs-2"></i>
-                    <form id="searchBar" action="{{ path('app_search') }}" >
-                        <input type="Text">
-                        <button type="submit">
+                    <form id="searchBar" action="{{ path('app_search') }}" method="post" >
+                        <input type="Text" name="textSearch" maxlength="50">
+                        <button type="submit">rechercher</button>
                     </form>
-                    <a href="#"> recherche</a>
+                 
                 </li>
             </ul>
             <ul>

@@ -21,7 +21,16 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function searchProduct(string $text){
+        return $this->createQueryBuilder('p')
+        ->where('p.name LIKE :query')
+        ->setParameter('query', '%'.$text.'%')
+        ->getQuery()
+        ->getResult();
 
+
+
+    }
 
     
     public function nameImgDelete(int $id ){
