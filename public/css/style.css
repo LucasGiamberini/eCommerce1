@@ -107,8 +107,25 @@ header:hover{
     align-items: center;
 }
 
-/*//////////////////////////recherche/////////////////*/
-form#searchBar >button{
+/*//////////////////////////search bar/////////////////*/
+
+#searchBarIcon{
+    cursor: pointer;
+
+}
+
+
+
+#searchBarForm{
+    display: none;
+    position: absolute;
+    bottom: 11vh;
+    left: 4vw;
+
+}
+
+
+#searchBarForm >button{
     margin-top: 2vh;
     border: none;
     background-color: #00BEE0;
@@ -117,9 +134,13 @@ form#searchBar >button{
 
 }
 
-form#searchBar >button:hover{
+form#searchBarForm >button:hover{
 background-color: black;
 
+}
+
+#searchBarForm{
+    position: absolute;
 }
 
 /*///////////////////////logo////////////////////////*/

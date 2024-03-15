@@ -4,8 +4,16 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
  /////////////////////////////////////////bouton ajouter - retirer quantité///////////////////////////////////////
          
-const  divProductBoxs =document.querySelector(".ProductBoxs");
-console.log(divProductBoxs);
+const  searchBarIcon = document.getElementById("searchBarIcon");
+const  searchBar = document.getElementById("searchBarForm");
+const  searchBarInput = document.getElementById("textSearch");
+
+
+searchBarIcon.onclick = function(){
+  searchBarIcon.style.visibility = "hidden";
+  searchBar.style.display = "block";
+  searchBarInput.focus();
+}
 
 
 
@@ -155,7 +163,7 @@ else {// si l'icone est un coeur plein
  var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
  const incrBtn = document.getElementById('increaseBtn');//bouton pour ajouter une quantité
  const decrsBtn = document.getElementById('decreaseBtn');// bouton pour reduire la quantité
-console.log('hehy');
+
  incrBtn.addEventListener('click', function() {//
        
        qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
@@ -187,26 +195,12 @@ console.log('hehy');
 ////////////////////////////////////////script home//////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (window.location.href.includes('home')    ) {// si l'url contient le mot home
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
       // bouton ajout quantité
      
      
       function buttonQuantity(){
-        console.log("hello")
+     
         var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
         const incrBtn = document.getElementById('increaseBtn');//bouton pour ajouter une quantité
         const decrsBtn = document.getElementById('decreaseBtn');// bouton pour reduire la quantité
@@ -235,10 +229,6 @@ console.log('hehy');
 
       const ButtonnewProduct = $('input[type="radio"]#newProduct');
       const categoryLabel = document.querySelector('label[for="category"]');
-      
-
-      
-      
       
       
       function executeAjaxNew(){

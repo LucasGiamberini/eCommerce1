@@ -34,9 +34,9 @@
         <nav>
             <ul>
                 <li class="header-links">
-                    <i class="bi bi-search text-white-icon fs-2"></i>
-                    <form id="searchBar" action="{{ path('app_search') }}" method="post" >
-                        <input type="Text" name="textSearch" maxlength="50">
+                    <i  id="searchBarIcon" class="bi bi-search text-white-icon fs-2"></i>
+                    <form id="searchBarForm" action="{{ path('app_search') }}" method="post" >
+                        <input  id="textSearch" type="Text" name="textSearch" maxlength="50">
                         <button type="submit">rechercher</button>
                     </form>
                  
