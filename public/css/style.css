@@ -406,8 +406,7 @@ article{
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
 input[type="radio"] {
-    display: none;
-    
+    display: none;    
   }
 
  label{

@@ -588,12 +588,15 @@ prevBtn.addEventListener('click', () => {
            
           
            $(favoriteBtn).click(function(event) {
+            event.preventDefault();
+           
+           
             const productId = $(this).data('product-id');
             const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
             var classfavoriteIcon = favoriteIcon.attr('class');
              console.log(classfavoriteIcon );
            
-             event.preventDefault();
+            
            
              if (classfavoriteIcon === "bi-heart fs-2 favoriteIconShow") {
               
@@ -613,7 +616,7 @@ prevBtn.addEventListener('click', () => {
                    console.error('Erreur lors de l\'ajout aux favoris:', error);
                  }
                });
-             } 
+             }// bi-heart-fill fs-2 favoriteIconShow
              else if (classfavoriteIcon === "bi-heart-fill fs-2 favoriteIconShow") {
               
                $.ajax({

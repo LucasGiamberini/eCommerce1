@@ -52,7 +52,7 @@ class UserController extends AbstractController
         $flashes->add('success', 'Produit ajouté aux favoris avec succès !');
         }
       
-       // return $this->redirectToRoute('app_home');
+       
         return new JsonResponse(['success' => true]);
     }
 
