@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
     
-  if (window.location.href.includes('searchProductByCategory'|| 'newProducts' )    ) {
+  if (window.location.href.includes('searchProductByCategory'|| 'newProducts' || "home" )    ) {
     
  //////////////////////////////////////////// requette ajax avec jQuery pour categorie/////////////////////////////////////
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {// attend que la page 
 
 
 
- ////////////////////////////////////////////// Requette Ajax avec jQuery pour favoris////////////////////////////////////////////
+ ////////////////////////////////////////////// Requette Ajax avec jQuery pour favoris home////////////////////////////////////////////
        
        const favoriteBtn = document.querySelectorAll('a.addFavorite');// selection toute les balises <a> avec la classe addFavorite
 
@@ -546,21 +546,23 @@ prevBtn.addEventListener('click', () => {
 
 
 
-///////////////////////////////////// Requette Ajax avec jQuery pour favoris/////////////////////////////////////////////////
+///////////////////////////////////// Requette Ajax avec jQuery pour favoris Show/////////////////////////////////////////////////
        
            const favoriteBtn = document.querySelectorAll('a.addFavorite');
-
+           
+           
+          
            $(favoriteBtn).click(function(event) {
-             const productId = $(this).data('product-id');
-             const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
-             const classfavoriteIcon = favoriteIcon.attr('class');
+            const productId = $(this).data('product-id');
+            const favoriteIcon = $(event.currentTarget).find('i#favoriteIcon' + productId);
+            var classfavoriteIcon = favoriteIcon.attr('class');
              console.log(classfavoriteIcon );
            
              event.preventDefault();
            
-             if (classfavoriteIcon === "bi bi-heart fs-2 favoriteIconShow") {
+             if (classfavoriteIcon === "bi-heart fs-2 favoriteIconShow") {
               
-               
+               console.log('ajouter')
               $.ajax({
                  
                  url: "/user/addfavorite/" + productId,
@@ -577,7 +579,7 @@ prevBtn.addEventListener('click', () => {
                  }
                });
              } 
-             else {
+             else if (classfavoriteIcon === "bi-heart-fill fs-2 favoriteIconShow") {
               
                $.ajax({
                  url: "/user/removeFavorite/" + productId,

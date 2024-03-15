@@ -1,6 +1,9 @@
 {% block body %}
 
-
+{% block javascripts %}
+<script  src="{{asset('js/script.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
 
 
 
@@ -42,7 +45,7 @@
 
 
     {% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
+        <a class="addFavorite" href="{{ path ('remove_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
    {# data-favorite-id est utiliser pour recuperer l'id du produit      #}
         {% else %}{#  si le produit n'est pas dans les favoris            #}
         <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi bi-heart fs-2 favoriteIconNavigation"></i> </a>
