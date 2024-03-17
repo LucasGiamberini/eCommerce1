@@ -59,10 +59,16 @@
 <div id="presentation">
 <h2> {{ product.name}}</h2>
 
+
+
+
+{% if app.user %}
 {% set favoriteIds = [] %}
 {% for favorite in app.user.Favorite %}
     {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
 {% endfor %}
+
+
 
 
     {% if product.id in favoriteIds %}
@@ -70,7 +76,7 @@
     {% else %}
         <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconShow"></i> </a>
     {% endif %}
-
+    {% endif %}
 
 
 <p>Reference: {{product.reference}}</p>

@@ -29,7 +29,7 @@ class ProductType extends AbstractType
                 'class' => Aroma::class,
                 'choice_label' => 'category_name',
             ])
-            ->add('nicotines', EntityType::class, [
+            ->add('Nicotines', EntityType::class, [
                 'class' => Nicotine::class,
                 'choice_label' => 'proportioning',
                 'label' => 'nicotine',

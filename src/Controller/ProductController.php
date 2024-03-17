@@ -44,15 +44,16 @@ class ProductController extends AbstractController
        
          $product-> setAroma($aroma);
        
-      
+         $capacity=$form->get('capacity')->getData();
+         $product->setCapacity($capacity);
 
+          
         foreach($product as $products ){
-            $capacity=$form->get('capacity')->getData();
-            $products->addCapacity($capacity);
+          
+         $nicotine=$form->get('Nicotines')->getData();
+       // dd($nicotine);
             
-            
-            $nicotine=$form->get('nicotines')->getData();
-            $products->addNicotine($nicotine);
+           
             
         }
         // et on les definits dans le nouveau produit

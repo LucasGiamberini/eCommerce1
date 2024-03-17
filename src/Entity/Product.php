@@ -36,14 +36,7 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Aroma $Aroma = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'products')]
-    //private ?Nicotine $Nicotine = null;
-
  
-
-
-    #[ORM\ManyToMany(targetEntity: Height::class, inversedBy: 'products')]
-    private Collection $capacity;
 
     #[ORM\OneToMany(targetEntity: Basket::class, mappedBy: 'Products')]
     private Collection $baskets;
@@ -53,6 +46,10 @@ class Product
 
     #[ORM\ManyToMany(targetEntity: Nicotine::class, inversedBy: 'products')]
     private Collection $Nicotines;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Height $Capacity = null;
 
     public function __construct()
     {
@@ -176,29 +173,6 @@ class Product
 
 
  
-    /**
-     * @return Collection<int, Height>
-     */
-    public function getCapacity(): Collection
-    {
-        return $this->capacity;
-    }
-
-    public function addCapacity(Height $capacity): static
-    {
-        if (!$this->capacity->contains($capacity)) {
-            $this->capacity->add($capacity);
-        }
-
-        return $this;
-    }
-
-    public function removeCapacity(Height $capacity): static
-    {
-        $this->capacity->removeElement($capacity);
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Basket>
@@ -277,6 +251,18 @@ class Product
     public function removeNicotine(Nicotine $nicotine): static
     {
         $this->Nicotines->removeElement($nicotine);
+
+        return $this;
+    }
+
+    public function getCapacity(): ?Height
+    {
+        return $this->Capacity;
+    }
+
+    public function setCapacity(?Height $Capacity): static
+    {
+        $this->Capacity = $Capacity;
 
         return $this;
     }

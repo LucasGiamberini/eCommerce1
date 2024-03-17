@@ -18,8 +18,9 @@ class Height
     #[ORM\Column(length: 255)]
     private ?string $milliliter = null;
 
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'capacity')]
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Capacity')]
     private Collection $products;
+
 
     public function __construct()
     {
@@ -55,7 +56,7 @@ class Height
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->addCapacity($this);
+            $product->setCapacity($this);
         }
 
         return $this;
@@ -64,9 +65,14 @@ class Height
     public function removeProduct(Product $product): static
     {
         if ($this->products->removeElement($product)) {
-            $product->removeCapacity($this);
+            // set the owning side to null (unless already changed)
+            if ($product->getCapacity() === $this) {
+                $product->setCapacity(null);
+            }
         }
 
         return $this;
     }
+
+   
 }
