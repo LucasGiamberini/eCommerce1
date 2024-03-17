@@ -40,8 +40,7 @@ class ProductType extends AbstractType
                 'class' => Height::class,
                 'choice_label' => 'milliliter',
                 'mapped' => false,
-                'multiple' => true,
-                'expanded' => true,
+                'multiple' => false,
             ])
             ->add('picture', FileType::class,[
                 'label' => 'image',
