@@ -17,15 +17,11 @@ class Nicotine
 
   
 
-  //  #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Nicotine')]
- //   private Collection $products;
-
-    #[ORM\Column(length: 255)]
-    private ?string $proportioning = null;
-
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'Nicotines')]
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Nicotine', cascade:["persist"], orphanRemoval:true)]
     private Collection $products;
 
+    #[ORM\Column(length: 255)]
+    private ?string $proportioning = null;   
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -38,35 +34,35 @@ class Nicotine
 
 
 
- //   /**
- //    * @return Collection<int, Product>
- //    */
- //   public function getProducts(): Collection
- //   {
- //       return $this->products;
- //  }
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+  }
 
- //   public function addProduct(Product $product): static
-  //  {
- //       if (!$this->products->contains($product)) {
- //           $this->products->add($product);
-//            $product->setNicotine($this);
- //       }
+    public function addProduct(Product $product): static
+ {
+       if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setNicotine($this);
+        }
 
-  //      return $this;
-  //  }
+        return $this;
+   }
 
- //   public function removeProduct(Product $product): static
- //   {
-  //      if ($this->products->removeElement($product)) {
- //           // set the owning side to null (unless already changed)
- //           if ($product->getNicotine() === $this) {
- //               $product->setNicotine(null);
-   //         }
-  //      }
+   public function removeProduct(Product $product): static
+    {
+        if ($this->products->removeElement($product)) {
+           // set the owning side to null (unless already changed)
+            if ($product->getNicotine() === $this) {
+                $product->setNicotine(null);
+           }
+       }
 
-  //      return $this;
- //   }
+       return $this;
+   }
 
     public function getProportioning(): ?string
     {
@@ -80,30 +76,5 @@ class Nicotine
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->addNicotine($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeNicotine($this);
-        }
-
-        return $this;
-    }
+ 
 }
