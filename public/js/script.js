@@ -229,7 +229,7 @@ else {// si l'icone est un coeur plein
 
       const ButtonnewProduct = $('input[type="radio"]#newProduct');
       const categoryLabel = document.querySelector('label[for="category"]');
-      
+      const resultDivNew = $('#ResultBoxHomeNew');
       
       function executeAjaxNew(){
         event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
@@ -241,7 +241,7 @@ else {// si l'icone est un coeur plein
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
          
           success: function(response) {// lorsque la requete est un succès
-            resultDiv.html(response);
+            resultDivNew.html(response);
             favorite();
             buttonQuantity()
           },
@@ -272,9 +272,18 @@ else {// si l'icone est un coeur plein
        const resultDiv = $('#ResultBoxHome');// on determine la div du resultat du filtre avec l'id ResultBoxHome
 
        const ButtonCategory = $('#category');
+
+      
+    
+
+       if (ButtonCategory.prop('checked') )  {
+      
+        executeAjaxCategory()
+       
+      }
        
        
-       $(ButtonCategory).click(function(event) { 
+       function executeAjaxCategory(){
        event.preventDefault();
        console.log('hello')
    
@@ -291,10 +300,22 @@ else {// si l'icone est un coeur plein
             const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
        
             const resultDivAjax = $('#ResultBox');// on determine la div du resultat du filtre avec l'id ResultBoxHome
-        
+          //  const categorySelectorButton = $('#');
             
             function executeAjaxCategory(categoryId){
-             $.ajax({
+              
+             if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
+              $.ajax({
+                url: "/category/showAllProduct" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
+                method: 'POST',// pour envoyer une requette http "Post"
+                contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+                success: function(response) {
+                  // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+                  resultDivAjax.html(response);
+                }})
+             }
+             else{// quand le nom d'une categorie est selection
+              $.ajax({
                url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
                method: 'POST',// pour envoyer une requette http "Post"
                contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -302,11 +323,19 @@ else {// si l'icone est un coeur plein
                success: function(response) {
                  // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
                  resultDivAjax.html(response);
+
+
                  buttonQuantity();
                  favorite();
                },
              })
+            }
            }
+
+
+
+
+
             
            
             document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
@@ -337,6 +366,9 @@ else {// si l'icone est un coeur plein
         })
       
 
+
+
+        
       
        document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
        
@@ -357,8 +389,8 @@ else {// si l'icone est un coeur plein
         })
        })
 
-
-      })
+      }
+    
 
 
 

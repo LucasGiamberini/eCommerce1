@@ -18,11 +18,29 @@ class CategoryController extends AbstractController
         ]);
     }
 
+   // pour voir tout les produits si aucune categorie n'est selectionné
+    #[Route('/category/showAllProduct', name: 'showAll_product')]
+    public function SearchAllProduct(ProductRepository $productRepo ): Response
+    {   
+        
+        $products = $productRepo->findBy([],["name" => "Desc"], 4);
+       
+        return $this->render('category/category.html.twig', [
+            'products' => $products,
+            
+        ]);
+    }
+   
+   
+   
+   
+   
+   // pour afficher les resultat des produits par categorie 
     #[Route('/category/searchProductByCategory/{id}', name: 'product_category')]
     public function SearchProductByCategory($id,ProductRepository $productRepo, AromaRepository $AromaRepo ): Response
     {   $category = $AromaRepo->findOneBy(["id" => $id] );
         
-        $products = $productRepo->findBy(["Aroma" => $category ]);
+        $products = $productRepo->findBy(["Aroma" => $category ],[], 4);
        
         return $this->render('category/category.html.twig', [
             'products' => $products,
@@ -30,10 +48,11 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    // pour afficher les derniers produit arriver
     #[Route('/category/newProducts', name: 'new_product')]
     public function newProducts(ProductRepository $productRepo, AromaRepository $AromaRepo ): Response
     {  
-        $products= $productRepo->findBy([],["id" => "Desc"]);
+        $products= $productRepo->findBy([],["id" => "Desc"], 4);
        
        
         return $this->render('category/new.html.twig', [
@@ -41,12 +60,12 @@ class CategoryController extends AbstractController
         ]);
     }
 
-
+// pour afficher la page du selecteur de categorie
     #[Route('/category/showCategory', name: 'show_category')]
     public function ShowCategory(ProductRepository $productRepo, AromaRepository $aromaRepo ): Response
     {  
        
-        $category=$aromaRepo->findBy([], ["categoryName" => "ASC"]);
+        $category=$aromaRepo->findBy([], ["categoryName" => "ASC"], 4);
        
         return $this->render('category/index.html.twig', [
             

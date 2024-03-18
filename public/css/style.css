@@ -441,6 +441,23 @@ article{
 
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
+#allFilterHome{
+margin: 0 2vw;
+
+}
+
+#ResultBoxHome{
+    margin: 0 1vw;
+}
+
+
+.filterCategoryActive{
+    border: 2px solid black;
+    border-bottom: none;
+
+}
+
+
 input[type="radio"] {
     display: none;    
   }
@@ -461,6 +478,7 @@ input[type="radio"] {
 
 .navigationToShowProduct{
     text-decoration: none;
+    text-align: center;
 }
 
 

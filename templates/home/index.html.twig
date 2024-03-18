@@ -26,10 +26,14 @@
 
 <a href="{{path('add_product')}}">Ajouter un produit</a><br>
 
-<input name="productCategory" type="radio" id="newProduct" href="{{path('new_product')}}"  checked ></input>
-<label for="newProduct">Nouveauté </label>
-<input  name="productCategory" type="radio" id="category"href="{{path('show_category')}}" ></input>
-<label for="category">Categorie </label>
+
+
+
+
+<div id="allFilterHome">
+<h1>Categorie  </h1>
+<input  name="productCategory" type="radio" id="category"href="{{path('show_category')}}" checked></input>
+
 
 
 
@@ -38,6 +42,21 @@
 
 
 </div>
+
+<h1> Nouveauté</h1>
+<input name="productNew" type="radio" id="newProduct" href="{{path('new_product')}}"  checked ></input>
+
+
+<div id="ResultBoxHomeNew">{# affiche les resultat des requetes ajax pour les filtres#}
+
+
+
+</div>
+
+</div>
+
+
+
 
 
 
