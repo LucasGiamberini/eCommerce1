@@ -304,6 +304,8 @@ else {// si l'icone est un coeur plein
             
             function executeAjaxCategory(categoryId){
               
+
+              
              if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
               $.ajax({
                 url: "/category/showAllProduct" ,//pour executer l'action avec cette url  et en transmettant l'id du produit

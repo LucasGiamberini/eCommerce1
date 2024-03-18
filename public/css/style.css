@@ -441,6 +441,15 @@ article{
 
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
+#filter{
+
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 47%;
+}
+
+
 #allFilterHome{
 margin: 0 2vw;
 
