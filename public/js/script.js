@@ -341,44 +341,48 @@ else {// si l'icone est un coeur plein
            let olderLabelId = null; // variable pour stocker l'ancien label sélectionné
            
             document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
-            
+         
              const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
              executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
         
-             const labelName = "label"+ categoryId;
-              saveOlder(labelName);
+             const labelName = "label"+ categoryId;// on donne le nom de  l'id + l'id de la categorie ;
+        
              const labelNameId = $("#"+labelName);
              
-             const olderLabelId = labelNameId;
-
+            
+           
+            
              labelNameId.addClass("filterCategoryActive");
-             //olderLabelId.removeClass("filterCategoryActive");
+           
              
 
-             function saveOlder(labelName){
-               
-             }
+             if (olderLabelId !== null) {
+              olderLabelId.removeClass("filterCategoryActive");
+            }
+           // mettre à jour l'ancien label sélectionné
 
              
-        //.filterCategoryActive
+       
              
              input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
-              //  const categoryChecked = formCategory.find('input[type="radio"]:checked');
+         
                const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
                const labelName = "label"+ categoryId;
-
+         
                const labelNameId = $("#"+labelName);
-
-               labelNameId.addClass("filterCategoryActive")
-             //  olderLabelId.removeClass("filterCategoryActive")
-             deleteOlderClass(olderLabelId);
+               console.log(olderLabelId);
+               labelNameId.addClass("filterCategoryActive");
+   
+           
+             if (olderLabelId !== null) {
+              olderLabelId.removeClass("filterCategoryActive");
+            }
+             
+           //  console.log(olderLabelId);
                executeAjaxCategory(categoryId);
                event.preventDefault();//on empeche la redirection vers la page complete page
-             
-               function deleteOlderClass(olderLabelId){
-                olderLabelId.removeClass("filterCategoryActive");
-               }
-              
+          
+               olderLabelId = labelNameId;
 
              })
             
