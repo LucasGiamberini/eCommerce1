@@ -305,7 +305,7 @@ else {// si l'icone est un coeur plein
             function executeAjaxCategory(categoryId){
               
 
-              
+
              if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
               $.ajax({
                 url: "/category/showAllProduct" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
@@ -338,25 +338,50 @@ else {// si l'icone est un coeur plein
 
 
 
-            
+           let olderLabelId = null; // variable pour stocker l'ancien label sélectionné
            
             document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
             
              const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
              executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
         
+             const labelName = "label"+ categoryId;
+              saveOlder(labelName);
+             const labelNameId = $("#"+labelName);
              
-        
-        
+             const olderLabelId = labelNameId;
+
+             labelNameId.addClass("filterCategoryActive");
+             //olderLabelId.removeClass("filterCategoryActive");
+             
+
+             function saveOlder(labelName){
+               
+             }
+
+             
+        //.filterCategoryActive
              
              input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
-              
+              //  const categoryChecked = formCategory.find('input[type="radio"]:checked');
                const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
+               const labelName = "label"+ categoryId;
+
+               const labelNameId = $("#"+labelName);
+
+               labelNameId.addClass("filterCategoryActive")
+             //  olderLabelId.removeClass("filterCategoryActive")
+             deleteOlderClass(olderLabelId);
                executeAjaxCategory(categoryId);
                event.preventDefault();//on empeche la redirection vers la page complete page
-               
-            
+             
+               function deleteOlderClass(olderLabelId){
+                olderLabelId.removeClass("filterCategoryActive");
+               }
+              
+
              })
+            
             })
         
         

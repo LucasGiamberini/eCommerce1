@@ -441,6 +441,13 @@ article{
 
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
+
+
+
+
+
+
+
 #filter{
 
     display: flex;
@@ -463,12 +470,13 @@ margin: 0 2vw;
 .filterCategoryActive{
     border: 2px solid black;
     border-bottom: none;
-
+    font-size: 3vh;
 }
 
 
 input[type="radio"] {
-    display: none;    
+    display: none;
+
   }
 
  label{
@@ -571,6 +579,10 @@ input[type="radio"] {
   /*  bottom: -61vh; */
 }
 /*/////////////////////show product//////////////////*/
+
+
+
+
 #productShow{
     display: flex;
     justify-content: center;

@@ -14,7 +14,7 @@
   {% for  category in categorys %}
   
   <input type="radio"  id="category{{category.id}}" name="category" value="{{category.id}}" data-category-id="{{category.id}} " >  </a>
-  <label for="category{{category.id}}">{{category.categoryName}} </label>
+  <label  id= "label{{category.id}}"     for="category{{category.id}}">{{category.categoryName}} </label>
   {% endfor %}
   </form>
 
