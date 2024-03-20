@@ -13,7 +13,7 @@
 <h1> Resultat de recherche pour  {{textToSearch}}</h1>
 {% if products %}
     
-
+<div id="result">
 <div class="ProductBoxs">
     {% for product in products %}
   <div class="ProductBox">
@@ -97,7 +97,7 @@
     {% endif %}
   {% endfor %} 
 </div>
-
+</div>
 
 
 {%   else   %}

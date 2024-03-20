@@ -48,8 +48,8 @@ security:
       #  - { path: '^/secure', roles: ROLE_ADMIN, requires_channel: https }
       #  - { path: '^/login', roles: PUBLIC_ACCESS, requires_channel: https }
         # catch all other URLs
-       #  - { path: '^/', roles: PUBLIC_ACCESS, requires_channel: http }
-       #  - { path: '^/', roles: ROLE_USER, requires_channel: http } # mettre https avant de mettre en ligne
+         - { path: '^/', roles: PUBLIC_ACCESS, requires_channel: https }
+         - { path: '^/', roles: ROLE_USER, requires_channel: https } 
 when@test:
     security:
         password_hashers:

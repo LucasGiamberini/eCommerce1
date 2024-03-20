@@ -114,7 +114,9 @@ header:hover{
 
 }
 
-
+#textSearch{
+    border-radius: 1vw;
+}
 
 #searchBarForm{
     display: none;
@@ -443,6 +445,16 @@ article{
 /*////////////////// navigation produit home page et categorie/////////////////////*/
 
 
+#result{
+    display: table;
+    border-spacing: 1vw;
+}
+
+
+
+#ResultBox{
+    display: table;
+}
 
 
 
@@ -458,21 +470,42 @@ article{
 
 
 #allFilterHome{
-margin: 0 2vw;
+margin: 0 6vw;
 
 }
 
 #ResultBoxHome{
-    margin: 0 1vw;
+    
+    border-spacing: 1vw;
+   
 }
 
+#ResultBoxHomeNew{
+    border-spacing: 1vw;
+}
 
 .filterCategoryActive{
-    border: 2px solid black;
-    border-bottom: none;
+     border-top-right-radius: 1vh;
+    border-top-left-radius: 1vh;
+    
+    /* border: 2px solid black; */
+    /* border-bottom: none; */
     font-size: 3vh;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0,0 , 0.2);
+    width: 15vw;
+    text-align: center;
 }
 
+
+.filterCategoryActive::before{
+    border-bottom: 1px solid black;
+    box-shadow: none;
+}
+
+.filterCategoryActive::after{
+    border-bottom: 1px solid black;
+    box-shadow: none;
+}
 
 input[type="radio"] {
     display: none;
@@ -496,6 +529,7 @@ input[type="radio"] {
 .navigationToShowProduct{
     text-decoration: none;
     text-align: center;
+    display: table-row;
 }
 
 
@@ -503,17 +537,20 @@ input[type="radio"] {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 5vh 0vw
+    padding: 5vh 0vw;
+    border-top: 3px outset;
+    display: table-row;
 }
 
 .ProductBox{
     background-color: rgba(202, 201, 201, 0.945);
-    width: 20%;
+    width: 18vw;
     height: 30%;
     display: flex;
     align-items: center;
     flex-direction: column;
     border-radius: 1vw;
+    display: table-cell;
 }
 
 .productPrice{
@@ -527,7 +564,7 @@ input[type="radio"] {
     padding-right: 1vw;
     font-size: 3vh;
     bottom: -4vh;
-    left: 6%;
+ /*   left: 6%; */
     margin:-1vw;
 }
 
