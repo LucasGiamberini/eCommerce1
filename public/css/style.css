@@ -454,6 +454,7 @@ article{
 
 #ResultBox{
     display: table;
+    border-spacing: 1vw;
 }
 
 

@@ -18,9 +18,9 @@ class CategoryController extends AbstractController
         ]);
     }
 
-   // pour voir tout les produits si aucune categorie n'est selectionné
-    #[Route('/category/showAllProduct', name: 'showAll_product')]
-    public function SearchAllProduct(ProductRepository $productRepo ): Response
+   // pour voir tout les produits sur la page d'accueil si aucune categorie n'est selectionné
+    #[Route('/category/showAllProductHome', name: 'showAll_productHome')]
+    public function ShowAllProductHome(ProductRepository $productRepo ): Response
     {   
         
         $products = $productRepo->findBy([],["name" => "Desc"], 4);
@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
    
    
    // pour afficher les resultat des produits par categorie 
-    #[Route('/category/searchProductByCategory/{id}', name: 'product_category')]
+    #[Route('/category/searchProductByCategoryHome/{id}', name: 'product_category')]
     public function SearchProductByCategory($id,ProductRepository $productRepo, AromaRepository $AromaRepo ): Response
     {   $category = $AromaRepo->findOneBy(["id" => $id] );
         
@@ -73,7 +73,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-
+// page des categories
     #[Route('/category/showCategoryMenu', name: 'show_categoryMenu')]
     public function ShowCategoryMenu( AromaRepository $aromaRepo ): Response
     {  
@@ -88,9 +88,9 @@ class CategoryController extends AbstractController
 
 
 
-    #[Route('/category/showProductCategory', name: 'show_categoryProductMenu')]
-    public function ShowProductCategory(ProductRepository $productRepo, AromaRepository $aromaRepo ): Response
-    {   $category = $AromaRepo->findOneBy(["id" => $id] );
+    #[Route('/category/searchProductByCategory/{id}', name: 'showProduct_category')]
+    public function ShowProductCategory($id,ProductRepository $productRepo, AromaRepository $aromaRepo ): Response
+    {   $category = $aromaRepo->findOneBy(["id" => $id] );
         
         $products = $productRepo->findBy(["Aroma" => $category ],[]);
        
@@ -102,7 +102,18 @@ class CategoryController extends AbstractController
     }
 
 
-
+    #[Route('/category/showAllProduct', name: 'showAll_product')]
+    public function ShowAllProduct(ProductRepository $productRepo ): Response
+    {   
+        
+        $products = $productRepo->findBy([],["name" => "Desc"]);
+       
+        return $this->render('category/homeProductCategory.html.twig', [
+            'products' => $products,
+            
+        ]);
+    }
+   
 
 
 
