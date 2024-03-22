@@ -33,6 +33,38 @@ searchBarIcon.onclick = function(){
 
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
 
+// bouton pour ajuster la quantité de produit
+  function buttonQuantity(){
+     
+
+    const quantityButtons = document.querySelectorAll('.qttButton');// recupere tout les boutons
+
+    quantityButtons.forEach((button) => {//parcour tout les boutons quantité
+      button.addEventListener('click', (event) => {// lorsque l'on clique sur l'un des bouton avec la classe qttButton
+        
+              
+              const action = event.target.dataset.action;// Récupére l'action à effectuer (plus ou minus) à partir de l'attribut data-action
+              const qttInput =  event.target.parentElement.querySelector('.qtt');// recupere le parent  de l'element avec la class qtt ( qui est l'input avec la quantité de produit)
+     console.log(qttInput.value);
+        console.log(qttInput);
+        
+        if (action === 'plus'){// si la valeur dans la constante est egale a plus
+          qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
+          // additionne  une unité a la quantité total du chiffre present dans le input
+
+          }
+     
+          
+          else if(action === 'minus'){// si la valeur dans la constante est egale a plus
+          if (parseInt(qttInput.value) > 1) {// si la valeur est superieur a un
+              qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
+          }}
+
+
+        })
+      })
+    
+  }
 
 
   //fonction pour ajouter au favoris 
@@ -128,6 +160,7 @@ else {// si l'icone est un coeur plein
     success: function(response) {
       // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
       resultDiv.html(response);
+      
     },
   })
 }
@@ -180,16 +213,138 @@ else {// si l'icone est un coeur plein
 
 
 
- ////////////////////////////////////////////// Requette Ajax avec jQuery pour favoris home////////////////////////////////////////////
 
 
   }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////menu category///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (window.location.href.includes('showCategoryMenu') ) { 
+ 
+    
+// requette ajax pour les categorie
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const resultDiv = $('#ResultBox');// on determine la div du resultat du filtre avec l'id ResultBoxHome
+
+
+event.preventDefault();
+       console.log('hello')
+   
+        $.ajax({
+          url: "/category/showCategory" ,//pour executer l'action avec cette url  
+          method: 'POST',// pour envoyer une requette http "Post"
+          contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+         
+          success: function(response) {
+            // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+            resultDiv.html(response);
+
+            
+            const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
+       
+            const resultDivAjax = $('#ResultBox');// on determine la div du resultat du filtre avec l'id ResultBoxHome
+          //  const categorySelectorButton = $('#');
+            
+            function executeAjaxCategory(categoryId){
+              
+
+
+             if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
+              $.ajax({
+                url: "/category/showAllProduct" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
+                method: 'POST',// pour envoyer une requette http "Post"
+                contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+                success: function(response) {
+                  // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+                  resultDivAjax.html(response);
+                  buttonQuantity();
+                 favorite();
+                }})
+             }
+             else{// quand le nom d'une categorie est selection
+              $.ajax({
+               url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
+               method: 'POST',// pour envoyer une requette http "Post"
+               contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
+               data: {id: categoryId},// les données qui seront envoyer
+               success: function(response) {
+                 // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
+                 resultDivAjax.html(response);
+                 buttonQuantity();
+                 favorite();
+               },
+             })
+            }
+           }
 
 
 
+
+
+           let olderLabelId = null; // variable pour stocker l'ancien label sélectionné
+           
+            document.querySelectorAll("#filter input").forEach(input =>{//selectionne tout les les id avec filter
+         
+             const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
+             executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
+        
+             const labelName = "label"+ categoryId;// on donne le nom de  l'id + l'id de la categorie ;
+        
+             const labelNameId = $("#"+labelName);
+             
+            
+           
+            
+             labelNameId.addClass("filterCategoryActive");
+           
+             
+
+             if (olderLabelId !== null) {
+              olderLabelId.removeClass("filterCategoryActive");
+            }
+           // mettre à jour l'ancien label sélectionné
+
+             
+       
+             
+             input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
+         
+               const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
+               const labelName = "label"+ categoryId;
+         
+               const labelNameId = $("#"+labelName);
+               console.log(olderLabelId);
+               labelNameId.addClass("filterCategoryActive");
+   
+           
+             if (olderLabelId !== null) {
+              olderLabelId.removeClass("filterCategoryActive");
+            }
+             
+           //  console.log(olderLabelId);
+               executeAjaxCategory(categoryId);
+               event.preventDefault();//on empeche la redirection vers la page complete page
+          
+               olderLabelId = labelNameId;
+
+             })
+            
+            })
+        
+        
+
+
+
+            
+          },
+        })
+      
+
+
+
+
+  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////script home//////////////////////////////////////////////////////////////////////////////
@@ -197,28 +352,9 @@ else {// si l'icone est un coeur plein
     if (window.location.href.includes('home')    ) {// si l'url contient le mot home
     
       // bouton ajout quantité
+      
      
-     
-      function buttonQuantity(){
-     
-        var qttInput = document.getElementById('qtt');// input du formulaire qui a fiche la quantité
-        const incrBtn = document.getElementById('increaseBtn');//bouton pour ajouter une quantité
-        const decrsBtn = document.getElementById('decreaseBtn');// bouton pour reduire la quantité
-       
-        incrBtn.addEventListener('click', function() {//
-              
-              qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
-              // additionne  une unité a la quantité total du chiffre present dans le input
-          });
-       
-          decrsBtn.addEventListener('click', function() {
-              
-          
-              if (parseInt(qttInput.value) > 1) {// si la valeur est superieur a un
-                  qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
-              }
-          });
-      }
+     // buttonQuantity();
       
 
 
@@ -243,7 +379,7 @@ else {// si l'icone est un coeur plein
           success: function(response) {// lorsque la requete est un succès
             resultDivNew.html(response);
             favorite();
-            buttonQuantity()
+        //    buttonQuantity();
           },
           
         });
@@ -285,10 +421,10 @@ else {// si l'icone est un coeur plein
        
        function executeAjaxCategory(){
        event.preventDefault();
-       console.log('hello')
+     
    
         $.ajax({
-          url: "/category/showCategory" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
+          url: "/category/showCategory" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
          
@@ -314,6 +450,8 @@ else {// si l'icone est un coeur plein
                 success: function(response) {
                   // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
                   resultDivAjax.html(response);
+                  buttonQuantity();
+                  favorite();
                 }})
              }
              else{// quand le nom d'une categorie est selection

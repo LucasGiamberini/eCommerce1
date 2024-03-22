@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
         
         $products = $productRepo->findBy([],["name" => "Desc"], 4);
        
-        return $this->render('category/category.html.twig', [
+        return $this->render('category/homeProductCategory.html.twig', [
             'products' => $products,
             
         ]);
@@ -42,7 +42,7 @@ class CategoryController extends AbstractController
         
         $products = $productRepo->findBy(["Aroma" => $category ],[], 4);
        
-        return $this->render('category/category.html.twig', [
+        return $this->render('category/homeProductCategory.html.twig', [
             'products' => $products,
             
         ]);
@@ -65,11 +65,45 @@ class CategoryController extends AbstractController
     public function ShowCategory(ProductRepository $productRepo, AromaRepository $aromaRepo ): Response
     {  
        
-        $category=$aromaRepo->findBy([], ["categoryName" => "ASC"], 4);
+        $category=$aromaRepo->findBy([], ["categoryName" => "ASC"]);
        
         return $this->render('category/index.html.twig', [
             
             'categorys'=> $category,
         ]);
     }
+
+
+    #[Route('/category/showCategoryMenu', name: 'show_categoryMenu')]
+    public function ShowCategoryMenu( AromaRepository $aromaRepo ): Response
+    {  
+       
+        $category=$aromaRepo->findBy([], ["categoryName" => "ASC"]);
+       
+        return $this->render('category/categoryMenu.html.twig', [
+            
+            'categorys'=> $category,
+        ]);
+    }
+
+
+
+    #[Route('/category/showProductCategory', name: 'show_categoryProductMenu')]
+    public function ShowProductCategory(ProductRepository $productRepo, AromaRepository $aromaRepo ): Response
+    {   $category = $AromaRepo->findOneBy(["id" => $id] );
+        
+        $products = $productRepo->findBy(["Aroma" => $category ],[]);
+       
+      
+       
+        return $this->render('category/productCategory.html.twig', [  
+            'products' => $products,
+        ]);
+    }
+
+
+
+
+
+
 }
