@@ -19,7 +19,7 @@ class BasketController extends AbstractController
     public function index(SessionInterface $session, ProductRepository $productRepository,NicotineRepository $nicotineRepository): Response
     {
         $basket=$session->get("basket");// prend le tableau du panier stocker en session
-//dd($basket);
+
         if ($basket !== [] && $basket !== NULL){// si le panier en session existe
    
         $dataBasket= [];// on crée un tableau vide
@@ -95,32 +95,27 @@ class BasketController extends AbstractController
     {   
         $quantity = filter_input(INPUT_POST, 'qtt', FILTER_SANITIZE_NUMBER_INT);// recuperation du nombre  de produit transmise via le formulaire 
         $basket=$session->get("basket", []); // recuperation du panier present en session
-        $id=$product->getId();// recuperation de l'id du produit
-        $nicotineId = $request->request->get('nicotine');
-        $nicotine =  $nicotineRepo->find( $nicotineId);
+        $productId=$product->getId();// recuperation de l'id du produit
+        $nicotineId = $request->request->get('nicotine');// recuperation de l'identifiant de nicotine
+        //$nicotine =  $nicotineRepo->find( $nicotineId);// recuperation de l'objet nicotine
 
 
-
-
-      
-        $nicotineId = $request->request->get('nicotine');
-        $nicotine = $nicotineRepo->find($nicotineId);
     
         // Créez une clé unique en combinant l'ID du produit et l'ID de la nicotine
-        $key = $product->getId() . '-' . $nicotine->getId();
+        $key =  $productId . '-' . $nicotineId;
     
         if (isset($basket[$key])) {
             $basket[$key]['quantity'] += $quantity;
         } else {
             $basket[$key] = [
-                'product_id' => $product->getId(),
-                'nicotine_id' => $nicotine->getId(),
+                'product_id' =>  $productId,
+                'nicotine_id' => $nicotineId,
                 'quantity' => $quantity
             ];
         }
     
         $session->set("basket", $basket);
-      //  $session->remove("basket");
+      
         return $this->redirectToRoute('app_basket');
 
     }

@@ -87,14 +87,14 @@
 
 
 </div>
+
 <div id="buy">
 <p id="showPrice">{{ '%0.2f'|format(product.price) }} &euro;</p>
 
 <form id="formShow" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
     
-    
+    <label for="nicotine">Taux de Nicotines :</label>
     <select name="nicotine" id="nicotine">
-        
         {% for nicotine in product.nicotines %}
             <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>
         {% endfor %}
@@ -103,11 +103,11 @@
 
     <p>Quantité:</p>
     <div id="quantity">
-      
-    <button  class="qttButton"type="button" id="decreaseBtn">-</button>
-    <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
-    <button class="qttButton" type="button" id="increaseBtn">+</button>
-</div>
+        <button  class="qttButton"type="button" id="decreaseBtn">-</button>
+        <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
+        <button class="qttButton" type="button" id="increaseBtn">+</button>
+    </div>
+
     <button id="addToBasket" type="submit">Ajouter au panier</button>
 </form>
 
