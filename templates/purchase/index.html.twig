@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entrer votre adresse{% endblock %}
+{% block title %}Adresse de livraison{% endblock %}
 
 {% block body %}
-
+<h1> Adresse de livraison    </h1>
+<div id="formAdress">
 {{ form_start(AddAdressform) }}
 {{ form_end(AddAdressform) }}
+</div>
 {% endblock %}

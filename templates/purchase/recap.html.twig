@@ -3,6 +3,7 @@
 {% block title %}Recapitulatif{% endblock %}
 
 {% block body %}
+<div id="templateRecap">
 <h1>Recapitulatif</h1>
 
 <div id="adress">
@@ -17,7 +18,7 @@
 </div>
 <h2> Panier</h2>
 <tbody>
-<div id="basket">
+<div id="basketRecap">
     <thead>
         <div class="row">
             <div class="col-sm">   
@@ -41,7 +42,7 @@
     <br>
     </thead>
     {% for basket in baskets %}
-    <div class="products">
+    <div id="productBasketRecap">
     <div class="row">
         <div class="col-sm">
         {% if basket.product.img[0] is defined %}
@@ -78,12 +79,9 @@
  Total Commande :{{ '%0.2f'|format(total) }} &euro;
 
 
- <div id="Payement">
-    <form  id="termsRecap"action="{{ path ('app_pay')}}"  method="post" >
-        <div id="totalPayement">
-
-           
-        </div>
+    <div id="Payement">
+        <form  id="termsRecap"action="{{ path ('app_pay')}}"  method="post" >
+        
         <label for="heighteen">
             <input type="checkbox" id="heighteen" name="heighteen" required>
             J'affirme avoir plus de 18 ans.<br>.
@@ -93,10 +91,11 @@
             En cochant cette case, j'affirme avoir plus de 18 ans, j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a><br>  et les  <a href="{{ path('app_CGV') }}">CGV</a><br>.
         </label>
 
-        <button type="submit">Payer</button>
+        <button class="confirm" type="submit">Payer</button>
     </form>
 
 
-
- </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -37,7 +37,7 @@ class BasketController extends AbstractController
                 "nicotine" => $nicotine
             ];
         $total +=$product->getPrice() * $quantity;//on  ajoute au total en multipliant la quantité par le prix
-        $totalQuantity += $quantity;// on ajoute a la quantité total la quantité du produit
+       // $totalQuantity += $quantity;// on ajoute a la quantité total la quantité du produit
         }
     
         $session->set("total", $total);// on enregistre le montant total dans la session
@@ -45,7 +45,6 @@ class BasketController extends AbstractController
         return $this->render('basket/index.html.twig', [
             'baskets' => $dataBasket,
             'total' => $total,
-            'totalQuantity' => $totalQuantity,
             'empty' => false 
         ]);
     }
