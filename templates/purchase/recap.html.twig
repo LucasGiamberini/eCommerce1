@@ -81,14 +81,16 @@
 
     <div id="Payement">
         <form  id="termsRecap"action="{{ path ('app_pay')}}"  method="post" >
-        
+            
         <label for="heighteen">
             <input type="checkbox" id="heighteen" name="heighteen" required>
-            J'affirme avoir plus de 18 ans.<br>.
+            En cochant cette case,j'affirme avoir plus de 18 ans.<br>.  
+        </label>
+       
          </label>
         <label for="termsAgreed">
            <input type="checkbox" id="termsAgreed" name="termsAgreed" required>
-            En cochant cette case, j'affirme avoir plus de 18 ans, j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a><br>  et les  <a href="{{ path('app_CGV') }}">CGV</a><br>.
+            En cochant cette case,j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a><br>  et les  <a href="{{ path('app_CGV') }}">CGV</a><br>.
         </label>
 
         <button class="confirm" type="submit">Payer</button>

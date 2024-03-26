@@ -57,17 +57,17 @@
       
     </div>
     <div class="col-sm quantityBasketColumn">
-        <a class="buttonQuantityBasket" href="{{path("remove_basket", {id: basket.product.id ,nicotine: basket.nicotine.id })}}">
+        <a class="buttonQuantityBasket" href="{{path("remove_basket", {idProduct: basket.product.id  ,idNicotine: basket.nicotine.id })}}">
             <i>-</i>
         </a>
         {{basket.quantity}}
      
-        <a class="buttonQuantityBasket" href="{{path("add_basket", {id: basket.product.id})}}">
+        <a class="buttonQuantityBasket" href="{{path("add_basket", {idProduct: basket.product.id, idNicotine: basket.nicotine.id})}}">
             <i >+</i>
           </a>
     </div>
     <div class="col-sm">
-        <a class="deleteBasket" href="{{path("delete_basket", {id: basket.product.id , nicotine: basket.nicotine.id})}}"> Supprimer </a>
+        <a class="deleteBasket" href="{{path("delete_basket", {idProduct: basket.product.id , idNicotine: basket.nicotine.id})}}"> Supprimer </a>
     </div>
     <div class="col-sm"> 
        

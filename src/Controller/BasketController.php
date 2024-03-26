@@ -57,51 +57,37 @@ class BasketController extends AbstractController
 
     }
 
-    #[Route('/basket/add/{id}', name:'add_basket')]
-    public function add(Product $product, SessionInterface $session, Request $request, NicotineRepository $nicotineRepo): Response
+    #[Route('/basket/add/{idProduct}{idNicotine}', name:'add_basket')]
+    public function add($idProduct,$idNicotine, SessionInterface $session, Request $request,): Response
     {
         $basket = $session->get("basket", []);
-        $id = $product->getId();
-
+        // recherche la clé unique en combinant l'ID du produit et l'ID de la nicotine
+        $key = $idProduct . '-' . $idNicotine;
     
-        foreach ($basket as $id => $data) {
-        $nicotineId = $data['nicotine_id'];
-        }
-        $nicotine =  $nicotineRepo->find( $nicotineId);
-
-    
-        // Créez une clé unique en combinant l'ID du produit et l'ID de la nicotine
-        $key = $product->getId() . '-' . $nicotine->getId();
-    
-        if (isset($basket[$key])) {
-            $basket[$key]['quantity'] += 1;
-        } else {
-            $basket[$key] = [
-                'product_id' => $product->getId(),
-                'nicotine_id' => $nicotine->getId(),
-                'quantity' => 1
-            ];
-        }
-    
+        $basket[$key]['quantity'] += 1;
+       
         $session->set("basket", $basket);
     
         return $this->redirectToRoute('app_basket');
     }
 
+
+
+
     //pour ajouter un nombre definis de produit
     #[Route('/basket/addnumber/{id}', name:'addNumber_basket')]
-    public function addNumber(Product $product, SessionInterface $session,Request $request  , NicotineRepository $nicotineRepo): Response
+    public function addNumber(Product $product, SessionInterface $session,Request $request  ): Response
     {   
         $quantity = filter_input(INPUT_POST, 'qtt', FILTER_SANITIZE_NUMBER_INT);// recuperation du nombre  de produit transmise via le formulaire 
         $basket=$session->get("basket", []); // recuperation du panier present en session
         $productId=$product->getId();// recuperation de l'id du produit
         $nicotineId = $request->request->get('nicotine');// recuperation de l'identifiant de nicotine
-        //$nicotine =  $nicotineRepo->find( $nicotineId);// recuperation de l'objet nicotine
+   
 
 
     
         // Créez une clé unique en combinant l'ID du produit et l'ID de la nicotine
-        $key =  $productId . '-' . $nicotineId;
+        $key =  $productId .'-'. $nicotineId;
     
         if (isset($basket[$key])) {
             $basket[$key]['quantity'] += $quantity;
@@ -122,12 +108,12 @@ class BasketController extends AbstractController
 
 
 // enlever un unité de quantité d'un produit du panier
-    #[Route('/basket/remove/{id}{nicotine}', name:'remove_basket')]
-    public function remove(Product $product, SessionInterface $session, Nicotine $nicotine): Response
+    #[Route('/basket/remove/{idProduct}{idNicotine}', name:'remove_basket')]
+    public function remove($idProduct,$idNicotine, SessionInterface $session): Response
     {   
         $basket=$session->get("basket", []); 
-        $idProduct=$product->getId();
-        $idNicotine=$nicotine->getId();
+        
+       
 
         $key= $idProduct .'-'. $idNicotine ;        
 
@@ -146,18 +132,17 @@ class BasketController extends AbstractController
 
 
     //pour supprimer un article  du panier
-    #[Route('/basket/delete/{id}{nicotine}', name:'delete_basket')]
-    public function delete(Product $product, SessionInterface $session , Nicotine $nicotine): Response
+    #[Route('/basket/delete/{idProduct}{idNicotine}', name:'delete_basket')]
+    public function delete($idProduct,$idNicotine, SessionInterface $session ): Response
     {   
         $basket=$session->get("basket", []); 
-        $idProduct=$product->getId();
-        $idNicotine=$nicotine->getId();
+       
 
         $key= $idProduct .'-'. $idNicotine ;   
 
-        if(!empty($basket[$key])){ // si le panier contient l'article
-            unset($basket[$key]);//alors on supprime l'article 
-          }
+      
+            unset($basket[$key]);// on supprime l'article 
+          
         
           $session->set("basket", $basket);// on sauvegarde dans la session le fait que l'on a supprimer l'article du panier
 
@@ -171,7 +156,6 @@ class BasketController extends AbstractController
     #[Route('/basket/deleteAll', name:'deleteAll_basket')]
     public function deleteAll( SessionInterface $session): Response
     {   
-       
         $session->remove('basket');//supression du panier present en session
 
         return $this->redirectToRoute('app_basket');
