@@ -169,8 +169,8 @@ class PurchaseController extends AbstractController
         #[Route('/purchase/pay', name: 'app_pay')]
     public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request ): Response
     {    
-        if (!$this->isCsrfTokenValid('pay', $request->request->get('_csrf_token'))) {
-            return $this->redirectToRoute('app_home');
+        if (!$this->isCsrfTokenValid('pay', $request->request->get('_csrf_token'))) {// on recupere le jeton csrf et on verifie si elle est valide
+            return $this->redirectToRoute('app_home');// si le jeton n'est pas valide , alors la page renvoyé est la page d'accueille
         }else{
 
         $total=$session->get("total");// recuperation du montant present en session
@@ -204,6 +204,8 @@ class PurchaseController extends AbstractController
       return $this->redirect($session->url, Response::HTTP_FOUND);
     }
     }
+
+
 
 // si le paiement est reussi
     #[Route('/purchase/paySuccess', name: 'app_success')]
