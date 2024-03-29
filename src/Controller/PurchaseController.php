@@ -77,7 +77,7 @@ class PurchaseController extends AbstractController
         $basket=$session->get("basket");
         $adress=$session->get("adress");
         $total=$session->get("total");
-
+       
   
          // voir basket controller ligne 23
             $dataBasket= [];
@@ -103,7 +103,8 @@ class PurchaseController extends AbstractController
         return $this->render('purchase/recap.html.twig', 
         [ 'address' => $adress,
         'baskets' => $dataBasket,
-         'total' => $total 
+         'total' => $total ,
+        
     ]);
     }
 
@@ -166,8 +167,12 @@ class PurchaseController extends AbstractController
 
 // payement par stripe
         #[Route('/purchase/pay', name: 'app_pay')]
-    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session, ): Response
-    {   
+    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request ): Response
+    {    
+        if (!$this->isCsrfTokenValid('pay', $request->request->get('_csrf_token'))) {
+            return $this->redirectToRoute('app_home');
+        }else{
+
         $total=$session->get("total");// recuperation du montant present en session
         $totalStripe= $total*100;// multiplication par 100 pour avoir le montant en centime
 
@@ -181,7 +186,7 @@ class PurchaseController extends AbstractController
                         'currency' => 'eur',// choix de la monnaie
                         'unit_amount' =>  $totalStripe , // Montant total en centimes (par exemple, 50 EUR)
                         'product_data' => [
-                            'name' => 'Commande', // Nom de votre produit ou service
+                            'name' => 'Commande', // Nom du produit ou service
                             
                         ],
                     ],
@@ -197,6 +202,7 @@ class PurchaseController extends AbstractController
 
       // Rediriger l'utilisateur vers la page de paiement Stripe
       return $this->redirect($session->url, Response::HTTP_FOUND);
+    }
     }
 
 // si le paiement est reussi
