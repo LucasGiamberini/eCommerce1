@@ -171,7 +171,8 @@ class PurchaseController extends AbstractController
     {    
         if (!$this->isCsrfTokenValid('pay', $request->request->get('_csrf_token'))) {// on recupere le jeton csrf et on verifie si elle est valide
             return $this->redirectToRoute('app_home');// si le jeton n'est pas valide , alors la page renvoyé est la page d'accueille
-        }else{
+        }
+        else{
 
         $total=$session->get("total");// recuperation du montant present en session
         $totalStripe= $total*100;// multiplication par 100 pour avoir le montant en centime
