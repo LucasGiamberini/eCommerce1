@@ -42,7 +42,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/product/new, roles: ROLE_ADMIN }
+         - { path: ^/product3dit/\d+/edit, roles: ROLE_ADMIN }
+         - { path: ^/m4st3rAdm1n, roles: ROLE_ADMIN }
+         - { path: ^/productN3w/new, roles: ROLE_ADMIN }
+         - { path: ^/product/\d+/r3mov3, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
   
       #  - { path: '^/secure', roles: ROLE_ADMIN, requires_channel: https }

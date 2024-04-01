@@ -22,8 +22,8 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}/edit', name:'edit_product')]
-    #[Route('/product/new', name: 'add_product')]
+    #[Route('/product3dit/{id}/edit', name:'edit_product')]
+    #[Route('/productN3w/new', name: 'add_product')]
     public function add(Product $product=NULL , EntityManagerInterface $entityManager,  Request $request): Response
     {
          if(!$product){// pour l'edition, si aucun objet n'est trouver
@@ -86,7 +86,7 @@ class ProductController extends AbstractController
                 }
 
 
-            return  $this->redirectToRoute('app_home');//redirection vers home
+            return  $this->redirectToRoute('app_admin');//redirection vers home
             }
 
 
@@ -112,7 +112,7 @@ class ProductController extends AbstractController
 
        
        // pour supprimer un produit
-       #[Route('/product/{id}/delete', name: 'delete_product')]// on recupere l'id du prduit
+       #[Route('/product/{id}/r3mov3', name: 'delete_product')]// on recupere l'id du prduit
        public function delete(Product $product,EntityManagerInterface $entityManager,ProductRepository $productRepo ): Response
     {         
         
@@ -139,7 +139,7 @@ class ProductController extends AbstractController
            $entityManager->remove($product);//enleve produit dans la base de donnée
            $entityManager->flush();// execute la requete
     
-           return $this->redirectToRoute('app_home');
+           return $this->redirectToRoute('app_admin');
        }
        
    }

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Produit en ligne{% endblock %}
+
+{% block body %}
+<div id="basket">
+<h1>Administration des produits</h1>
+
+<a href="{{path('add_product')}}">Ajouter un produit</a><br>
+
+
+
+<thead>
+    <div class="row">
+        <div class="col-sm">   
+        </div>
+        <div class="col-sm">
+            nom du produit
+        </div>
+        <div class="col-sm">
+            Prix unitaire
+        </div>
+      
+        <div id="quantityBasketTitle" class="col-sm">
+          
+        </div>
+        <div class="col-sm">   
+        </div>
+        <div class="col-sm">  
+            
+        </div>
+        
+    </div>   
+<br>
+</thead>
+<tbody>
+{% for product in products %}
+<div class="row">
+    <div class="col-sm">
+    {% if product.img[0] is defined %}
+    <figure>
+    <img id="pictureBasket" src="{{ asset('/img/' ~ product.img[0].name) }}" alt="{{ product.name }}">
+    </figure>
+    {% endif %}
+    </div>
+    <div class="col-sm">
+        <a href="{{ path ('show_product' , {'id': product.id})}}">
+            {{product.name}}  
+        </a>
+     
+    </div>
+    <div class="col-sm">
+        {{ '%0.2f'|format(product.price) }} &euro;
+      
+    </div>
+    
+    
+    <div class="col-sm">
+        <a href ="{{ path ('edit_product' , {'id' : product.id})}}">Editer</a><br>
+    </div>
+    <div class="col-sm"> 
+        <a href ="{{ path ('delete_product' , {'id': product.id})}}"> Supprimer</a>
+      
+    </div>
+ 
+</div>  
+
+<br>
+{% endfor %}
+</tbody>
+
+<tfoot>
+    
+        
+    </div>
+
+</tfoot>
+
+</div>
+{% endblock %}
