@@ -5,7 +5,7 @@
 {% block body  %}
 <h1> Mes favoris</h1>
 {% for product in favorites %}
-{{dump(product)}}
+
 <a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br>
 {% endfor %}
 

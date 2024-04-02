@@ -25,6 +25,17 @@ nav{
     justify-content: space-around
 }
 
+.blueTitle{
+    Background-image:linear-gradient(#00BEE0,rgb(2, 2, 2) );
+    font-weight: bolder;
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: cover;
+  background-attachment: fixed;
+  font-size: 3vw;
+}
+
+
 .blue{
     color:#00BEE0;
 }
@@ -57,11 +68,20 @@ nav a:hover i{
 }
 
 
+
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 3vh;
+}
+
+
 .template{
     width: 90%;
     min-height: 80vh;
     background-color: white;
-    padding-top: 5vh;
+    padding-top: 7vh;
 }
 
 .templateHome{
@@ -171,12 +191,19 @@ height: 0px;
 
 #logo{
     position: absolute;
-    top: -6vh;
-    width: 21%;
+    top: 0vh;
+    width: 14%;
     z-index: 2;
+    transition: 1s transform ease-in-out
 }
 
+#logo:hover{
+transform: scale(1.2) ;
+}
 
+header:hover  #logo{
+    transform: scale(1.2) ; 
+}
 
 /*///////////////////////img cloud////////////////////////////*/
 
@@ -520,11 +547,18 @@ input[type="radio"] {
 .favoriteIconNavigation{
     color: rgba(255, 0, 0, 0.74);
     position: relative;
-    bottom: 36vh;
-   /* right: 56vw; */
+    bottom: 33vh;
+    right: -14vw; 
     height: 0vh;
     width: 0vw;
 
+}
+
+.addFavorite{
+    display: flex;
+    width: 0vw;
+    height: 0vw;
+    
 }
 
 .navigationToShowProduct{
@@ -533,6 +567,11 @@ input[type="radio"] {
     display: table-row;
 }
 
+.navProductDetail{
+    width: 60%;
+    overflow-wrap: break-word;
+    display: none;
+}
 
 .ProductBoxs{
     display: flex;
@@ -546,12 +585,13 @@ input[type="radio"] {
 .ProductBox{
     background-color: rgba(202, 201, 201, 0.945);
     width: 18vw;
-    height: 30%;
+    height: 63vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     border-radius: 1vw;
     display: table-cell;
+    text-align: center;
 }
 
 .productPrice{
@@ -604,9 +644,9 @@ input[type="radio"] {
     background-color: black ;
 }
 
-.formNav{
+.formNav{ 
     display: none;
-    
+
 }
 
 .ProductBox:hover .formNav{
@@ -614,7 +654,8 @@ input[type="radio"] {
     flex-direction: column;
     align-items: center;
     position: relative;
-  /*  bottom: -61vh; */
+    z-index: 3;
+    bottom: 5vh; 
 }
 /*/////////////////////show product//////////////////*/
 
@@ -623,7 +664,8 @@ input[type="radio"] {
 
 #productShow{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin: 0 2vw
 }
 
 #imgShow{
@@ -638,7 +680,11 @@ input[type="radio"] {
 }
 
 #presentation{
-    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30vw;
+    
 }
 
 #buy{
@@ -701,8 +747,9 @@ input[type="radio"] {
 .carouselShow{
     position: relative;
     overflow: hidden;
-    width: 30%;
+    
     height: 30vh;
+    width: 18vw;
     /*right: 5vw;*/
 }
 
@@ -784,6 +831,13 @@ input[type="radio"] {
     font-size: 3vw;
     cursor: pointer;
     position: absolute;
+    top: -2vh;
+    background-color: white;
+    width: 4vw;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 9vw;
 }  
 
 /*////////////////////////////////////Basket//////////////////////////////*/
@@ -866,6 +920,13 @@ input[type="radio"] {
 
 /*//////////////////////////purchase/////////////////////////////*/
 
+/*////////////////////////addProduct/////////////////////////////*/
+#addProduct{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /*/////////////////////formulaire adresse   /////////////////////*/
 #formAdress{
     display: flex;
@@ -912,7 +973,7 @@ input[type="radio"] {
     align-items: center;
 }
 
-#registrationForm{
+.form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -994,3 +1055,15 @@ footer{
     color: #00BEE0;  
 }
 
+/*/////////////////////////user//////////////////////////*/
+#userMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+    align-items: center;
+}
+
+#userMenu a{
+    text-decoration: none;
+}

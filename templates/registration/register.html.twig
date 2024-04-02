@@ -12,7 +12,7 @@
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm,{'attr': {'id': 'registrationForm'}})  }}
+    {{ form_start(registrationForm,{'attr': {'class': 'form'}})  }}
         {{ form_row(registrationForm.email,{'label_attr': {'class': 'formRowRegister'}}) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe',

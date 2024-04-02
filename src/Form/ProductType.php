@@ -52,7 +52,8 @@ class ProductType extends AbstractType
                     'accept' => '.jpg, .jpeg'
                 ] 
             ])
-            ->add('Valider' , SubmitType::class)
+            ->add('Valider' , SubmitType::class,[
+                'attr' => [ 'id' => 'blueButton']])
         ;
     }
 
