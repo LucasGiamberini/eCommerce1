@@ -29,9 +29,15 @@
     </head>
     <body>
         
-        <header>
+        <header id="header">
           
         <nav>
+           
+
+            
+            <label id="hamburger-menu" class="bi bi-list fs-2 white" for="hamburger-input"> <input type="checkbox" id="hamburger-input"  />       </label>
+
+            <div id="navMobileScreen">
             <ul>
                 <li class="header-links">
                     <i  id="searchBarIcon" class="bi bi-search text-white-icon fs-2"></i>
@@ -81,7 +87,9 @@
               <a href="{{path('app_login')}}"> se connecter</a>
           </li>
           {% endif %}
+        </div>
         </ul>
+    
         <ul>
             <li>
                 

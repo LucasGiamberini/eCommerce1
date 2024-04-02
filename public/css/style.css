@@ -14,16 +14,32 @@ body{
     max-width: 100vw;
     overflow-x: hidden;
 }
+
+
 nav{
     display: flex;
     flex-direction: row;
     /* color: white; */
     text-decoration: none;
     list-style: none;
-    width: 98%;
+    width: 80%;
     align-items: center;
-    justify-content: space-around
+    justify-content: space-between;
 }
+
+
+
+
+
+#navMobileScreen{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70vw;
+
+}
+
 
 .blueTitle{
     Background-image:linear-gradient(#00BEE0,rgb(2, 2, 2) );
@@ -100,15 +116,19 @@ header{
     display: flex;
     justify-content: center;
     width: 100vw;
-    background-image:url(/pictureHeader/milky-way-2695569_1280.jpg) ;
+    background-image:url(/pictureHeader/pexels-pixabay-358528.jpg) ;
     
     background-size: cover;
-    filter:brightness(0.8);
+    filter:brightness(0.6);
     transition: filter 0.7s ease-in-out;
     height: 12vw;
 }
 
 header:hover{
+    filter:brightness(1);
+}
+
+.headerAnimation{
     filter:brightness(1);
  
 }
@@ -125,6 +145,13 @@ header:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+/*////////////////////////hamburger////////////////*/
+#hamburger-menu{
+    display: none;
+    
 }
 
 /*//////////////////////////search bar/////////////////*/
@@ -179,14 +206,9 @@ height: 0px;
     align-items: center;
 }
 
-.logoBefore{
-    width: 47%;
-    z-index: 20;
-}
 
-.logoAfter{
-    background-image: url();
-}
+
+
     
 
 #logo{
@@ -197,11 +219,11 @@ height: 0px;
     transition: 1s transform ease-in-out
 }
 
-#logo:hover{
+.logoAnimate{
 transform: scale(1.2) ;
 }
 
-header:hover  #logo{
+  #logo:hover{
     transform: scale(1.2) ; 
 }
 
@@ -321,7 +343,7 @@ right: 16vw;
 .carousel {
     position: relative;
     overflow: hidden;
-    width: 99vw;
+    width: 100vw;
     height: 80vh;
     right: 5vw;
   }
@@ -540,6 +562,8 @@ input[type="radio"] {
 
   }
 
+
+
  label{
     cursor: pointer;
  } 
@@ -645,8 +669,9 @@ input[type="radio"] {
 }
 
 .formNav{ 
+  
     display: none;
-
+  
 }
 
 .ProductBox:hover .formNav{
@@ -655,7 +680,9 @@ input[type="radio"] {
     align-items: center;
     position: relative;
     z-index: 3;
-    bottom: 5vh; 
+    bottom: 4vh; 
+   
+    height: 15vh;
 }
 /*/////////////////////show product//////////////////*/
 
@@ -711,11 +738,11 @@ input[type="radio"] {
 }
 
 #blueButton{
-    margin-top: 2vh;
+    margin-top: 1vh;
     border:none;
     background-color: #00BEE0;
     color: white;
-    height: 6vh;
+    height: 9vh;
     width: 15vw;
     border-radius: 2vh;
 }
@@ -1067,3 +1094,113 @@ footer{
 #userMenu a{
     text-decoration: none;
 }
+
+
+/*////////////////////////////media query tablet //////////////////////*/
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+   
+   
+   
+    .boxHomeBlog{
+        justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    }
+ /*//////////////////header/////////////////////////*/   
+   
+  header{
+    filter:brightness(1);
+    height:18vw;
+  }
+    .cloudFigure{
+        display: none;
+        width: 0vw;
+    }
+
+    .cloudLeft-home{
+    display: none;
+   }
+
+   .cloudRight-home{
+    display: none;
+   }
+
+   #logo{
+    width: 25%;
+   }
+
+   #navMobileScreen {
+    display:none;
+   }
+
+   #hamburger-input{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+   }
+
+   input[type="checkbox"]{
+   visibility: hidden;
+    }
+
+    #hamburger-menu{
+        display: inline;
+        pointer-events: fill;
+    }
+
+/*//////////////////home blog////////////////////*/
+
+
+#pictureWhyVapoting {
+    width: 58vw;
+    margin-left: 0vw;
+    border-radius: 31vw;
+    transition: none;
+}
+
+   #pictureWhoWeAre{
+    width: 82vw;
+    margin-right: 0vw;
+   }
+
+
+
+   footer{
+    flex-direction: column;
+   }
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+/*///////////////////////////media query mobile//////////////////////*/
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .cloudFigure{
+        display: none;
+        width: 0vw;
+    }
+
+    .cloudLeft-home{
+    display: none;
+   }
+
+   .cloudRight-home{
+    display: none;
+   }
+
+   #logo{
+    width: 25%;
+   }
+  }

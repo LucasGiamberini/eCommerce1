@@ -546,7 +546,8 @@ event.preventDefault();
 ///////////////////////////////////////////////animation nuage header///////////////////////////////////////////////////
 
 
-
+      const header = document.getElementById("header");// selectionne le header
+      const logo = document.getElementById('logo');// selectionne le logo dans le header
     const topAreaHeight = 350; // Hauteur de la zone de passage de la souris en pixels
     const effectElement = document.createElement('div');// creation d'une div pour le passage de la souris
 
@@ -560,12 +561,16 @@ event.preventDefault();
 
         if (y <= topAreaHeight) {// si l'axe vertical de la souris est inferieure a la zone definis
             console.log("enhaut")
+            logo.classList.add('logoAnimate');
+            header.classList.add('headerAnimation');
             cloudLeft.classList.add('animate-cloudLeft');// on lance les animation d'ouverture nuages
             cloudRight.classList.add('animate-cloudRight');
             cloudLeft.classList.remove('reverse-cloudLeft');//et on enleve  les animations d'ouverture des nuages
             cloudRight.classList.remove('reverse-cloudRight');
         } else {// si l'axe vertical est en dessous de la zone
             console.log("enbas")
+            logo.classList.remove('logoAnimate');
+            header.classList.remove('headerAnimation');
             cloudLeft.classList.add('reverse-cloudLeft');// on lance la fermeture des nuages
             cloudRight.classList.add('reverse-cloudRight');
             cloudLeft.classList.remove('animate-cloudLeft');//et on enleve l'animation d'ouverture des nuages
