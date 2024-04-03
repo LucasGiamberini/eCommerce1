@@ -1185,7 +1185,14 @@ footer{
    }
 
 
+/*////////////////////////////////////product show///////////////////////*/
 
+#productShow {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 16vh 1vw;
+}
 
 
   }
