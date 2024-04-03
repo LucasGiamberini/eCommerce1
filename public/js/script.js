@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
 
 
@@ -19,7 +18,29 @@ searchBarIcon.onclick = function(){
 
 
 
+//////////////////////////////menu burger ///////////////////////////////
+const burgerButton = document.getElementById("hamburger-menu");
 
+burgerButton.addEventListener('click',function(event){
+  event.stopPropagation();
+ console.log(burgerButton.className);
+ 
+ if (burgerButton.className === "bi bi-list fs-2 white"){
+console.log(burgerButton)
+burgerButton.classList.remove('bi','bi-list', 'fs-2', 'white');
+    burgerButton.classList.add('bi', 'bi-x-lg' ,'fs-2' ,'white');
+
+  }
+  else  {
+    console.log("hey2")
+    burgerButton.classList.remove('bi','bi-x-lg','fs-2','white');
+    burgerButton.classList.add('bi', 'bi-list', 'fs-2', 'white');
+    
+
+  }
+
+}
+);
 
 
 
@@ -32,7 +53,7 @@ searchBarIcon.onclick = function(){
 // bouton pour ajuster la quantité de produit
   function buttonQuantity(){
      
-    console.log('hey')
+    
     const quantityButtons = document.querySelectorAll('.qttButton');// recupere tout les boutons
 //console.log(quantityButtons)
     quantityButtons.forEach((button) => {//parcour tout les boutons quantité
@@ -481,7 +502,7 @@ event.preventDefault();
                const labelName = "label"+ categoryId;
          
                const labelNameId = $("#"+labelName);
-               console.log(olderLabelId);
+              
                labelNameId.addClass("filterCategoryActive");
    
            
