@@ -1112,6 +1112,8 @@ footer{
   header{
     filter:brightness(1);
     height:18vw;
+    position: fixed;
+    z-index: 3;
   }
     .cloudFigure{
         display: none;
@@ -1128,10 +1130,21 @@ footer{
 
    #logo{
     width: 25%;
+    position: fixed;
+    z-index: 3;
    }
 
    #navMobileScreen {
     display:none;
+    align-items: center;
+    justify-content: space-between;
+    width: 44%;
+    position: fixed;
+    bottom: 47vh;
+    flex-direction: column;
+    background-color: #003ce0d7;
+    right: 55%;
+    font-size: 5vw;
    }
 
    #hamburger-input{

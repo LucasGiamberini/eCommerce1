@@ -19,23 +19,26 @@ searchBarIcon.onclick = function(){
 
 
 //////////////////////////////menu burger ///////////////////////////////
-const burgerButton = document.getElementById("hamburger-menu");
+const burgerButton = document.querySelector("#hamburger-menu");
+const burgerMenu = document.querySelector("#navMobileScreen");
+const outsideHeader= document.querySelector("#template");
 
-burgerButton.addEventListener('click',function(event){
-  event.stopPropagation();
- console.log(burgerButton.className);
+
+burgerButton.addEventListener('click',function(){
+  outsideHeader.appendChild(burgerMenu);
+ 
  
  if (burgerButton.className === "bi bi-list fs-2 white"){
-console.log(burgerButton)
+
 burgerButton.classList.remove('bi','bi-list', 'fs-2', 'white');
     burgerButton.classList.add('bi', 'bi-x-lg' ,'fs-2' ,'white');
-
+    burgerMenu.style.display='flex' ;
   }
   else  {
-    console.log("hey2")
+    
     burgerButton.classList.remove('bi','bi-x-lg','fs-2','white');
     burgerButton.classList.add('bi', 'bi-list', 'fs-2', 'white');
-    
+    burgerMenu.style.display='none';
 
   }
 
