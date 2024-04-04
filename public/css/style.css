@@ -1098,7 +1098,7 @@ footer{
 
 /*////////////////////////////media query tablet //////////////////////*/
 
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
    
    
    
@@ -1135,16 +1135,30 @@ footer{
    }
 
    #navMobileScreen {
-    display:none;
+    display: none;
     align-items: center;
     justify-content: space-between;
-    width: 44%;
+   
     position: fixed;
-    bottom: 47vh;
+    bottom: -23vh;
     flex-direction: column;
-    background-color: #003ce0d7;
-    right: 55%;
-    font-size: 5vw;
+    background-color: #051541;
+    right: 54%;
+    max-width: 45vw;
+    margin: 11vh 1vh;
+    height: 134vh;
+    justify-content: center;
+    font-size: 3vh;
+    
+   }
+
+   #textSearch{
+    font-size: 1rem;
+    position: relative;
+    bottom: 65vh;
+    right: -5vw;
+    display: flex;
+    width: 31vw;
    }
 
    #hamburger-input{
@@ -1161,6 +1175,33 @@ footer{
     #hamburger-menu{
         display: inline;
         pointer-events: fill;
+    }
+
+    #navMobileScreen a{
+        text-decoration: none;
+        color: white;
+    }
+
+
+    #searchBarForm >button {
+        border: none;
+        background-color: #00BEE0;
+        color: white;
+        border-radius: 15vh;
+        bottom: 71vh;
+        position: relative;
+        left: 33vw;
+        height: 5vh;
+        width: 5vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ul{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
     }
 
 /*//////////////////home blog////////////////////*/
