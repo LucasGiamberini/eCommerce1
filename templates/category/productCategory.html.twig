@@ -10,7 +10,7 @@
 
 <div class="ProductBoxs">
     {% for product in products %}
-  <div class="ProductBox">
+    <div  id="productBox{{loop.index}}"class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
     <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
   <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
     {% if product.pictures[0] is defined %}

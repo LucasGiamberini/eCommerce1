@@ -18,6 +18,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'categorys'=> $category,
             'products' => $product,
+            'description' => "Venez découcrir les produits E-liquide de la boutique Appolo"
         ]);
     }
 
