@@ -12,19 +12,8 @@
     {% for product in products %}
     <div  id="productBox{{loop.index}}"class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
     <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
-  <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
-    {% if product.pictures[0] is defined %}
-    <figure class="figureNavigation">
-        
-    <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
-  </figure>
-{% endif %}
 
-
-
-
-
-{% if app.user %}{#     si un utilisateur est connecter                  #}
+      {% if app.user %}{#     si un utilisateur est connecter                  #}
   
 
 {% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
@@ -42,6 +31,23 @@
 
 
 {% endif %}
+
+
+
+
+  <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
+    {% if product.pictures[0] is defined %}
+    <figure class="figureNavigation">
+        
+    <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
+  </figure>
+{% endif %}
+
+
+
+
+
+
 <br>
 
 
@@ -87,10 +93,7 @@
     
     </div>
 
-    {% if loop.index is divisible by(4) %}
-      </div><br>
-      <div class="ProductBoxs">
-    {% endif %}
+    
   {% endfor %} 
 </div>
 
