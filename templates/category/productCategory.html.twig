@@ -10,28 +10,10 @@
 
 <div class="ProductBoxs">
     {% for product in products %}
-    <div  id="productBox{{loop.index}}"class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
+    <div  class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
     <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
 
-      {% if app.user %}{#     si un utilisateur est connecter                  #}
-  
-
-        {% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
-        {% for favorite in app.user.Favorite %}{# on fait une boucle pour les favoris de l'utilisateur en ligne   #}
-         {% set favoriteIds = favoriteIds|merge([favorite.id]) %}{# on fusione les deux tableau en utilisant merge, remplissant ainsi favoriteIds      #}
-      {% endfor %}
-
-
-    {% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
-   {# data-favorite-id est utiliser pour recuperer l'id du produit      #}
-        {% else %}{#  si le produit n'est pas dans les favoris            #}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconNavigation"></i> </a>
-    {% endif %}
-
-
-{% endif %}
-
+    
 
 
 
@@ -40,6 +22,26 @@
     <figure class="figureNavigation">
         
     <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
+    
+    {% if app.user %}{#     si un utilisateur est connecter                  #}
+  
+
+    {% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
+    {% for favorite in app.user.Favorite %}{# on fait une boucle pour les favoris de l'utilisateur en ligne   #}
+     {% set favoriteIds = favoriteIds|merge([favorite.id]) %}{# on fusione les deux tableau en utilisant merge, remplissant ainsi favoriteIds      #}
+  {% endfor %}
+
+
+{% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
+    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
+{# data-favorite-id est utiliser pour recuperer l'id du produit      #}
+    {% else %}{#  si le produit n'est pas dans les favoris            #}
+    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconNavigation"></i> </a>
+{% endif %}
+
+
+{% endif %}
+
   </figure>
 {% endif %}
 

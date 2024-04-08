@@ -108,7 +108,7 @@ class CategoryController extends AbstractController
         
         $products = $productRepo->findBy([],["name" => "Desc"]);
        
-        return $this->render('category/homeProductCategory.html.twig', [
+        return $this->render('category/productCategory.html.twig', [
             'products' => $products,
             
         ]);
