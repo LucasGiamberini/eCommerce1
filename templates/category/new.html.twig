@@ -1,36 +1,15 @@
 {% block body %}
 
-
-
-
-
-
-
-  <div id="ResultBoxHome">{# affiche les resultat des requetes ajax pour les filtres#}
-
-
-
-  </div>
-
-
-
-  
 <div class="ProductBoxs">
     {% for product in products %}
-  <div  id="productBox{{loop.index}}"class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
+    <div  id="productBox{{loop.index}}"class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
     <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
   <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
     {% if product.pictures[0] is defined %}
     <figure class="figureNavigation">
         
     <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
-  </figure>
-{% endif %}
-
-
-
-
-
+    
 {% if app.user %}{#     si un utilisateur est connecter                  #}
   
 
@@ -41,13 +20,15 @@
 
 
     {% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
-        <a class="addFavorite" href="{{ path ('remove_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconNavigation"></i> </a>
    {# data-favorite-id est utiliser pour recuperer l'id du produit      #}
         {% else %}{#  si le produit n'est pas dans les favoris            #}
         <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconNavigation"></i> </a>
     {% endif %}
 
 
+{% endif %}
+  </figure>
 {% endif %}
 
 
@@ -57,11 +38,16 @@
 
 
 
-    
-    </a>
-    <h3>   {{product.name }}</h3>
-    
-    <br> 
+
+
+
+
+
+
+   <h3>   {{product.name }}</h3>
+<br>
+   {#}  <p class="navProductDetail"> {{product.detail}}</p> #}
+    </a> <br> 
      <br>
     
     
@@ -83,7 +69,7 @@
           
           <button  class="qttButton"type="button" id="decreaseBtn"  data-action="minus"   >-</button>
           <input class="qtt" type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
-          <button class="qttButton" type="button" id="increaseBtn"  data-action="plus" data-id="{{product.id}}">+</button>
+          <button class="qttButton" type="button" id="increaseBtn"  data-action="plus" >+</button>
     </div>
         <button id="blueButton" type="submit">Ajouter au panier</button>
     </form>
@@ -97,9 +83,6 @@
    
   {% endfor %} 
 </div>
-
-
-
 
 
 {% endblock %}

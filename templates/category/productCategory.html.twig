@@ -16,10 +16,10 @@
       {% if app.user %}{#     si un utilisateur est connecter                  #}
   
 
-{% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
-{% for favorite in app.user.Favorite %}{# on fait une boucle pour les favoris de l'utilisateur en ligne   #}
-    {% set favoriteIds = favoriteIds|merge([favorite.id]) %}{# on fusione les deux tableau en utilisant merge, remplissant ainsi favoriteIds      #}
-{% endfor %}
+        {% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
+        {% for favorite in app.user.Favorite %}{# on fait une boucle pour les favoris de l'utilisateur en ligne   #}
+         {% set favoriteIds = favoriteIds|merge([favorite.id]) %}{# on fusione les deux tableau en utilisant merge, remplissant ainsi favoriteIds      #}
+      {% endfor %}
 
 
     {% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}

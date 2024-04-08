@@ -23,14 +23,7 @@
     <figure class="figureNavigation">
         
     <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
-  </figure>
-{% endif %}
-
-
-
-
-
-{% if app.user %}{#     si un utilisateur est connecter                  #}
+    {% if app.user %}{#     si un utilisateur est connecter                  #}
   
 
 {% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
@@ -48,6 +41,14 @@
 
 
 {% endif %}
+  </figure>
+{% endif %}
+
+
+
+
+
+
 
 
 

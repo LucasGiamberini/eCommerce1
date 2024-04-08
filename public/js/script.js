@@ -15,7 +15,12 @@ searchBarIcon.onclick = function(){
   searchBarInput.focus();
 }
 
+if (window.innerWidth < 1024 ){// si la taille de l'ecran est en dessous de 1024 pixel
+  searchBarIcon.style.visibility = "hidden";
+  searchBar.style.display = "block";
+  searchBarInput.focus();
 
+}
 
 
 //////////////////////////////menu burger ///////////////////////////////

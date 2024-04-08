@@ -63,19 +63,7 @@
 
 
 
-{% if app.user %}
-{% set favoriteIds = [] %}
-{% for favorite in app.user.Favorite %}
-    {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
-{% endfor %}
 
-
-    {% if product.id in favoriteIds %}
-        <a class="addFavorite" href="{{ path ('remove_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconShow"></i> </a>
-    {% else %}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconShow"></i> </a>
-    {% endif %}
-    {% endif %}
 
 
 <p>Reference: {{product.reference}}</p>
@@ -86,6 +74,27 @@
 </div>
 
 <div id="buy">
+
+    {% if app.user %}
+    {% set favoriteIds = [] %}
+    {% for favorite in app.user.Favorite %}
+        {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
+    {% endfor %}
+    
+    
+        {% if product.id in favoriteIds %}
+            <a id="addFavorite" class="addFavorite" href="{{ path ('remove_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconShow"></i> </a>
+        {% else %}
+            <a id="addFavorite" class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconShow"></i> </a>
+        {% endif %}
+        {% endif %}
+
+
+
+
+
+
+
 <p id="showPrice">{{ '%0.2f'|format(product.price) }} &euro;</p>
 
 <form id="formShow" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">

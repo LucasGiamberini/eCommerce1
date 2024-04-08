@@ -9,13 +9,7 @@
     <figure class="figureNavigation">
         
     <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
-  </figure>
-{% endif %}
-
-
-
-
-
+    
 {% if app.user %}{#     si un utilisateur est connecter                  #}
   
 
@@ -34,6 +28,14 @@
 
 
 {% endif %}
+  </figure>
+{% endif %}
+
+
+
+
+
+
 
 
 
