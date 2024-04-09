@@ -33,16 +33,16 @@ burgerButton.addEventListener('click',function(){
   outsideHeader.appendChild(burgerMenu);
  
  
- if (burgerButton.className === "bi bi-list fs-2 white"){
+ if (burgerButton.className === "bi bi-list white"){
 
-burgerButton.classList.remove('bi','bi-list', 'fs-2', 'white');
-    burgerButton.classList.add('bi', 'bi-x-lg' ,'fs-2' ,'white');
+burgerButton.classList.remove('bi','bi-list',  'white');
+    burgerButton.classList.add('bi', 'bi-x-lg'  ,'white');
     burgerMenu.style.display='flex' ;
   }
   else  {
     
-    burgerButton.classList.remove('bi','bi-x-lg','fs-2','white');
-    burgerButton.classList.add('bi', 'bi-list', 'fs-2', 'white');
+    burgerButton.classList.remove('bi','bi-x-lg','white');
+    burgerButton.classList.add('bi', 'bi-list', 'white');
     burgerMenu.style.display='none';
 
   }
@@ -114,7 +114,7 @@ console.log(favoriteIcon);
 
 event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
 
-if (classfavoriteIcon === "bi-heart fs-2 favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
+if (classfavoriteIcon === "bi-heart  favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
  
  $.ajax({//appelle de la fonction ajax de jQuery
    
@@ -124,8 +124,8 @@ if (classfavoriteIcon === "bi-heart fs-2 favoriteIconNavigation") {// si la clas
    data: {id: productId},// les données qui seront envoyer
    success: function(response) {// lorsque la requete est un succès
      console.log('Ajouté aux favoris avec succès !');
-     favoriteIcon.removeClass('bi-heart fs-2 favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
-     favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconNavigation');// et on le remplace avec l'icone coeur plein
+     favoriteIcon.removeClass('bi-heart  favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
+     favoriteIcon.addClass('bi-heart-fill  favoriteIconNavigation');// et on le remplace avec l'icone coeur plein
    },
    error: function (xhr, status, error) {// lorqu'une erreur se produit, 
      console.error('Erreur lors de l\'ajout aux favoris:', error);//on affiche les erreur dans
@@ -141,8 +141,8 @@ else {// si l'icone est un coeur plein
    data: {id: productId},
    success: function(response) {// lorsque le produit a été enlever des favoris
      console.log('Retiré des favoris avec succès !');
-     favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconNavigation');// on enleve l'icone avec le coeur plein
-     favoriteIcon.addClass('bi-heart fs-2 favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
+     favoriteIcon.removeClass('bi-heart-fill  favoriteIconNavigation');// on enleve l'icone avec le coeur plein
+     favoriteIcon.addClass('bi-heart  favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
    },
    error: function (xhr, status, error) {
      console.error('Erreur lors du retrait des favoris:', error);
@@ -802,7 +802,7 @@ prevBtn.addEventListener('click', () => {
            
             
            
-             if (classfavoriteIcon === "bi-heart fs-2 favoriteIconShow") {
+             if (classfavoriteIcon === "bi-heart  favoriteIconShow") {
               
              //  console.log('ajouter')
               $.ajax({
@@ -813,7 +813,7 @@ prevBtn.addEventListener('click', () => {
                  data: {id: productId},
                  success: function(response) {
                    console.log('Ajouté aux favoris avec succès !');
-                   favoriteIcon.removeClass('bi-heart fs-2 favoriteIconShow');
+                   favoriteIcon.removeClass('bi-heart  favoriteIconShow');
                    favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconShow');
                  },
                  error: function (xhr, status, error) {
@@ -831,7 +831,7 @@ prevBtn.addEventListener('click', () => {
                  success: function(response) {
                    console.log('Retiré des favoris avec succès !');
                    favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconShow');
-                   favoriteIcon.addClass('bi-heart fs-2 favoriteIconShow');
+                   favoriteIcon.addClass('bi-heart  favoriteIconShow');
                  },
                  error: function (xhr, status, error) {
                    console.error('Erreur lors du retrait des favoris:', error);

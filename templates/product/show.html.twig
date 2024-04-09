@@ -85,7 +85,7 @@
         {% if product.id in favoriteIds %}
             <a id="addFavorite" class="addFavorite" href="{{ path ('remove_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill fs-2 favoriteIconShow"></i> </a>
         {% else %}
-            <a id="addFavorite" class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart fs-2 favoriteIconShow"></i> </a>
+            <a id="addFavorite" class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart  favoriteIconShow"></i> </a>
         {% endif %}
         {% endif %}
 
