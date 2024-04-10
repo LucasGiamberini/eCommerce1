@@ -122,6 +122,9 @@ nav a:hover i{
     
 }
 
+input[type=number] {
+    text-align: center;
+}
 
 /*////////////////////////header///////////////*/
 
@@ -1010,6 +1013,10 @@ input[type="radio"] {
 
  .label{
     padding:2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 
 }
 
@@ -1388,7 +1395,13 @@ height:5vh ;
 }
 
 .qttButton{
-    width:4vw;
+    height: 1em;
+    width: 1em;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .favoriteIconNavigation{
@@ -1498,6 +1511,7 @@ height:5vh ;
             justify-content: center;
         align-items: center;
         flex-direction: column;
+        width: 100vw;
         }
     
         .categorySelector{
@@ -1505,8 +1519,39 @@ height:5vh ;
             margin:0 2vw;
         }
 
-        h2{
+        h2,h1{
             font-size: 3.5em !important;
+             padding: 0em;
+         
+        }
+
+        p{
+            font-size: 2rem;
+        }
+
+        #nicotine{
+            font-size: 2.5em;
+        }
+
+        option{
+            font-size: 1rem;
+        }
+
+        label{
+            font-size: 2em;
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+        
+        }
+
+
+        h4{
+            font-size: 3rem;
+        }
+
+        .fs-3{
+            font-size: 3rem !important;
         }
      /*//////////////////header/////////////////////////*/   
        
@@ -1613,7 +1658,7 @@ height:5vh ;
             }
     
        #searchBarForm {
-          
+        height: 0vh;
         top: 45vh;
             left: 25vw;
         }
@@ -1627,7 +1672,9 @@ height:5vh ;
     }  
     
     #filter{
-        width: 67%;
+        width: 85%;
+        right: 9vw;
+        position: absolute;
     }
     
     
@@ -1639,6 +1686,10 @@ height:5vh ;
         width: 95%;
     }
     
+    .homeTitle{
+        font-size: 4.5rem !important;
+        margin: 5vh;
+    }
     
     /*//////////////////home carousel////////////////*/
     
@@ -1666,7 +1717,8 @@ height:5vh ;
     
     /*//////////////////home blog////////////////////*/
     .blueTitle {
-        font-size: 3rem !important;
+        font-size: 4.5rem !important;
+        margin: 5vh 0em;
     }
     
     #pictureWhyVapoting {
@@ -1685,18 +1737,22 @@ height:5vh ;
     
        footer{
         flex-direction: column;
+        font-size: 2rem ;
        }
     
        /*////////////////////////////////nav produit//////////////////////////*/
-    
+    .navigationToShowProduct{
+        display: flex;
+    }
 
        .filterCategoryActive {
-        font-size: 4rem !important;
+        font-size: 3.5rem !important;
         width: 34vw;
        }
+
        .addFavorite {
         position: absolute;
-        left: 32vw;
+        left: 33vw;
         
     }
     
@@ -1708,6 +1764,7 @@ height:5vh ;
        width: 100%;
        margin-bottom: 1vw;
        position: relative;
+     
     }
     
     .ProductBoxs {
@@ -1721,7 +1778,10 @@ height:5vh ;
     }
     
     .productPrice{
-        width: 21vw;
+        width: 26vw;
+        font-size: 4.3rem;
+        top: 6vh;
+       
     }
     
     .ProductBox:hover .formNav {
@@ -1735,13 +1795,13 @@ height:5vh ;
       }
     
       #blueButton{
-        width: 35vw;
-        height: 5vh;
-        font-size: 2rem;
+        width: 42vw;
+        height: 7vh;
+        font-size: 2.5rem;
       }
     
       h3{
-       font-size: 1.3rem; 
+       font-size: 3rem !important; 
       }
     
       #ResultBox {
@@ -1749,7 +1809,8 @@ height:5vh ;
     }
     
     #qtt{
-        width: 18vw;
+        width: 22vw;
+        font-size: 2.5em;
     }
     
     .qtt{
@@ -1757,37 +1818,57 @@ height:5vh ;
     }
     
     .qttButton{
-        width:4vw;
+        height: 1.3em;
+        width: 1.3em;
+        font-size: 4.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
+    #quantity{
+        margin-bottom: 1vh;
+    }
+
     .favoriteIconNavigation{
-        bottom: 22vh;
-        right: -20vw;
+       
+        font-size: 4.5rem !important;
     
     }
     /*//////////////////////////////////// show product///////////////////////*/
+   #showPrice{
+    font-size: 5rem;
+   }
+   
+   
     #productName{
         margin-bottom: 0vh;
     }
     
-    
+    .modalZoom {
+        display: none !important;
+    }
+
+
+
     #addFavorite{
         position: relative;
         left: 1vw !important;
-        bottom: 2vh !important;
+        bottom: 1vh !important;
     }
     
     #productShow {
         
         justify-content: space-evenly;
-        margin: 2vh 5vw;
+        margin: 2vh 0vw;
         display: grid;
         justify-items: center;
     
     }
     
     .nextShow {
-        left: 42vw;
+        left: 88vw;
     }
     
     .carouselShow{
@@ -1797,23 +1878,26 @@ height:5vh ;
         display:grid;
         justify-items: center;
         grid-column: 1/3;
-        grid-row: 2;/* pour mettre l'element a la ligne en dessous*/
+        grid-row: 3;/* pour mettre l'element a la ligne en dessous*/
         border: solid #00BEE0;
         border-radius: 1rem;
-        min-width: 37rem;
+        min-width: 53rem;
+        margin-top: 1vh;
+        font-size: 2rem;
     }
     
     #buy{
         display: grid;
-        width: 29vw;
+        width: 95vw;
         justify-items: center;
-        height: 27rem;
+        height: 41rem;
+        grid-row: 2;
     }
     
     .carouselShow-item img{
     
-        width: 28rem;
-        height: 27rem;
+        width: 60rem;
+        height: 60rem;
         max-width: 100%;
        max-height: 100%;
     }
@@ -1822,7 +1906,7 @@ height:5vh ;
     
          height: auto; 
          width: auto; 
-         right: 5vw; 
+         left:0vw;
     }
     
     .carouselShow-item {
@@ -1833,6 +1917,9 @@ height:5vh ;
         justify-content: center;
     }
     
+    .carouselShow-inner{
+        width: 95vw;
+    }
     /*/////////////////////////basket//////////////////////*/
     .deleteBasket{
         width: 16vw;
