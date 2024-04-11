@@ -50,7 +50,8 @@
     <div class="col-sm basketName">
         <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
             {{basket.product.name}}  
-        </a>nicotine:{{basket.nicotine.proportioning}}
+        </a> 
+        <p>nicotine:{{basket.nicotine.proportioning}}</p>
      
     </div>
     <div class="col-sm basketProductPrice">
@@ -84,13 +85,13 @@
 <tfoot>
     <div id="rowToValidate" class="row">
     
-        <div class="col-sm" colspan="2"> 
+        <div  id="amountBasket"class="col-sm" colspan="2"> 
         Total Commande:{{ '%0.2f'|format(total) }} &euro;
         </div>
-        <div class="col-sm">
-            <a class="deleteBasket" href="{{path("deleteAll_basket")}}"> Vider le panier</a>
+        <div id="deleteAllBasket" class="col-sm">
+            <a id="deleteAllProduct" class="deleteBasket" href="{{path("deleteAll_basket")}}"> Vider le panier</a>
             </div>
-        <div class="col-sm"> 
+        <div id="validateBasketSection" class="col-sm"> 
            <a id="validateBasket" href="{{path("app_purchase")}}"> Valider la commande</a>
         </div>
         

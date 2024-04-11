@@ -582,7 +582,7 @@ margin: 0 6vw;
     box-shadow: none;
 }
 
-input[type="radio"] {
+[type="radio"] {
     display: none;
 
   }
@@ -1230,9 +1230,6 @@ footer{
     justify-content: center;
    }
 
-   input[type="checkbox"]{
-   visibility: hidden;
-    }
 
     #hamburger-menu{
         display: inline;
@@ -1616,9 +1613,7 @@ height:5vh ;
         justify-content: center;
        }
     
-       input[type="checkbox"]{
-       visibility: hidden;
-        }
+
     
         #hamburger-menu{
             display: inline;
@@ -1744,9 +1739,7 @@ height:5vh ;
        }
     
        /*////////////////////////////////nav produit//////////////////////////*/
-    .navigationToShowProduct{
-        display: flex;
-    }
+   
 
        .filterCategoryActive {
         font-size: 3.5rem !important;
@@ -1840,6 +1833,8 @@ height:5vh ;
     
     }
     /*//////////////////////////////////// show product///////////////////////*/
+   
+    
     .favoriteIconShow {
        
         font-size: 4rem !important;
@@ -1942,6 +1937,8 @@ height:5vh ;
     
     .rowProducts{
         display: grid !important;
+        background-color: #4593A1;
+        border-radius: 5vw;
     }
     
     .deleteBasket{
@@ -1963,6 +1960,7 @@ height:5vh ;
         grid-row: 1;
         justify-items: center;
         grid-column: 2;
+        width: 42vw !important;
     }
 
     .basketProductPrice{
@@ -1975,6 +1973,9 @@ height:5vh ;
     .quantityBasketColumn{
         grid-column: 2;
         grid-row: 2;
+        height: 15vh;
+        display: flex;
+        justify-content: space-evenly;
     }
 
     .basketButtonDeleteProduct{
@@ -2000,10 +2001,105 @@ height:5vh ;
         display: grid;
         justify-items: center;
     }
+
+    #rowToValidate{
+
+    }
+
+    #deleteAllBasket{
+        grid-row: 2;
+    }
+
+    #validateBasketSection{
+        grid-row: 2;
+        grid-column: 3;
+    }
+
+    #deleteAllProduct{
+        width: 50vw !important;
+    }
+
+    #validateBasket{
+        width: 34vw !important;
+         height: 10vh;
+    }
     /*///////////////////////////////form Adress //////////////////////////////////*/
     
 #formAdress {
 font-size: 2rem;
 }
 
+
+ /*//////////////////////////////////////recap/////////////////////////////////////*/
+
+ #adress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 9vh 0vw;
+ }
+
+ #adress a{
+    font-size: 2rem;
+ }
+
+ #productBasketRecap{
+    font-size: 2rem;
+ }
+
+ #basketRecap{
+    font-size: 2rem;
+ }
+ [type="checkbox"] {
+    width: 2rem;
+    height: 2rem;
+
+  }
+
+  .confirm{
+    width: 25rem;
+    height: 6rem;
+    margin-bottom: 2vh;
+    font-size: 3rem;
+
+  }
+
+  #termsRecap{
+    margin-top: 9vh;
+  }
+
+
+
+
+  /*/////////////////////////////////////////login/////////////////////////////////////////*/
+
+
+ .form{
+    font-size: 2rem;
+  }
+
+  #inputEmail, #inputPassword, #login {
+    font-size: 3rem;
+  }
+
+  #login{
+    margin-top: 2vh;
+  }
+ 
+
+
+  /*/////////////////////////////////////register///////////////////////////////////////////*/
+  .captcha-container {
+    /* Définissez ici la taille du captcha pour les appareils mobiles */
+    width: 80%;
+}
+  #registration_form_captcha{
+    width:50vw;
+    height: 20vh;
+  }
+
+
+  .g-recaptcha {
+    transform: scale(0.8); /* Réduire la taille du Captcha */
+}
   }
