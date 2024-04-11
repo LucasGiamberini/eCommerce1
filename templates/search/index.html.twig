@@ -36,7 +36,7 @@
         <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill  favoriteIconNavigation"></i> </a>
    {# data-favorite-id est utiliser pour recuperer l'id du produit      #}
         {% else %}{#  si le produit n'est pas dans les favoris            #}
-        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart  favoriteIconNavigation"></i> </a>
+        <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart favoriteIconNavigation"></i> </a>
     {% endif %}
 
 

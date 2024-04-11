@@ -1296,7 +1296,7 @@ display: none;
    }
 /*/////////////////////////home result///////////////////*/
 
-.formNav{
+.formNav {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1691,6 +1691,9 @@ height:5vh ;
         margin: 5vh;
     }
     
+    .carousel-control{
+        font-size: 10vw !important;
+    }
     /*//////////////////home carousel////////////////*/
     
     .carousel-item img {
@@ -1837,13 +1840,19 @@ height:5vh ;
     
     }
     /*//////////////////////////////////// show product///////////////////////*/
-   #showPrice{
+    .favoriteIconShow {
+       
+        font-size: 4rem !important;
+    }
+  
+    #showPrice{
     font-size: 5rem;
    }
    
    
     #productName{
         margin-bottom: 0vh;
+        font-size: 10vw !important;
     }
     
     .modalZoom {
@@ -1921,8 +1930,22 @@ height:5vh ;
         width: 95vw;
     }
     /*/////////////////////////basket//////////////////////*/
+    
+    #tableHeadBasket{
+        display: none;
+    }
+    
+    
+    #basket{
+        font-size: 3rem;
+    }
+    
+    .rowProducts{
+        display: grid !important;
+    }
+    
     .deleteBasket{
-        width: 16vw;
+        width: 26vw !important;
     }
     
     #validateBasket{
@@ -1930,5 +1953,57 @@ height:5vh ;
         border-radius: 5vw;
     }
 
+    .basketPicture{
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .basketName{
+        display: grid;
+        grid-row: 1;
+        justify-items: center;
+        grid-column: 2;
+    }
+
+    .basketProductPrice{
+        display: grid;
+        grid-column: 2;
+        grid-row: 2;
+        justify-items: center;
+    }
+
+    .quantityBasketColumn{
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .basketButtonDeleteProduct{
+        display: grid;
+        grid-column: 3;
+        grid-row: 2; 
+        align-items: center;
+    }
+
+    .buttonQuantityBasket {
+    width: 7vw;
+    border-radius: 1vh
+    }
+
+    .totalAmounProduct{
+        display: grid;
+        grid-column: 3;
+        grid-row: 2; 
+        justify-items: center;
+    }
+
+    #rowToValidate{
+        display: grid;
+        justify-items: center;
+    }
+    /*///////////////////////////////form Adress //////////////////////////////////*/
+    
+#formAdress {
+font-size: 2rem;
+}
 
   }

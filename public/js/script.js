@@ -114,7 +114,7 @@ console.log(favoriteIcon);
 
 event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
 
-if (classfavoriteIcon === "bi-heart  favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
+if (classfavoriteIcon === "bi-heart favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
  
  $.ajax({//appelle de la fonction ajax de jQuery
    
@@ -124,7 +124,7 @@ if (classfavoriteIcon === "bi-heart  favoriteIconNavigation") {// si la classe p
    data: {id: productId},// les données qui seront envoyer
    success: function(response) {// lorsque la requete est un succès
      console.log('Ajouté aux favoris avec succès !');
-     favoriteIcon.removeClass('bi-heart  favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
+     favoriteIcon.removeClass('bi-heart favoriteIconNavigation');// on enleve la classe avec l'icon du coeur vide(favoriteIconNavigation est la classe pour la position et la couleur de l'icone)
      favoriteIcon.addClass('bi-heart-fill  favoriteIconNavigation');// et on le remplace avec l'icone coeur plein
    },
    error: function (xhr, status, error) {// lorqu'une erreur se produit, 
@@ -142,7 +142,7 @@ else {// si l'icone est un coeur plein
    success: function(response) {// lorsque le produit a été enlever des favoris
      console.log('Retiré des favoris avec succès !');
      favoriteIcon.removeClass('bi-heart-fill  favoriteIconNavigation');// on enleve l'icone avec le coeur plein
-     favoriteIcon.addClass('bi-heart  favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
+     favoriteIcon.addClass('bi-heart favoriteIconNavigation');// et on le remplace par l'icone avec le coeur vide
    },
    error: function (xhr, status, error) {
      console.error('Erreur lors du retrait des favoris:', error);
@@ -802,7 +802,7 @@ prevBtn.addEventListener('click', () => {
            
             
            
-             if (classfavoriteIcon === "bi-heart  favoriteIconShow") {
+             if (classfavoriteIcon === "bi-heart favoriteIconShow") {
               
              //  console.log('ajouter')
               $.ajax({
@@ -813,15 +813,15 @@ prevBtn.addEventListener('click', () => {
                  data: {id: productId},
                  success: function(response) {
                    console.log('Ajouté aux favoris avec succès !');
-                   favoriteIcon.removeClass('bi-heart  favoriteIconShow');
-                   favoriteIcon.addClass('bi-heart-fill fs-2 favoriteIconShow');
+                   favoriteIcon.removeClass('bi-heart favoriteIconShow');
+                   favoriteIcon.addClass('bi-heart-fill favoriteIconShow');
                  },
                  error: function (xhr, status, error) {
                    console.error('Erreur lors de l\'ajout aux favoris:', error);
                  }
                });
-             }// bi-heart-fill fs-2 favoriteIconShow
-             else if (classfavoriteIcon === "bi-heart-fill fs-2 favoriteIconShow") {
+             }// bi-heart-fill favoriteIconShow
+             else if (classfavoriteIcon === "bi-heart-fill favoriteIconShow") {
               
                $.ajax({
                  url: "/user/removeFavorite/" + productId,
@@ -830,8 +830,8 @@ prevBtn.addEventListener('click', () => {
                  data: {id: productId},
                  success: function(response) {
                    console.log('Retiré des favoris avec succès !');
-                   favoriteIcon.removeClass('bi-heart-fill fs-2 favoriteIconShow');
-                   favoriteIcon.addClass('bi-heart  favoriteIconShow');
+                   favoriteIcon.removeClass('bi-heart-fill favoriteIconShow');
+                   favoriteIcon.addClass('bi-heart favoriteIconShow');
                  },
                  error: function (xhr, status, error) {
                    console.error('Erreur lors du retrait des favoris:', error);

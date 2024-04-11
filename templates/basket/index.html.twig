@@ -14,7 +14,7 @@
 
 
 <thead>
-    <div class="row">
+    <div id="tableHeadBasket" class="row">
         <div class="col-sm">   
         </div>
         <div class="col-sm">
@@ -38,21 +38,22 @@
 </thead>
 <tbody>
 {% for basket in baskets %}
-<div class="row">
-    <div class="col-sm">
-    {% if basket.product.img[0] is defined %}
+<div class="row rowProducts">
+    <div class="col-sm basketPicture">
+      
+    {% if basket.product.pictures[0] is defined %}
     <figure>
-    <img id="pictureBasket" src="{{ asset('/img/' ~ basket.product.img[0].name) }}" alt="{{ basket.product.name }}">
+    <img id="pictureBasket" src="{{ asset('/picture/' ~ basket.product.pictures[0].name) }}" alt="{{ basket.product.name }}">
     </figure>
     {% endif %}
     </div>
-    <div class="col-sm">
+    <div class="col-sm basketName">
         <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
             {{basket.product.name}}  
         </a>nicotine:{{basket.nicotine.proportioning}}
      
     </div>
-    <div class="col-sm">
+    <div class="col-sm basketProductPrice">
         {{ '%0.2f'|format(basket.product.price) }} &euro;
       
     </div>
@@ -66,10 +67,10 @@
             <i >+</i>
           </a>
     </div>
-    <div class="col-sm">
+    <div class="col-sm basketButtonDeleteProduct">
         <a class="deleteBasket" href="{{path("delete_basket", {idProduct: basket.product.id , idNicotine: basket.nicotine.id})}}"> Supprimer </a>
     </div>
-    <div class="col-sm"> 
+    <div class="col-sm totalAmounProduct"> 
        
         {{ '%0.2f'|format(basket.product.price * basket.quantity) }} &euro;
     </div>
@@ -81,7 +82,7 @@
 </tbody>
 
 <tfoot>
-    <div class="row">
+    <div id="rowToValidate" class="row">
     
         <div class="col-sm" colspan="2"> 
         Total Commande:{{ '%0.2f'|format(total) }} &euro;
