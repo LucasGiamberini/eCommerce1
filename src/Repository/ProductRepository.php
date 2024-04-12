@@ -32,6 +32,14 @@ class ProductRepository extends ServiceEntityRepository
 
     }
 
+
+    public function showProduct(int $id){
+        return $this->createQueryBuilder('p')
+        ->where('p.id = :productId')
+        ->setParameter('productId', $id)
+        ->getQuery()
+        ->getResult();
+    }
     
     public function nameImgDelete(int $id ){
         return  $this->createQueryBuilder('i')

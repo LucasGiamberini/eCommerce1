@@ -8,9 +8,9 @@
 
 {% block body %}
 
-<div class="ProductBoxs">
+<div  id= class="ProductBoxs">
     {% for product in products %}
-    <div  class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
+    <div id="productBox{{loop.index}}" class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
     <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
 
     

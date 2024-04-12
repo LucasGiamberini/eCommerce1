@@ -100,11 +100,12 @@ class ProductController extends AbstractController
 
        //pour afficher un produit
        #[Route('/product/{id}/Show', name: 'show_product')]//on recupere l'id du produit
-       public function show(Product $product): Response
+       public function show($id,ProductRepository $productRepo): Response
        {    
-          
+          $product = $productRepo->showProduct($id);
+         
            return $this->render('product/show.html.twig',
-       [ 'product' => $product]);
+       [ 'product' => $product[0]]);
        }
 
 

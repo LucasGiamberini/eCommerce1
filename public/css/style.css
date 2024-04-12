@@ -646,6 +646,7 @@ margin: 0 6vw;
     display: table-cell;
     text-align: center;
     position:relative;
+ 
 }
 
 .productPrice{
@@ -1344,6 +1345,7 @@ display: none;
    width: 100%;
    margin-bottom: 1vw;
    position: relative;
+   row-gap: 2vh;
 }
 
 .ProductBoxs {
