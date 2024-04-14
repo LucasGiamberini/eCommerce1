@@ -50,8 +50,8 @@ class PurchaseController extends AbstractController
         else{// si un utilisateur est connecter
 
             $form = $this->createForm(AddAdressType::class);// crée le formulaire pour l'adresse 
-           $form->handleRequest($request);
-          
+           $form->handleRequest($request);//handleRequest est une fonction qui retourne un booléen( True ou False) qui permet de determiner si le formulaire est envoyer ou non. 
+          //$request est le contenant du formulaire
             if ($form->isSubmitted() && $form->isValid()) {// si le formulaire est envoyer et valide
               
                 $adress = $form->getData();// recupere les infos du formulaire
