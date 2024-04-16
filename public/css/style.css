@@ -1029,6 +1029,7 @@ margin: 0 6vw;
     height: 6vh;
     width: 15vw;
     border-radius: 2vh;
+    margin-bottom: 2vh;
 }
 
 .confirm:hover{

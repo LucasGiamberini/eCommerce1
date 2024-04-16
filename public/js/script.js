@@ -1,3 +1,9 @@
+function autor(){
+  alert("Ce site a été crée par Lucas Giamberini");
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function() {// attend que la page est completement charger avant l'execution du js
 
 
