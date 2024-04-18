@@ -39,4 +39,11 @@ public function CGU( ): Response
 
     return $this->render('home/cgu.html.twig');
 }
+
+#[Route('/home/Confidentiality', name: 'app_confidentiality')]
+public function Confidentiality( ): Response
+{  
+
+    return $this->render('home/confidentiality.html.twig');
+}
 }
