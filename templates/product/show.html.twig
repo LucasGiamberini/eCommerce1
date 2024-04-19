@@ -100,7 +100,7 @@
 <form id="formShow" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
     
     <label for="nicotine">Taux de Nicotines :</label>
-    <select name="nicotine" class="nicotine">
+    <select aria-label="taux de nicotine" name="nicotine" class="nicotine">
         {% for nicotine in product.nicotines %}
             <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>
         {% endfor %}
@@ -108,7 +108,7 @@
 
 
     <p>Quantité:</p>
-    <div id="quantity">
+    <div class="quantityNav">
         <button  class="qttButton"type="button" id="decreaseBtn">-</button>
         <input type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
         <button class="qttButton" type="button" id="increaseBtn">+</button>

@@ -151,7 +151,7 @@ header:hover{
  
 }
 
-#quantityBasket{
+.quantityNavBasket{
     color:white;
 }
 
@@ -775,7 +775,7 @@ margin: 0 6vw;
 
 }
 
-#quantity{
+.quantityNav{
     display: flex;
     justify-content: center;
     ;
@@ -924,7 +924,7 @@ margin: 0 6vw;
     justify-content: center;
 }
 
-#quantityBasketTitle{
+.quantityNavBasketTitle{
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -1503,6 +1503,7 @@ height:5vh ;
     i{
         font-size: 3rem !important;
     }
+  
     .template{
         width: 95%;
         padding-top: 21vh;
@@ -1827,7 +1828,7 @@ height:5vh ;
         justify-content: center;
     }
     
-    #quantity{
+    .quantityNav{
         margin-bottom: 1vh;
     }
 

@@ -49,7 +49,7 @@ class ProductType extends AbstractType
                 
                 'required' => false,
                 'attr' => [
-                    'accept' => '.jpg, .jpeg'
+                    'accept' => '.jpg, .jpeg , .webp'
                 ] 
             ])
             ->add('Valider' , SubmitType::class,[
