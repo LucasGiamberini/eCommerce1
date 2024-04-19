@@ -71,7 +71,7 @@
       <form class="formNav" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
     
         <label for="nicotine">Taux de Nicotine</label>
-        <select name="nicotine" id="nicotine">
+        <select name="nicotine" class="nicotine">
             
             {% for nicotine in product.nicotines %}
                 <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>

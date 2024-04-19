@@ -1119,6 +1119,7 @@ footer{
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
 }
 
 #socialFooterIcons{
@@ -1529,7 +1530,7 @@ height:5vh ;
             font-size: 2rem;
         }
 
-        #nicotine{
+        .nicotine{
             font-size: 2.5em;
         }
 

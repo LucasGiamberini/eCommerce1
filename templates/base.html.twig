@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -43,8 +43,8 @@
                 <li class="header-links">
                     <i  id="searchBarIcon" class="bi bi-search text-white-icon fs-2"></i>
                     <form id="searchBarForm" action="{{ path('app_search') }}" method="post" >
-                        <input  id="textSearch" type="Text" name="textSearch" maxlength="50">
-                        <button id="searchButtonIcon" type="submit"><i   class="bi bi-search text-white-icon "></i></button>
+                        <input  id="textSearch" type="Text" name="textSearch" maxlength="50" aria-label="searchBar">
+                        <button id="searchButtonIcon" type="submit" aria-label="searchButton"><i   class="bi bi-search text-white-icon "></i></button>
                     </input>
                     </form>
                  
@@ -117,14 +117,14 @@
 </header>
 <div id="top">
 <figure class="cloudFigure">
-    <img id="cloudLeft" class="cloudLeft" src="{{ asset('/pictureHeader/nuage1.png') }}">
+    <img id="cloudLeft" class="cloudLeft" src="{{ asset('/pictureHeader/nuage1.png') }}" alt="decoration header">
 </figure>
 <figure class="cloudFigure">
-    <img id="cloudRight" class="cloudRight" src="{{ asset('/pictureHeader/nuage2.png') }}">
+    <img id="cloudRight" class="cloudRight" src="{{ asset('/pictureHeader/nuage2.png') }}" alt="decoration header">
 </figure>
 <a class="home" href="{{path('app_home')}}">
     <figure id="figureLogo">
-        <img id="logo" class="logoBefore" src="{{ asset('/pictureHeader/logo1.png') }}">
+        <img id="logo" class="logoBefore" src="{{ asset('/pictureHeader/logo1.png') }}" alt="logo Appollo Cloud">
     </figure> </a>
 </div>
    
@@ -139,7 +139,7 @@
     </div>
     <footer>
         <div id="footerSocial">
-            <h4 ><strong>Retrouver Nous sur les reseaux sociaux!</strong> </h4>
+            <h2 ><strong>Retrouver Nous sur les reseaux sociaux!</strong> </h2>
         <div id="socialFooterIcons">
         
         <a href="#"><i class="bi bi-facebook socialWhite fs-3"></i></a>
