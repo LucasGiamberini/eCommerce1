@@ -1503,7 +1503,9 @@ height:5vh ;
     i{
         font-size: 3rem !important;
     }
-  
+   .required{
+    font-size: 2rem;
+  }
     .template{
         width: 95%;
         padding-top: 21vh;
@@ -1521,7 +1523,11 @@ height:5vh ;
             margin:0 2vw;
         }
 
-        h2,h1{
+        h1{
+            font-size: 1.5em !important;
+            padding: 0em;
+        }
+        h2{
             font-size: 3.5em !important;
              padding: 0em;
          
@@ -2007,9 +2013,6 @@ height:5vh ;
         justify-items: center;
     }
 
-    #rowToValidate{
-
-    }
 
     #deleteAllBasket{
         grid-row: 2;
@@ -2101,9 +2104,18 @@ font-size: 2rem;
   #registration_form_captcha{
     transform: scale(2.5);
     position: relative;
+    margin-top: 5rem;
     
   }
 
-
+  #agreeTerms{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+/*/////////////////user///////////////////*/
+#userMenu a{
+    font-size: 2rem;
+}
 
   }

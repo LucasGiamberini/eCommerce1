@@ -259,7 +259,7 @@ class PurchaseController extends AbstractController
         $em->persist($purchase);//  preparation du nouvelle objet
         $em->flush();//et injection dans la base de donnée
 
-        
+    
 
         foreach ($basket as $item) {
             $dataBaseBasket = new Basket();
@@ -281,22 +281,12 @@ class PurchaseController extends AbstractController
         $session->remove('adress');
         $session->remove('total');
         
-       
-       
-        $invoice= $purchaseRepository->findOneBy([] ,["id" => "DESC"]);
-    
-        
-        
         
         return $this->redirectToRoute('app_invoice');// renvoie vers le pdf controller
 
 
-
-
-       
-
-
     }
+
 
     #[Route('/purchase/sendingmail', name: 'app_sendingEmail')]
     public function sendingEmail(Security $security, MailerInterface $mailer): Response

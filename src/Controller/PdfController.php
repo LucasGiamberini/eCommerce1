@@ -42,7 +42,7 @@ class PdfController extends AbstractController
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
         
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        // (Optional) Setup the paper size and orienStation 'portrait' or 'portrait'
         $dompdf->setPaper('A4', 'portrait');
         
         // dd($dompdf->render());

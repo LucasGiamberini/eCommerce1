@@ -8,7 +8,7 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Créer un compte</h1>
+    <h2>Créer un compte</h2>
 
     {{ form_errors(registrationForm) }}
 
@@ -19,7 +19,7 @@
             'label_attr': {'class': 'formRowRegister'}
         }) }}
        
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_row(registrationForm.agreeTerms,{'attr': {'id': 'agreeTerms'}}) }}
         {{ form_row(registrationForm.captcha  ,
             { 'label_attr': {'id': 'captcha'}}    )}}
         {{ form_errors(registrationForm.captcha) }}
