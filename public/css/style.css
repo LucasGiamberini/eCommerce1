@@ -711,7 +711,7 @@ margin: 0 6vw;
     align-items: center;
     position: relative;
     z-index: 3;
-    bottom: 4vh; 
+   
    
     height: 15vh;
 }
@@ -1125,7 +1125,7 @@ footer{
 #socialFooterIcons{
  display: flex;
  flex-direction: row;
- width: 30vw;
+ width: 43vw;
  justify-content: space-evenly;
  color: white;
 }
@@ -1281,7 +1281,9 @@ footer{
 display: none;
 }
 
-
+#socialHomeIcons a {
+    font-size: 5rem !important;
+}
 
 /*//////////////////home carousel////////////////*/
 
@@ -1558,8 +1560,17 @@ height:5vh ;
             font-size: 3rem;
         }
 
-        .fs-3{
-            font-size: 3rem !important;
+        .footerSocialIcon{
+            font-size: 5rem !important;
+        }
+
+        #socialFooterIcons {
+            width: 71vw;
+        }
+
+        #footerLegal{
+            justify-content: space-between;
+            margin: 2vh;
         }
      /*//////////////////header/////////////////////////*/   
        
