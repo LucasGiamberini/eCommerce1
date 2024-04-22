@@ -134,7 +134,7 @@ header{
     display: flex;
     justify-content: center;
     width: 100vw;
-    background-image:url(/pictureHeader/pexels-pixabay-358528.jpg) ;
+    background-image:url(/pictureHeader/pexels-pixabay-358528.webp) ;
     
     background-size: cover;
     filter:brightness(0.6);
