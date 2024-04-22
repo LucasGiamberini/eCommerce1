@@ -1329,6 +1329,7 @@ display: none;
 
    footer{
     flex-direction: column;
+    height: 30vh;
    }
 
    /*////////////////////////////////nav produit//////////////////////////*/
@@ -1696,7 +1697,7 @@ height:5vh ;
     
     
     #productBox4{
-        display: grid;
+        display: flex !important;
     }
     
     .templateHome {
@@ -1782,6 +1783,7 @@ height:5vh ;
        width: 100%;
        margin-bottom: 1vw;
        position: relative;
+       row-gap: 0vh;
      
     }
     
