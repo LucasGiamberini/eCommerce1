@@ -1127,9 +1127,6 @@ footer{
     
 }
 
-#footerSocialTitle{
-
-}
 
 #footerLegal a{
     color:white;
@@ -1207,7 +1204,7 @@ footer{
 
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1173px)and (orientation : portrait) {
+@media only screen  and (max-width: 1173px)and (orientation : portrait) {
    
 
 
@@ -1549,7 +1546,7 @@ height:5vh ;
 
 /*///////////////////////////media query mobile//////////////////////*/
 
-@media  screen  and (max-device-width: 767px)  {
+@media    screen  and (max-device-width: 767px)  {
     i{
         font-size: 3rem !important;
     }
@@ -1809,7 +1806,10 @@ height:5vh ;
        }
     
        /*////////////////////////////////nav produit//////////////////////////*/
-   
+       
+.ProductBox:hover .formNav {
+    height:auto;
+  }
 
        .filterCategoryActive {
         font-size: 3.5rem !important;
