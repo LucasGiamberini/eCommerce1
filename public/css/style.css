@@ -9,7 +9,7 @@
 }
 
 
-h2, h1{
+h2{
 
     padding: 2em;
 }
@@ -166,8 +166,13 @@ header:hover{
 }
 
 #searchButtonIcon{
-font-size: 1rem;
+font-size: 1rem !important;
 }
+
+.bi-search{
+    font-size: 1rem;
+}
+
 /*////////////////////////hamburger////////////////*/
 #hamburger-menu{
     display: none;
@@ -183,12 +188,13 @@ font-size: 1rem;
 
 #textSearch{
     border-radius: 1vw;
+    width: 15vw;
 }
 
 #searchBarForm{
     display: none;
     position: absolute;
-    bottom: 11vh;
+    
     left: 4vw;
 
 }
@@ -200,6 +206,8 @@ font-size: 1rem;
     background-color: #00BEE0;
     color: white;  
     border-radius: 2vh;
+    right: 1.5vw;
+    position: relative;
 
 }
 
@@ -877,7 +885,7 @@ margin: 0 6vw;
   }
   
   .nextShow {
-    left: 25vw;
+    left: 14vw;
   }
 
 
@@ -923,6 +931,15 @@ margin: 0 6vw;
     align-items: center;
     justify-content: center;
 }
+
+.rowProducts{
+
+    background-color: #4593A1;
+    border-radius: 1vw;
+    align-items: center;
+    color:#000000;
+}
+
 
 .quantityNavBasketTitle{
     display: flex;
@@ -1110,6 +1127,10 @@ footer{
     
 }
 
+#footerSocialTitle{
+
+}
+
 #footerLegal a{
     color:white;
 
@@ -1153,6 +1174,33 @@ footer{
 
 
 /*////////////////////////////media query tablet //////////////////////*/
+
+@media only screen and (min-width: 768px) and (max-width: 1173px)and (orientation : landscape) {
+
+    .cloudRight-home {
+        display: none;
+    }
+
+    .cloudLeft-home {
+        display: none;
+    }
+
+    header{
+        height: 16vw;
+    }
+
+    #logo{
+        width:18%;
+    }
+
+    .cloudFigure{
+        display: none;
+    }
+
+    .productPrice{
+        width: 8vw;
+    }
+}
 
 @media only screen and (min-width: 768px) and (max-width: 1173px)and (orientation : portrait) {
    
@@ -1368,13 +1416,7 @@ display: none;
 }
 
 .ProductBox:hover .formNav {
-    display: initial; 
-    flex-direction: initial; 
-    align-items: initial; 
-    position: initial; 
-    z-index: initial; 
-    bottom: initial; 
-    height: initial; 
+    height:15vh;
   }
 
   #blueButton{
@@ -1541,7 +1583,7 @@ height:5vh ;
         }
 
         .nicotine{
-            font-size: 2.5em;
+            font-size: 3em;
         }
 
         option{
@@ -1566,7 +1608,7 @@ height:5vh ;
         }
 
         #socialFooterIcons {
-            width: 71vw;
+            width: 100vw;
         }
 
         #footerLegal{
@@ -1655,8 +1697,8 @@ height:5vh ;
             background-color: #00BEE0;
             color: white;
             border-radius: 15vh;
-            bottom: 14vw;
-            position: relative;
+            bottom: -4rem;
+            position: absolute;
             left: 49vw;
             height: 5vh;
             width: 8vh;
@@ -1804,15 +1846,7 @@ height:5vh ;
        
     }
     
-    .ProductBox:hover .formNav {
-        display: initial; 
-        flex-direction: initial; 
-        align-items: initial; 
-        position: initial; 
-        z-index: initial; 
-        bottom: initial; 
-        height: initial; 
-      }
+  
     
       #blueButton{
         width: 42vw;
@@ -1988,10 +2022,8 @@ height:5vh ;
     }
 
     .basketProductPrice{
-        display: grid;
-        grid-column: 2;
-        grid-row: 2;
-        justify-items: center;
+        display: none;
+       
     }
 
     .quantityBasketColumn{
@@ -2005,7 +2037,7 @@ height:5vh ;
     .basketButtonDeleteProduct{
         display: grid;
         grid-column: 3;
-        grid-row: 2; 
+        grid-row: 1; 
         align-items: center;
     }
 
