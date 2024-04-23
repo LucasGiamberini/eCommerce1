@@ -1200,6 +1200,11 @@ footer{
     .productPrice{
         width: 8vw;
     }
+
+    #searchBarForm >button {
+        right: 3vw;    
+    }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1173px)and (orientation : portrait) {
