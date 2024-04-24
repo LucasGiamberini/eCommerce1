@@ -16,7 +16,7 @@
 {{invoice.City}}<br>
 </div>
 
-<a href="{{ path ('app_downloadInvoice' , {'noOrder':invoice.noOrder })}}"> telecharger facture</a>
+<a  id="downloadInvoice" href="{{ path ('app_downloadInvoice' , {'noOrder':invoice.noOrder })}}"> <i class="bi bi-download"></i>telecharger facture</a>
 
 
 <p> Commande du {{invoice.purchaseDateFormat}}</p>
@@ -49,13 +49,13 @@
 
 <tbody>
 {% for basket in invoice.baskets %}
-   
+   <div id="basketRecap">
     <div class="row">
         <div class="col-sm">
 
     {% if basket.products.pictures[0] is defined %}
         <figure >
-            <img class="pictureShowProduct" src="{{ asset('/img/' ~ basket.products.pictures[0].name) }}" alt="{{ basket.products.name }}">
+            <img class="pictureBasket" class="pictureShowProduct" src="{{ asset('/picture/' ~ basket.products.pictures[0].name) }}" alt="{{ basket.products.name }}">
             </figure> 
     {% endif %}
     </div>
@@ -88,4 +88,5 @@
         </div>
     </div>    
 </tfoot> 
+</div>
 {% endblock %}

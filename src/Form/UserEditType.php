@@ -24,7 +24,7 @@ class UserEditType extends AbstractType
         ->add('email',EmailType::class, [
             'label' => 'Email',
             'required' => true,
-            'attr' => ['class' => 'tinymce']
+            'label_attr' => ['id' => 'labelEmailEditUser']
         ])
             ->add('plainPassword', RepeatedType::class, [
              
@@ -34,6 +34,7 @@ class UserEditType extends AbstractType
                     'required' => false,
                     'attr' => [
                         'autocomplete' => 'new-password',
+                       
                     ],
                 ],
                 'first_options' => [
@@ -52,22 +53,24 @@ class UserEditType extends AbstractType
                         ])
     
                     ],
-                    'label' => 'New password',
+                    'label' => 'Nouveau mot de passe',
                   
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'label' => 'Repeter mot de passe',
                    
                 ],
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Les mots de passe ne corresponde pas.',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
             ])
-            ->add('Valider', SubmitType::Class)   
+            ->add('Valider', SubmitType::Class,
+            [ 'attr' => ['class' => 'blueButton' ] ])   
             ;
-
+           
         ;
+      
     }
 
     public function configureOptions(OptionsResolver $resolver): void

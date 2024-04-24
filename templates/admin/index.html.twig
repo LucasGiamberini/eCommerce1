@@ -39,7 +39,7 @@
     <div class="col-sm">
     {% if product.img[0] is defined %}
     <figure>
-    <img id="pictureBasket" src="{{ asset('/img/' ~ product.img[0].name) }}" alt="{{ product.name }}">
+    <img class="pictureBasket" src="{{ asset('/img/' ~ product.img[0].name) }}" alt="{{ product.name }}">
     </figure>
     {% endif %}
     </div>

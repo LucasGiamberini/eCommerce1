@@ -43,7 +43,7 @@
       
     {% if basket.product.pictures[0] is defined %}
     <figure>
-    <img id="pictureBasket" src="{{ asset('/picture/' ~ basket.product.pictures[0].name) }}" alt="{{ basket.product.name }}">
+    <img class="pictureBasket" src="{{ asset('/picture/' ~ basket.product.pictures[0].name) }}" alt="{{ basket.product.name }}">
     </figure>
     {% endif %}
     </div>

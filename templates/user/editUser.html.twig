@@ -9,12 +9,13 @@
 {% block title %}Editer les informations{% endblock %}
 
 {% block body %}
-<h1>Editer les informations</h1>
+<h2>Editer les informations</h2>
 
 
 
-{{form_start(registrationForm)}}
-
+{{form_start(registrationForm,{'attr':{'id':'editUserInformation'} }  )}}
+{{ form_row (registrationForm.email    )}}
+{{ form_row (registrationForm.plainPassword   )}}
 {{form_end(registrationForm)}}
 
 <a href="#" id="deleteProfile" data-delete-url="{{ path('delete_user', {'id': app.user.id} ) }}">Se désinscrire</a>

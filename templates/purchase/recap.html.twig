@@ -7,9 +7,9 @@
 <h2>Recapitulatif</h2>
 
 <div id="adress">
-<h2> Adresse de livraison</h2>
+<h3> Adresse de livraison</h3>
 
-<p>
+<p >
 {{ address.firstName }}    {{ address.name}}<br>
 {{address.adress}} <br>
 {{address.postalCode}} <br>
@@ -49,7 +49,7 @@
         <div class="col-sm">
         {% if basket.product.pictures[0] is defined %}
         <figure>
-        <img id="pictureBasket" src="{{ asset('/picture/' ~ basket.product.pictures[0].name) }}" alt="{{ basket.product.name }}">
+        <img class="pictureBasket" src="{{ asset('/picture/' ~ basket.product.pictures[0].name) }}" alt="{{ basket.product.name }}">
         </figure>
         {% endif %}
         </div>

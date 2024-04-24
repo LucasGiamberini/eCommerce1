@@ -5,13 +5,15 @@
 
 
 {% block body %}
-<h1>Historique des commandes</h1>
+<h2>Historique des commandes</h2>
+
+<menu>
 {% for order in orders %}
 
 
 <a href="{{path('app_orderHistoryDetail' , {'noOrder':order.NoOrder }) }}">  Commande no {{order.NoOrder}}</a><br>
 
 {% endfor %}
-
+</menu>
 
 {% endblock %}
