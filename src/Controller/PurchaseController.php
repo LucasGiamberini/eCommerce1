@@ -5,22 +5,16 @@ namespace App\Controller;
 use DateTime;
 use Stripe\Stripe;
 
-use PayPal\Api\Payer;
+
 use App\Entity\Basket;
 use DateTimeImmutable;
-use PayPal\Api\Amount;
-use PayPal\Api\Payment;
 use App\Entity\Purchase;
 use Stripe\StripeClient;
 use App\Form\AddAdressType;
-use PayPal\Api\Transaction;
-use PayPal\Rest\ApiContext;
-use PayPal\Api\RedirectUrls;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
-use PayPal\Auth\OAuthTokenCredential;
 use App\Repository\NicotineRepository;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;

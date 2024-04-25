@@ -33,13 +33,15 @@
         
         <header id="header">
           
-        <nav>
+            <nav>
            
 
             
-            <label id="hamburger-menu" class="bi bi-list white" for="hamburger-input">       </label>
+                <label id="hamburger-menu" class="bi bi-list white" for="hamburger-input">       
 
-            <div id="navMobileScreen">
+                         </label>
+
+                            <div id="navMobileScreen">
             <ul>
                 <li class="header-links">
                     <i  id="searchBarIcon" class="bi bi-search text-white-icon fs-2"></i>
@@ -54,7 +56,7 @@
             <ul>
                
                 <li>
-                    <a href="{{path('show_categoryMenu')}}"> Categorie</a>
+                    <a href="{{path('show_categoryMenu')}}"> Categories</a>
                  </li>
             </ul>
         <ul>
@@ -117,27 +119,29 @@
 
 </header>
 <div id="top">
-<figure class="cloudFigure">
-    <img id="cloudLeft" class="cloudLeft" src="{{ asset('/pictureHeader/nuage1.png') }}" alt="decoration header">
-</figure>
-<figure class="cloudFigure">
-    <img id="cloudRight" class="cloudRight" src="{{ asset('/pictureHeader/nuage2.png') }}" alt="decoration header">
-</figure>
-<a class="home" href="{{path('app_home')}}">
-    <figure id="figureLogo">
-        <img id="logo" class="logoBefore" src="{{ asset('/pictureHeader/logo1.webp') }}" alt="logo Appollo Cloud">
-    </figure> </a>
-</div>
-   
-<div id="template" class="template">
-    {% block body %}
+    <figure class="cloudFigure">
+        <img id="cloudLeft" class="cloudLeft" src="{{ asset('/pictureHeader/nuage1.png') }}" alt="decoration header">
+    </figure>
+    <figure class="cloudFigure">
+        <img id="cloudRight" class="cloudRight" src="{{ asset('/pictureHeader/nuage2.png') }}" alt="decoration header">
+    </figure>
+    <a class="home" href="{{path('app_home')}}">
+        <figure id="figureLogo">
+            <img id="logo" class="logoBefore" src="{{ asset('/pictureHeader/logo1.webp') }}" alt="logo Appollo Cloud">
+        </figure> </a>
+    </div>
     
-    
+    <main id="template" class="template">
+
+     
+       
+        
+        {% block body %}
     
     
     {% endblock %}
 
-    </div>
+</main>
     <footer>
         <div id="footerSocial">
             <h1 id="footerSocialTitle"><strong>Retrouver Nous sur les reseaux sociaux!</strong> </h2>

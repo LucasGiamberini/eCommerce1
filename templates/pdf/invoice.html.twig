@@ -10,7 +10,14 @@ Appollo Cloud<br>
 
 </div>
 <h1>Facture</h1>
-<div id="topHead">
+<div id="adress">
+    <h2> Adresse de livraison</h2>
+{{invoice.firstName}}<br>
+{{invoice.name}}<br>
+{{invoice.adress}}<br>
+{{invoice.postalCode}}<br>
+{{invoice.city}}<br>
+</div>
 
 
 
@@ -89,12 +96,5 @@ Appollo Cloud<br>
         Total Commande:{{invoice.total}} &euro;
         </div>
     </div>    
-    <div id="adress">
-        <h2> Adresse de livraison</h2>
-    {{invoice.firstName}}<br>
-    {{invoice.name}}<br>
-    {{invoice.adress}}<br>
-    {{invoice.postalCode}}<br>
-    {{invoice.city}}<br>
-    </div>
+ 
 

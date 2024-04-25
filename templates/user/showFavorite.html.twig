@@ -4,10 +4,99 @@
 
 {% block body  %}
 <h2> Mes favoris</h2>
-{% for product in favorites %}
 
-<a href="{{ path ('show_product' , {'id': product.id})}}">{{product.name }}</a> <br>
-{% endfor %}
+
+<div  class="ProductBoxs">
+    {% for product in favorites %}
+    <div id="productBox{{loop.index}}" class="ProductBox">{#   loop.index indique quelle numero de resultat il y a dans la boucle        #}
+    <a class="navigationToShowProduct" href="{{ path ('show_product' , {'id': product.id})}}">
+
+    
+
+
+
+  <div class="productPrice">{{ '%0.2f'|format(product.price) }} &euro;</div>
+    {% if product.pictures[0] is defined %}
+    <figure class="figureNavigation">
+        
+    <img class="pictureNavigation" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
+    
+    {% if app.user %}{#     si un utilisateur est connecter                  #}
+  
+
+    {% set favoriteIds = [] %} {# on instancie une variable avec un tableau vide  #}
+    {% for favorite in app.user.Favorite %}{# on fait une boucle pour les favoris de l'utilisateur en ligne   #}
+     {% set favoriteIds = favoriteIds|merge([favorite.id]) %}{# on fusione les deux tableau en utilisant merge, remplissant ainsi favoriteIds      #}
+  {% endfor %}
+
+
+{% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
+    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill  favoriteIconNavigation"></i> </a>
+{# data-favorite-id est utiliser pour recuperer l'id du produit      #}
+    {% else %}{#  si le produit n'est pas dans les favoris            #}
+    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart favoriteIconNavigation"></i> </a>
+{% endif %}
+
+
+{% endif %}
+
+  </figure>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    <h3>   {{product.name }}</h3>
+     </a>  
+     <br>
+    
+
+     
+    
+      <form class="formNav" action="{{ path('addNumber_basket', {'id' : product.id }) }}" method="post">
+    
+        <label for="nicotine">Taux de Nicotine</label>
+        <select aria-label="taux de nicotine" name="nicotine" class="nicotine">
+            
+            {% for nicotine in product.nicotines %}
+                <option value="{{ nicotine.id }}">{{ nicotine.proportioning }}</option>
+            {% endfor %}
+        </select>
+    
+    
+        <label for="quantity">Quantité:</label>
+        <div name="quantity" class="quantityNav">
+          
+        <button  class="qttButton"type="button" id="decreaseBtn"  data-action="minus"   >-</button>
+        <input  class="qtt" type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
+        <button class="qttButton" type="button" id="increaseBtn"  data-action="plus" >+</button>
+    </div>
+        <button class="blueButton" type="submit">Ajouter au panier</button>
+    </form>
+    
+    
+    
+    
+    
+    </div>
+
+    
+  {% endfor %} 
+</div>
+
 
 
 

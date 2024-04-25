@@ -133,7 +133,7 @@ class UserController extends AbstractController
 
 
             $uniqueValue = 'deleted_user_' . uniqid();
-            $user->setUsername($uniqueValue);
+            $user->setEmail($uniqueValue);
 
 
 

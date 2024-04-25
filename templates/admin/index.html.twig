@@ -6,9 +6,20 @@
 <div id="basket">
 <h2>Administration des produits</h2>
 
-<a href="{{path('add_product')}}">Ajouter un produit</a><br>
+<menu>
+<ul>
+    <li>
+       <a href="{{path('admin_invoice')}}"> Liste des factures</a>
+    </li>
+</ul>  
+<ul>
+    <li>
+        <a href="{{path('add_product')}}">Ajouter un produit</a> 
+    </li>
+</ul>   
 
 
+</menu>
 
 <thead>
     <div class="row">
@@ -37,9 +48,9 @@
 {% for product in products %}
 <div class="row">
     <div class="col-sm">
-    {% if product.img[0] is defined %}
+    {% if product.pictures[0] is defined %}
     <figure>
-    <img class="pictureBasket" src="{{ asset('/img/' ~ product.img[0].name) }}" alt="{{ product.name }}">
+    <img class="pictureBasket" src="{{ asset('/picture/' ~ product.pictures[0].name) }}" alt="{{ product.name }}">
     </figure>
     {% endif %}
     </div>
@@ -77,4 +88,7 @@
 </tfoot>
 
 </div>
+
+
+
 {% endblock %}
