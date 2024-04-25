@@ -91,9 +91,7 @@ burgerButton.classList.remove('bi','bi-list',  'white');
           qttInput.value = parseInt(qttInput.value) + 1;// parsetInt() permet de convertir une chaine de carractere en nombre entier
           // additionne  une unité a la quantité total du chiffre present dans le input
 
-          }
-     
-          
+          }      
           else if(action === 'minus'){// si la valeur dans la constante est egale a plus
           if (parseInt(qttInput.value) > 1) {// si la valeur est superieur a un
               qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
@@ -123,7 +121,7 @@ event.preventDefault();// fonction pour ne pas executer la commande par defaut l
 if (classfavoriteIcon === "bi-heart favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
  
  $.ajax({//appelle de la fonction ajax de jQuery
-   
+  async: true,
    url: "/user/addfavorite/" + productId,//pour executer l'action avec cette url  et en transmettant l'id du produit
    method: 'POST',// pour envoyer une requette http "Post"
    contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -141,6 +139,7 @@ if (classfavoriteIcon === "bi-heart favoriteIconNavigation") {// si la classe pr
 else {// si l'icone est un coeur plein
  
  $.ajax({
+  async: true,
    url: "/user/removeFavorite/" + productId,// on utilise la fonction pour enlever le produit des favoris
    method: 'POST',
    contentType: "application/json; charset=utf-8",
@@ -207,6 +206,7 @@ if (window.location.href.includes("showFavorite"))
  
  function executeAjaxCategory(categoryId){
   $.ajax({
+    async: true,
     url: "/category/showProductCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
     method: 'POST',// pour envoyer une requette http "Post"
     contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -225,9 +225,6 @@ if (window.location.href.includes("showFavorite"))
   const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
   executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
 
-
-
-
   
   input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
 
@@ -238,15 +235,6 @@ if (window.location.href.includes("showFavorite"))
  
   })
  })
-
-
-
-
-
-
-
-
-
 
 
   }
@@ -267,6 +255,7 @@ event.preventDefault();
       
    
         $.ajax({
+          async: true,
           url: "/category/showCategory" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -287,6 +276,7 @@ event.preventDefault();
 
              if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
               $.ajax({
+                async: true,
                 url: "/category/showAllProduct" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
                 method: 'POST',// pour envoyer une requette http "Post"
                 contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -299,6 +289,7 @@ event.preventDefault();
              }
              else{// quand le nom d'une categorie est selection
               $.ajax({
+              async: true,
                url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
                method: 'POST',// pour envoyer une requette http "Post"
                contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -366,11 +357,6 @@ event.preventDefault();
              })
             
             })
-        
-        
-
-
-
             
           },
         })
@@ -397,6 +383,7 @@ event.preventDefault();
         event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
       
         $.ajax({//appelle de la fonction ajax de jQuery  
+          async: true,
           url: "/category/newProducts" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -411,13 +398,8 @@ event.preventDefault();
         });
       }
  
- 
- 
- 
-
 
       if (ButtonnewProduct.prop('checked') )  {
-      
         executeAjaxNew()
        
       }
@@ -445,6 +427,7 @@ event.preventDefault();
      
    
         $.ajax({
+          async: true,
           url: "/category/showCategory" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -453,18 +436,15 @@ event.preventDefault();
             // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
             resultDiv.html(response);
 
-            
             const formCategory= $('form#filter');// on determine le formulaire avec l'id Filter
-       
             const resultDivAjax = $('#ResultBox');// on determine la div du resultat du filtre avec l'id ResultBoxHome
-          //  const categorySelectorButton = $('#');
+          
             
             function executeAjaxCategory(categoryId){
               
-
-
              if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
               $.ajax({
+                async: true,
                 url: "/category/showAllProductHome" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
                 method: 'POST',// pour envoyer une requette http "Post"
                 contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -477,6 +457,7 @@ event.preventDefault();
              }
              else{// quand le nom d'une categorie est selection
               $.ajax({
+                async: true,
                url: "/category/searchProductByCategoryHome/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
                method: 'POST',// pour envoyer une requette http "Post"
                contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
@@ -503,16 +484,9 @@ event.preventDefault();
              executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
         
              const labelName = "label"+ categoryId;// on donne le nom de  l'id + l'id de la categorie ;
-        
              const labelNameId = $("#"+labelName);
-             
-            
-           
-            
              labelNameId.addClass("filterCategoryActive");
-           
-             
-
+          
              if (olderLabelId !== null) {
               olderLabelId.removeClass("filterCategoryActive");
             }
@@ -556,18 +530,11 @@ event.preventDefault();
        
         const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;//releve la valeur du bouton du bouton radio qui a été cocher  
         executeAjaxCategory(categoryId);// execute la fonction qui fait la requete ajax
-
-
-
-
-        
         input.addEventListener("change",(event) => {// lorsque l'on change de input, ici un bouton radio
       
           const categoryId =formCategory.find('input[type="radio"]:checked').val()  ;
           executeAjaxCategory(categoryId);
           event.preventDefault();//on empeche la redirection vers la page complete page
-          
-       
         })
        })
 
@@ -741,12 +708,6 @@ prevBtn.addEventListener('click', () => {
     
 
     
-
-
-
-
-        
-    
     prevBtn.addEventListener('click', () => {//lance les fonction suivante lorsque l'on appuie sur le bouton prevBtn
         previousSlide();
         resetInterval()
@@ -823,7 +784,7 @@ prevBtn.addEventListener('click', () => {
               
              //  console.log('ajouter')
               $.ajax({
-                 
+                async: true,
                  url: "/user/addfavorite/" + productId,
                  method: 'POST',
                  contentType: "application/json; charset=utf-8",
@@ -841,6 +802,7 @@ prevBtn.addEventListener('click', () => {
              else if (classfavoriteIcon === "bi-heart-fill favoriteIconShow") {
               
                $.ajax({
+                async: true,
                  url: "/user/removeFavorite/" + productId,
                  method: 'POST',
                  contentType: "application/json; charset=utf-8",
@@ -878,13 +840,6 @@ prevBtn.addEventListener('click', () => {
                 qttInput.value = parseInt(qttInput.value) - 1;// alors on enleve une unité au chiffre dans la fenetre d'input
             }
         });
-
-
-
-     
-    
-
-
 
         }
 

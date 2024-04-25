@@ -529,7 +529,7 @@ article{
 
 
 #result{
-    display: table;
+   
     border-spacing: 1vw;
 }
 
@@ -619,7 +619,7 @@ margin: 0 6vw;
     height: 0vw;
     justify-content: center;
     position: absolute;
-    left: 14vw;
+    left: 15vw;
     
 }
 
@@ -627,6 +627,10 @@ margin: 0 6vw;
     text-decoration: none;
     text-align: center;
     display: table-row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .navProductDetail{
@@ -656,28 +660,29 @@ margin: 0 6vw;
     display: table-cell;
     text-align: center;
     position:relative;
- 
+    color: #000000;
 }
 
 .productPrice{
     position: relative;
     background-position-x: left;
     background-color: #00bee0;
-    width: 7vw;
+    width: 8.5vw;
     text-size-adjust: 29vh;
     text-align: right;
-    color:white;
+    color:#0D0D0D;
     padding-right: 1vw;
     font-size: 3vh;
     bottom: -4vh;
- /*   left: 6%; */
     margin:-1vw;
+    right: 5vw;
 }
 
 .pictureNavigation{
     display: flex;
     height: 30%;
     width: 95%;
+    border-radius: 1vw;
 }
 
 
@@ -719,9 +724,9 @@ margin: 0 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    position: absolute;
     z-index: 3;
-   
+   left: 2vw;
    
     height: 15vh;
 }
@@ -802,7 +807,7 @@ margin: 0 6vw;
     border:none;
     background-color: #00BEE0;
     color: white;
-    height: 9vh;
+    height: 6vh;
     width: 15vw;
     border-radius: 2vh;
 }
@@ -1199,7 +1204,7 @@ menu{
 }
 /*////////////////////////////media query tablet //////////////////////*/
 
-@media only screen and (min-width: 768px) and (max-width: 1173px)and (orientation : landscape) {
+@media only screen and (min-width: 768px) and (max-width: 1600px)and (orientation : landscape) {
 
     .cloudRight-home {
         display: none;
@@ -1231,7 +1236,7 @@ menu{
 
 }
 
-@media only screen  and (max-width: 1173px)and (orientation : portrait) {
+@media only screen  and (max-width: 1350px) {
    
 
 
@@ -1446,6 +1451,7 @@ display: none;
 
 .ProductBox:hover .formNav {
     height:15vh;
+    position: initial;
   }
 
   .blueButton{
@@ -1879,10 +1885,10 @@ height:5vh ;
     }
     
     .productPrice{
-        width: 26vw;
         font-size: 4.3rem;
         top: 6vh;
-       
+        right: 9vw;
+        width: 27vw;
     }
     
   
@@ -2198,10 +2204,11 @@ font-size: 2rem;
     align-items: center;
   }
 /*/////////////////user///////////////////*/
-#userMenu a{
+
+
+menu, .userMenu {
     font-size: 2rem;
 }
-
 
 /*/////////////////////editUser////////////*/
 
