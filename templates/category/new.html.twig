@@ -88,7 +88,19 @@
     </div>
         <button class="blueButton" type="submit">Ajouter au panier</button>
     </form>
-    
+    <section>
+
+      {% set sumReviews = 0 %}
+      {% for review in product.reviews %}
+        {% set sumReviews = sumReviews + review.note %}
+      {% endfor %}
+      
+          <h4><strong>Note Produit:
+              {% if product.reviews|length > 0 %}
+              {{ sumReviews  / product.reviews|length }}/5
+      {% endif %}
+      </h4>
+    </section>
     
     
     

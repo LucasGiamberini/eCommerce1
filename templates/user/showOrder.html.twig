@@ -43,12 +43,27 @@
         </div>
         
     </div>   
+    <div class="col-sm">  
+        
+    </div>
+    
+</div>   
 
 </thead>
 <br>
 
 
 <tbody>
+
+    {% set productReviewed = [] %}
+
+    {% for reviews in app.user.reviews %}
+    
+    {% set  productReviewed = productReviewed|merge([reviews.Product.id]) %}
+    {% endfor %}
+
+
+
 <div id="basketRecap">    
 {% for basket in invoice.baskets %}
    
@@ -73,7 +88,18 @@
     <div class="col-sm">
         {{basket.quantity * basket.products.price}}  &euro;
     </div>
-    <a href="{{ path ('publish_review', {'idProduct': basket.products.id , 'noOrder': invoice.noOrder  } )}}"> Notez</a>
+    <div class="col-sm"> 
+
+    {% if basket.products.id  in  productReviewed %}
+   
+    {% else %}
+<a href="{{ path ('publish_review', {'idProduct': basket.products.id , 'noOrder': invoice.noOrder  } )}}"> Notez</a> 
+    {% endif %}
+    </div>
+    
+</div>   
+
+    
     </div>
 {% endfor %}
 

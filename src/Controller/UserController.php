@@ -294,8 +294,8 @@ class UserController extends AbstractController
 
 
 // poster un commentaire
-#[Route('/orderHistoryDetail/publishReview/{idProduct}{noOrder}', name: 'publish_review')]
-public function publishReview($idProduct, Security $security, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepo) : response
+#[Route('/orderHistoryDetail/publishReview/{idProduct}/{noOrder}', name: 'publish_review')]
+public function publishReview($idProduct,$noOrder, Security $security, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepo) : response
 {
    $form= $this->createForm(ReviewType::class);
    
@@ -317,7 +317,7 @@ public function publishReview($idProduct, Security $security, Request $request, 
     $entityManager->persist($review);
     $entityManager->flush();// envoie dans la base de donnée
 
-    return $this->redirectToRoute('app_orderHistory');
+    return $this->redirectToRoute('app_orderHistoryDetail',['noOrder' => $noOrder] );
    }
 
 
