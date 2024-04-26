@@ -7,10 +7,12 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class ProductController extends AbstractController
 {
@@ -100,13 +102,19 @@ class ProductController extends AbstractController
 
        //pour afficher un produit
        #[Route('/product/{id}/Show', name: 'show_product')]//on recupere l'id du produit
-       public function show($id,ProductRepository $productRepo): Response
+       public function show($id,ProductRepository $productRepo, Security $security): Response
        {    
           $product = $productRepo->showProduct($id);
+          $userPurchases = $security->getUser()->getPurchases();
+         
+          
+           
          
            return $this->render('product/show.html.twig',
        [ 'product' => $product[0],
-       'description' => $product[0]->getDetail()]);
+       'description' => $product[0]->getDetail(),
+       'commentary' => $product[0]->getReviews() 
+           ]);
        }
 
 
@@ -143,9 +151,18 @@ class ProductController extends AbstractController
     
            return $this->redirectToRoute('app_admin');
        }
+
+
+
+       #[Route('/product/publishReview/{id}', name: 'publish_review')]
+       public function publishReview($id) : response
+      {
+
+
+
        
    }
 
 
-
+}
 

@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
+use App\Entity\Review;
+use DateTimeInterface;
+use App\Form\ReviewType;
 use App\Form\UserEditType;
+use Monolog\DateTimeImmutable;
 use App\Repository\UserRepository;
 use App\Repository\BasketRepository;
 use App\Repository\ProductRepository;
@@ -14,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -285,4 +291,40 @@ class UserController extends AbstractController
    
    
    }
+
+
+// poster un commentaire
+#[Route('/orderHistoryDetail/publishReview/{idProduct}{noOrder}', name: 'publish_review')]
+public function publishReview($idProduct, Security $security, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepo) : response
+{
+   $form= $this->createForm(ReviewType::class);
+   
+   $form->handleRequest($request);
+
+   if ($form->isSubmitted() && $form->isValid()) {
+    $dateReview = new DateTime();
+    $review =$form->getData('note');  
+    $user = $security->getUser();
+    $product = $productRepo->findOneBy(['id' => $idProduct]) ;
+    
+     $commentary = $form->get('commentary');
+
+    $review->setAccount($user);
+    $review->setReviewDate($dateReview);
+    $review->setProduct( $product);
+
+
+    $entityManager->persist($review);
+    $entityManager->flush();// envoie dans la base de donnée
+
+    return $this->redirectToRoute('app_orderHistory');
+   }
+
+
+ return $this->render('user/publishReview.html.twig', [
+            'registrationForm' => $form
+        ]);
+
+}
+
 }

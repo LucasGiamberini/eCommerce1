@@ -73,6 +73,7 @@
     <div class="col-sm">
         {{basket.quantity * basket.products.price}}  &euro;
     </div>
+    <a href="{{ path ('publish_review', {'idProduct': basket.products.id , 'noOrder': invoice.noOrder  } )}}"> Notez</a>
     </div>
 {% endfor %}
 

@@ -51,6 +51,9 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Height $Capacity = null;
 
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'Product', orphanRemoval: true)]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
@@ -58,6 +61,7 @@ class Product
         $this->baskets = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->Nicotines = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,6 +267,36 @@ class Product
     public function setCapacity(?Height $Capacity): static
     {
         $this->Capacity = $Capacity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduct() === $this) {
+                $review->setProduct(null);
+            }
+        }
 
         return $this;
     }
