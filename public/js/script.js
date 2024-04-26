@@ -85,7 +85,7 @@ burgerButton.classList.remove('bi','bi-list',  'white');
               const action = event.target.dataset.action;// Récupére l'action à effectuer (plus ou minus) à partir de l'attribut data-action
               const qttInput = event.target.parentElement.querySelector('[id^="qtt"]');// recupere le parent  de l'element avec la class qtt ( qui est l'input avec la quantité de produit)
               // ^ permet de selectionner tout les elements qui commence par la valeur entré( ici "qtt")
-              
+
 
 
         console.log(qttInput.value);
@@ -124,6 +124,7 @@ event.preventDefault();// fonction pour ne pas executer la commande par defaut l
 if (classfavoriteIcon === "bi-heart favoriteIconNavigation") {// si la classe presente est l'icone avec un coeur vide
  
  $.ajax({//appelle de la fonction ajax de jQuery
+  type: 'GET',
   async: true,
    url: "/user/addfavorite/" + productId,//pour executer l'action avec cette url  et en transmettant l'id du produit
    method: 'POST',// pour envoyer une requette http "Post"
@@ -142,6 +143,7 @@ if (classfavoriteIcon === "bi-heart favoriteIconNavigation") {// si la classe pr
 else {// si l'icone est un coeur plein
  
  $.ajax({
+  type: 'GET',
   async: true,
    url: "/user/removeFavorite/" + productId,// on utilise la fonction pour enlever le produit des favoris
    method: 'POST',
@@ -209,11 +211,13 @@ if (window.location.href.includes("showFavorite"))
  
  function executeAjaxCategory(categoryId){
   $.ajax({
+    type: 'GET',
     async: true,
     url: "/category/showProductCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
     method: 'POST',// pour envoyer une requette http "Post"
     contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
     data: {id: categoryId},// les données qui seront envoyer
+    dataType: 'html',
     success: function(response) {
       // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
       resultDiv.html(response);
@@ -258,11 +262,12 @@ event.preventDefault();
       
    
         $.ajax({
+          type: 'GET',
           async: true,
           url: "/category/showCategory" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
           contentType: "application/json; charset=utf-8",// les donnée au serveur sont de type json et l'encodage des caractère sont de type utf8
-         
+          dataType: 'html',
           success: function(response) {
             // traitez la réponse du serveur et mettez à jour la page avec les résultats de la recherche
             resultDiv.html(response);
@@ -279,6 +284,7 @@ event.preventDefault();
 
              if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
               $.ajax({
+                type: 'GET',
                 async: true,
                 url: "/category/showAllProduct" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
                 method: 'POST',// pour envoyer une requette http "Post"
@@ -292,6 +298,7 @@ event.preventDefault();
              }
              else{// quand le nom d'une categorie est selection
               $.ajax({
+                type: 'GET',
               async: true,
                url: "/category/searchProductByCategory/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
                method: 'POST',// pour envoyer une requette http "Post"
@@ -386,6 +393,7 @@ event.preventDefault();
         event.preventDefault();// fonction pour ne pas executer la commande par defaut lorque l'on clique sur la balise a
       
         $.ajax({//appelle de la fonction ajax de jQuery  
+          type: 'GET',
           async: true,
           url: "/category/newProducts" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
@@ -430,6 +438,7 @@ event.preventDefault();
      
    
         $.ajax({
+          type: 'GET',
           async: true,
           url: "/category/showCategory" ,//pour executer l'action avec cette url  
           method: 'POST',// pour envoyer une requette http "Post"
@@ -447,6 +456,7 @@ event.preventDefault();
               
              if (categoryId === undefined ){// si aucune category n'est selectionner, on lance la fonction pour voir tout les produit
               $.ajax({
+                type: 'GET',
                 async: true,
                 url: "/category/showAllProductHome" ,//pour executer l'action avec cette url  et en transmettant l'id du produit
                 method: 'POST',// pour envoyer une requette http "Post"
@@ -460,6 +470,7 @@ event.preventDefault();
              }
              else{// quand le nom d'une categorie est selection
               $.ajax({
+                type: 'GET',
                 async: true,
                url: "/category/searchProductByCategoryHome/" + categoryId,//pour executer l'action avec cette url  et en transmettant l'id du produit
                method: 'POST',// pour envoyer une requette http "Post"
@@ -625,8 +636,8 @@ event.preventDefault();
     let interval;
 
 function nextSlide() {
-  carouselItems[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % carouselItems.length;
+  carouselItems[currentSlide].classList.remove('active');// enleve la classe active a la slide en cour
+  currentSlide = (currentSlide + 1) % carouselItems.length;// passe a la slide suivante
   carouselItems[currentSlide].classList.add('active');
 }
 
@@ -787,6 +798,7 @@ prevBtn.addEventListener('click', () => {
               
              //  console.log('ajouter')
               $.ajax({
+                type: 'GET',
                 async: true,
                  url: "/user/addfavorite/" + productId,
                  method: 'POST',
@@ -805,6 +817,7 @@ prevBtn.addEventListener('click', () => {
              else if (classfavoriteIcon === "bi-heart-fill favoriteIconShow") {
               
                $.ajax({
+                type: 'GET',
                 async: true,
                  url: "/user/removeFavorite/" + productId,
                  method: 'POST',

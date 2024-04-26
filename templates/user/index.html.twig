@@ -6,8 +6,9 @@
     
 
 {% block body %}
-<h2> Profil</h2>
+
 <menu >
+    <h2> Profil</h2>
 <a href="{{path('app_orderHistory')}}"> Historique des commandes</a><br>
 <a href="{{path('app_editUser' , {'id':app.user.id} )}}"> editer les informations du profil</a><br>
 </menu>
