@@ -113,7 +113,7 @@ class ProductController extends AbstractController
            return $this->render('product/show.html.twig',
        [ 'product' => $product[0],
        'description' => $product[0]->getDetail(),
-       'commentary' => $product[0]->getReviews() 
+       'reviews' => $product[0]->getReviews() 
            ]);
        }
 

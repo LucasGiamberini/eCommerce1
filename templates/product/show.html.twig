@@ -120,5 +120,16 @@
 
 </div>
 
+<div id="commentary" >
+    {% for  review in reviews  %}
+    {{dump(review)}}
+    <p> {{review.commentary}}</p>
+  
+
+
+    {% endfor %}
+
+</div>
+
 </div>
 {% endblock %}
