@@ -82,9 +82,9 @@
         <label for="quantity">Quantité:</label>
         <div name="quantity" class="quantityNav">
           
-        <button  class="qttButton"type="button" id="decreaseBtn"  data-action="minus"   >-</button>
-        <input  class="qtt" type="number" name="qtt" id="qtt" value="1" min="1" placeholder="Quantité">
-        <button class="qttButton" type="button" id="increaseBtn"  data-action="plus" >+</button>
+        <button  class="qttButton"type="button" id="decreaseBtn{{loop.index}}"  data-action="minus"   >-</button>
+        <input  class="qtt" type="number" name="qtt" id="qtt {{loop.index}}" value="1" min="1" placeholder="Quantité">
+        <button class="qttButton" type="button" id="increaseBtn{{loop.index}}"  data-action="plus" >+</button>
     </div>
         <button class="blueButton" type="submit">Ajouter au panier</button>
     </form>

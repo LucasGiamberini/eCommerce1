@@ -63,8 +63,9 @@ burgerButton.classList.remove('bi','bi-list',  'white');
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// bouton pour ajuster la quantité de produit//////////////////////////////////////////////////////////////
 
-// bouton pour ajuster la quantité de produit
   function buttonQuantity(){
      
     
@@ -77,12 +78,14 @@ burgerButton.classList.remove('bi','bi-list',  'white');
       
        
       
-        const buttonId = button.dataset.id;
-        console.log(buttonId);
+      //  var buttonId = button.element.id;
+
+     //   console.log(buttonId);
               
               const action = event.target.dataset.action;// Récupére l'action à effectuer (plus ou minus) à partir de l'attribut data-action
-              const qttInput =  event.target.parentElement.querySelector('#qtt' );// recupere le parent  de l'element avec la class qtt ( qui est l'input avec la quantité de produit)
-   
+              const qttInput = event.target.parentElement.querySelector('[id^="qtt"]');// recupere le parent  de l'element avec la class qtt ( qui est l'input avec la quantité de produit)
+              // ^ permet de selectionner tout les elements qui commence par la valeur entré( ici "qtt")
+              
 
 
         console.log(qttInput.value);

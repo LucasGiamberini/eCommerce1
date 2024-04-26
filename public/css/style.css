@@ -670,7 +670,7 @@ margin: 0 6vw;
     width: 8.5vw;
     text-size-adjust: 29vh;
     text-align: right;
-    color:#0D0D0D;
+    color:#ffffff;
     padding-right: 1vw;
     font-size: 3vh;
     bottom: -4vh;
@@ -1231,7 +1231,7 @@ menu{
     }
 
     #searchBarForm >button {
-        right: 3vw;    
+        right: 2vw;    
     }
 
 }
@@ -1302,7 +1302,7 @@ menu{
    #textSearch{
     font-size: 1rem;
     position: relative;
-    bottom: 2vh;
+    bottom: -2vh;
     right: -3vw;
     display: flex;
     width: 33vw;
@@ -1334,7 +1334,7 @@ menu{
         background-color: #00BEE0;
         color: white;
         border-radius: 15vh;
-        bottom: 7vh;
+        bottom: 3vh;
         left: 33vw;
         height: 3vh;
         width: 3vh;
