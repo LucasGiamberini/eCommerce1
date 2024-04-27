@@ -526,7 +526,18 @@ article{
 
 
 /*////////////////// navigation produit home page et categorie/////////////////////*/
+.productNoteNavigation{
+    position: absolute;
+    top: 59vh;
+    right: 0vw;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
 
+.starIconNavigation{
+    font-size:1rem !important
+}
 
 #result{
    
@@ -781,7 +792,7 @@ margin: 0 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(202, 201, 201, 0.945);
+    background-color: #4593A1;
     justify-content: space-around;
     height: 42vh;
 
@@ -830,6 +841,23 @@ margin: 0 6vw;
 
 #showPrice{
     font-size: 3rem;
+}
+
+.commentaryTop{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 2px solid #00BEE0;
+}
+
+.review{
+   
+    padding: 0 2vw;
+}
+
+#commentary{
+    background-color: #4593A1;
+    margin-top: 2vh;
 }
 /*//////carousel show//////////*/
 
@@ -1258,8 +1286,17 @@ menu a{
 }
 
 @media only screen  and (max-width: 1367px) {
-   
-
+    .productNoteNavigation {
+        position: initial;
+        font-size: 1.5rem;
+        margin-top: 1vh;
+    }
+    .bi-search {
+        font-size: 2rem;
+    }
+    i {
+        font-size: 3rem;
+    }
 
    .template{
     padding-top: 21vh;
@@ -1341,7 +1378,7 @@ menu a{
     #hamburger-menu{
         display: inline;
         pointer-events: fill;
-        font-size: 2em;
+        font-size: 3em;
     }
 
     #navMobileScreen a{
@@ -1862,6 +1899,10 @@ height:5vh ;
        }
     
        /*////////////////////////////////nav produit//////////////////////////*/
+       .productNoteNavigation {
+        font-size: 2rem;
+    }
+
        .pictureNavigation {
         height: 100%;
        }

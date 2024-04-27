@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moderation commentaire{% endblock %}
+
+{% block body %}
+
+<h2>Moderation des commentaires du produit  {{product.name }}</h2>
+<a href="{{path('app_admin')}}" >Retour</a>
+
+{% for  review in product.reviews  %}
+
+<article class="review">
+    <div class="commentaryTop">
+   <p>Note:{{review.note}}/5</p> 
+        <p>Avis donnée le {{review.reviewDateFormat}} </p>
+    </div>
+
+
+<p> {{review.commentary}}</p>
+
+</article>
+<a href="{{path('anonimise_review' , {'idReview' : review.id ,'idProduct' : product.id })}}"> Enlever commentaire </a>
+{% endfor %}
+{% endblock %}

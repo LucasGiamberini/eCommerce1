@@ -73,7 +73,22 @@
         <button class="blueButton" type="submit">Ajouter au panier</button>
     </form>
     
-    
+    <section>
+      {% set sumReviews = 0 %}
+      {% for review in product.reviews %}{# boucle pour additionner toute les notes du produits#}
+        {% set sumReviews = sumReviews + review.note %}
+      {% endfor %}
+      
+         <h4 class="productNoteNavigation">
+              {% if product.reviews|length > 0 %}{# si le nombre d'enregistrement est superieur a 0#}
+               Note:
+              {{ sumReviews  / product.reviews|length }}/5{# Alors une soustraction est faite pour calculer la note#}
+             <p> {{product.reviews|length }} avis</p>{# compte le nombre d'enregistrement#}
+              {% else %}
+              On attend vos avis!
+      {% endif %}
+      </h4>
+    </section>
     
     
     

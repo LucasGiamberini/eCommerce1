@@ -40,6 +40,9 @@
         <div class="col-sm">  
             
         </div>
+        <div class="col-sm">  
+            
+        </div>
         
     </div>   
 <br>
@@ -73,7 +76,10 @@
         <a href ="{{ path ('delete_product' , {'id': product.id})}}"> Supprimer</a>
       
     </div>
- 
+    <div class="col-sm">  
+        <a href="{{path ('admin_moderateReview', {'id': product.id})}}">Moderation Commentaire</a>    
+    </div>
+
 </div>  
 
 <br>

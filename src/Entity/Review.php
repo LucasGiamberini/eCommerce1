@@ -65,6 +65,11 @@ class Review
         return $this->reviewDate;
     }
 
+    public function getReviewDateFormat(): ?string
+    {
+        return $this->reviewDate->format('d/m/Y');
+    }
+
     public function setReviewDate(\DateTimeInterface $reviewDate): static
     {
         $this->reviewDate = $reviewDate;

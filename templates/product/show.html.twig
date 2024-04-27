@@ -127,26 +127,36 @@
 
 
 <section id="commentary" >
+    {% if reviews|length > 0 %}
     {% set sumReviews = 0 %}
 {% for review in reviews %}
   {% set sumReviews = sumReviews + review.note %}
 {% endfor %}
 
     <h2><strong>Note Produit:
-        {% if reviews|length > 0 %}
+       
         {{ sumReviews  / reviews|length }}
-{% endif %}
+
         
           /5 </strong> </h2>
     <h3> Section commentaire </h3>
     {% for  review in reviews  %}
     {{dump(review)}}
+    <article class="review">
+        <div class="commentaryTop">
+       <p>Note:{{review.note}}/5</p> 
+            <p>Avis donnée le {{review.reviewDateFormat}} </p>
+        </div>
+    
+
     <p> {{review.commentary}}</p>
   
-
+</article>
 
     {% endfor %}
-
+    {% else %}
+    <h3> On Attend Vos Avis!</h3>
+    {% endif %}
 </section>
 
 
