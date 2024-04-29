@@ -14,6 +14,9 @@ h2{
     padding: 2em;
 }
 
+p{
+    color:black;
+}
 body{
     display: flex;
     flex-direction: column;
@@ -612,6 +615,7 @@ margin: 0 6vw;
 
  label{
     cursor: pointer;
+    color: black
  } 
 
 .favoriteIconNavigation{
@@ -677,7 +681,7 @@ margin: 0 6vw;
 .productPrice{
     position: relative;
     background-position-x: left;
-    background-color: #00bee0;
+    background-color: #0654a5;
     width: 8.5vw;
     text-size-adjust: 29vh;
     text-align: right;
@@ -817,7 +821,7 @@ margin: 0 6vw;
 .blueButton{
     margin-top: 1vh;
     border:none;
-    background-color: #00BEE0;
+    background-color: #0654a5;
     color: white;
     height: 6vh;
     width: 15vw;
@@ -983,9 +987,7 @@ margin: 0 6vw;
     align-content: center;
     align-items: center;
 }
-#basket{
-    margin: 0 4vw;
-}
+
 
 .pictureBasket{
     width:100%;
@@ -1217,7 +1219,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+
     font-size: 1.5rem;
     border: 6px solid;
   
@@ -1226,9 +1228,16 @@ border-top-right-radius: 2vw;
     border-bottom-left-radius: 2vw;
 }
 
+.menuCenter{
+    align-items: center;
+
+}
 
 #editUser{
-
+    border: 6px solid;
+    height: 71vh;
+    border-top-right-radius: 2vw;
+    border-bottom-left-radius: 2vw;
     padding: 3vh 6vw;
 }
 
@@ -1237,7 +1246,7 @@ menu a{
     color: white;
     border: 2px solid rgb(0, 0, 0);
     width: 50vw;
-    background-color: #00BEE0;
+    background-color: #0654a5;
     text-align: center;
     border-radius: 1vw;
 }
@@ -1256,6 +1265,7 @@ menu a{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 20vw;
 }
 
 #addCommentary{
@@ -1271,13 +1281,70 @@ textarea {
     height: 20vh;
 }
 
+
+/*///////////////////////////////show order//////////////////*/
 #showOrder{
     border: 5px solid;
     padding: 2vh;
+    border-top-right-radius: 2vw;
+    border-bottom-left-radius: 2vw;
 }
 
 .row{
     border-top: 2px solid black;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+
+#adress{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 9vh 0vw;
+ }
+
+ #adressInner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+ }
+
+ #downloadInvoiceSection{
+    display: flex;
+    justify-content: center;
+ }
+
+#showOrderTop{
+    display: flex;
+    flex-direction:space-evenly;
+    align-items:center;
+    justify-content: space-around;
+}
+
+#titleUserMenu{
+    text-align: center;
+    border-top: solid #4593A1;
+    border-bottom: solid  #4593A1;
+  
+    margin-top: 2vh;
+    padding: 0em;
+    width: 97%;
+}
+
+
+#basketInvoice{
+    border: solid 4px;  
+}
+
+#menuBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
 }
 /*//////////////////////////////user menu /////////////////////////////////*/
 #editUserInformation{
@@ -2242,7 +2309,7 @@ font-size: 2rem;
  #adress{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     margin: 9vh 0vw;
  }
 
@@ -2346,5 +2413,11 @@ menu, .userMenu {
     font-size: 2rem;
 }
 
+.unitPrice , .unitQuantity{
+    display: none;
+}
 
+.userMenuReturn  {
+    width: 32vw;
+}
   }

@@ -7,22 +7,44 @@
 {% block body %}
 
 <menu id="showOrder">
+
 <a class="userMenuReturn" href="{{path('app_orderHistory')}}"><i class="bi bi-arrow-left">Retour</i> </a>
+
+<h1 id="titleUserMenu"> Commande no {{invoice.noOrder}}</h1>
+<section id="showOrderTop">
+
+
+
+    <p> Commande du {{invoice.purchaseDateFormat}}</p><br>
+    
+
+
+
+    <section id="downloadInvoiceSection">
+        <a  id="downloadInvoice" href="{{ path ('app_downloadInvoice' , {'noOrder':invoice.noOrder })}}"> <i class="bi bi-download"></i>telecharger facture</a>
+        </section>
+
 <div id="adress">
-    <h2>Adresse</h2>
+    <div id="adressInner">
+    <h3>Adresse</h3>
+   
 {{invoice.firstName}}<br>
 {{invoice.name}}<br>
 {{invoice.adress}}<br>
 {{invoice.postalCode}}<br>
 {{invoice.City}}<br>
+</div> 
 </div>
 
-<a  id="downloadInvoice" href="{{ path ('app_downloadInvoice' , {'noOrder':invoice.noOrder })}}"> <i class="bi bi-download"></i>telecharger facture</a>
 
 
-<p> Commande du {{invoice.purchaseDateFormat}}</p>
-<p> Commande no {{invoice.noOrder}}</p>
-<div id="basket">
+
+</section>
+
+
+
+
+<div id="basketInvoice">
 <thead>
     <div class="row">
         <div class="col-sm">   
@@ -30,22 +52,22 @@
         <div class="col-sm">
             nom du produit
         </div>
-        <div class="col-sm">
+        <div class="col-sm unitPrice ">
             Prix unitaire
         </div>
       
-        <div class="col-sm">
+        <div class="col-sm unitQuantity">
             Quantité
         </div>
        
         <div class="col-sm">  
             Total 
         </div>
-        
-    </div>   
-    <div class="col-sm">  
+        <div class="col-sm">  
         
     </div>
+    </div>   
+    
     
   
 
@@ -64,7 +86,7 @@
 
 
 
-<div id="basketRecap">    
+   
 {% for basket in invoice.baskets %}
    
     <div class="row">
@@ -77,12 +99,13 @@
     {% endif %}
     </div>
     <div class="col-sm">
-        <a href="{{ path ('show_product' , {'id': basket.products.id})}}">  {{basket.products.name}}</a>Nicotine:{{basket.nicotine}}
+        <a href="{{ path ('show_product' , {'id': basket.products.id})}}">  {{basket.products.name}}</a> <br>
+        Nicotine:{{basket.nicotine}}
     </div>
-    <div class="col-sm">
+    <div class="col-sm unitPrice">
         {{basket.products.price}}  &euro;
     </div>
-    <div class="col-sm">
+    <div class="col-sm unitQuantity">
         {{basket.quantity}}
         </div>
     <div class="col-sm">
@@ -102,7 +125,7 @@
     
    
 {% endfor %}
- </div>
+
     </tbody>
 </div>
 <tfoot>

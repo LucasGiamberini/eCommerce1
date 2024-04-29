@@ -9,14 +9,20 @@
 
 
 <menu class="menuNavigate">
-    <a  class="userMenuReturn" href="{{path('app_user')}}"><i class="bi bi-arrow-left">Retour</i> </a>
-    <h2>Historique des commandes</h2>
-{% for order in orders %}
+    
+<a  class="userMenuReturn" href="{{path('app_user')}}"><i class="bi bi-arrow-left">Retour</i> </a>
+
+    
+    <h1 id="titleUserMenu">Historique des commandes</h1>
+
+<section id="menuBox">
+    {% for order in orders %}
 
 
 <a href="{{path('app_orderHistoryDetail' , {'noOrder':order.NoOrder }) }}"><i class="bi bi-bag-fill"></i>  Commande no {{order.NoOrder}}</a><br>
 
 {% endfor %}
+    </section>
 </menu>
 
 {% endblock %}
