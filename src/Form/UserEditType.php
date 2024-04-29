@@ -24,11 +24,13 @@ class UserEditType extends AbstractType
         ->add('email',EmailType::class, [
             'label' => 'Email',
             'required' => true,
-            'label_attr' => ['id' => 'labelEmailEditUser']
+            'label_attr' => ['id' => 'labelEmailEditUser'],
+            'label_attr' => ['class' => 'label']
         ])
             ->add('plainPassword', RepeatedType::class, [
              
                 'type' => PasswordType::class,
+                'label_attr' => ['class' => 'label'],
                 'required' => false,
                 'options' => [
                     'required' => false,
@@ -54,11 +56,11 @@ class UserEditType extends AbstractType
     
                     ],
                     'label' => 'Nouveau mot de passe',
-                  
+                    'label_attr' => ['class' => 'label']
                 ],
                 'second_options' => [
                     'label' => 'Repeter mot de passe',
-                   
+                    'label_attr' => ['class' => 'label']
                 ],
                 'invalid_message' => 'Les mots de passe ne corresponde pas.',
                 // Instead of being set onto the object directly,

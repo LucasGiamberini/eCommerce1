@@ -737,6 +737,10 @@ margin: 0 6vw;
     align-items: center;
     z-index: 2;
     height: 15vh;
+    margin-bottom:2vh;
+    position:absolute;
+    left:2vw;
+    bottom:-1vh;
 }
 /*/////////////////////show product//////////////////*/
 #productName{
@@ -1062,12 +1066,10 @@ margin: 0 6vw;
 }
 
  .label{
-    padding:2vh;
+    padding:1vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-
 }
 
 .confirm{
@@ -1197,10 +1199,13 @@ footer{
     align-items: center;
 }
 
-.userMenu{
-    width: 24vw;
+.userMenuReturn{
+    width: 12vw;
     margin-top: 2vh;
-    
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+
 }
 
 #userMenu a{
@@ -1208,20 +1213,29 @@ footer{
 
 }
 
-menu{
+.menuNavigate{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     font-size: 1.5rem;
-   background-color: #4593A1;
+    border: 6px solid;
+  
 height: 71vh;
+border-top-right-radius: 2vw;
+    border-bottom-left-radius: 2vw;
+}
+
+
+#editUser{
+
+    padding: 3vh 6vw;
 }
 
 menu a{
     text-decoration: none;
     color: white;
-    border: 2px solid white;
+    border: 2px solid rgb(0, 0, 0);
     width: 50vw;
     background-color: #00BEE0;
     text-align: center;
@@ -1243,12 +1257,45 @@ menu a{
     flex-direction: column;
     align-items: center;
 }
+
+#addCommentary{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+textarea {
+    resize: vertical;
+    width: 49vw;
+    height: 20vh;
+}
+
+#showOrder{
+    border: 5px solid;
+    padding: 2vh;
+}
+
+.row{
+    border-top: 2px solid black;
+}
 /*//////////////////////////////user menu /////////////////////////////////*/
 #editUserInformation{
     display: flex;
     flex-direction: column;
     align-items: center;
 
+}
+
+#deleteProfile{
+    font-size: 1.5em;
+    display: flex;
+    width: 15vw;
+    height: 5vh;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 3vh;
 }
 /*////////////////////////////media query tablet //////////////////////*/
 
@@ -2276,7 +2323,7 @@ menu, .userMenu {
 
 #editUserInformation{
    font-size: 2rem !important;
-
+   padding: 3vh 6vw
 }
 
 

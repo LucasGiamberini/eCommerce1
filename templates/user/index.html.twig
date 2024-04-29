@@ -7,10 +7,10 @@
 
 {% block body %}
 
-<menu >
+<menu class="menuNavigate" >
     <h2> Profil</h2>
-<a href="{{path('app_orderHistory')}}"> Historique des commandes</a><br>
-<a href="{{path('app_editUser' , {'id':app.user.id} )}}"> editer les informations du profil</a><br>
+<a href="{{path('app_orderHistory')}}"><i class="bi bi-clock-history"></i> Historique des commandes</a><br>
+<a href="{{path('app_editUser' , {'id':app.user.id} )}}"><i class="bi bi-pencil-square"></i> editer les informations du profil</a><br>
 </menu>
 
 {% endblock %}

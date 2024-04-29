@@ -6,8 +6,8 @@
 
 {% block body %}
 
-
-<a class="userMenu" href="{{path('app_orderHistory')}}"> Retour</a>
+<menu id="showOrder">
+<a class="userMenuReturn" href="{{path('app_orderHistory')}}"><i class="bi bi-arrow-left">Retour</i> </a>
 <div id="adress">
     <h2>Adresse</h2>
 {{invoice.firstName}}<br>
@@ -47,7 +47,7 @@
         
     </div>
     
-</div>   
+  
 
 </thead>
 <br>
@@ -100,9 +100,9 @@
 </div>   
 
     
-    </div>
+   
 {% endfor %}
-
+ </div>
     </tbody>
 </div>
 <tfoot>
@@ -119,4 +119,6 @@
     </div>    
 </tfoot> 
 </div>
+</div> 
+</menu>
 {% endblock %}
