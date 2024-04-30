@@ -1,6 +1,6 @@
 {% block javascripts %}
 <script  src="{{asset('js/script.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 {% endblock %}
 
 
@@ -33,10 +33,11 @@
 
 
 {% if product.id in favoriteIds %}{# si le produit est deja dans la liste des favoris, alors on affiche l'icone avec le coeur plein #}
-    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill  favoriteIconNavigation"></i> </a>
+    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill  favoriteIconNavigation"
+      aria-label="Ajouter au favoris le produit {{product.name}}"></i> </a>
 {# data-favorite-id est utiliser pour recuperer l'id du produit      #}
     {% else %}{#  si le produit n'est pas dans les favoris            #}
-    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart favoriteIconNavigation"></i> </a>
+    <a class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart favoriteIconNavigation"  aria-label="Ajouter au favoris le produit {{product.name}}"></i> </a>
 {% endif %}
 
 
@@ -82,9 +83,9 @@
         <label for="quantity">Quantité:</label>
         <div name="quantity" class="quantityNav">
           
-        <button  class="qttButton"type="button" id="decreaseBtn{{loop.index}}"  data-action="minus"   >-</button>
+        <button  class="qttButton"type="button"   data-action="minus" aria-label="diminuer quantité du produit {{product.name}}"   >-</button>
         <input  class="qtt" type="number" name="qtt" id="qtt{{loop.index}}" value="1" min="1" placeholder="Quantité">
-        <button class="qttButton" type="button" id="increaseBtn{{loop.index}}"  data-action="plus" >+</button>
+        <button class="qttButton" type="button"   data-action="plus" aria-label="augmenter quantité du produit {{product.name}}" >+</button>
     </div>
         <button class="blueButton" type="submit">Ajouter au panier</button>
     </form>
