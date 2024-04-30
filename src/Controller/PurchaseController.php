@@ -128,8 +128,9 @@ class PurchaseController extends AbstractController
 
         $total=$session->get("total");// recuperation du montant present en session
         $totalStripe= $total*100;// multiplication par 100 pour avoir le montant en centime
-            $stripeApiKey= $this->param->get('STRIPE_SECRET_KEY');
-
+         
+        
+        $stripeApiKey= $this->param->get('STRIPE_SECRET_KEY');
         Stripe::setApiKey($stripeApiKey);
 
         $session = Session::create([

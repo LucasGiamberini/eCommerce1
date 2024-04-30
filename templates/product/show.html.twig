@@ -81,12 +81,15 @@
         {% set favoriteIds = favoriteIds|merge([favorite.id]) %}
     {% endfor %}
     
-    
+       <div id="addFavoriteBox">
         {% if product.id in favoriteIds %}
+     
             <a id="addFavorite" class="addFavorite" href="{{ path ('remove_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart-fill favoriteIconShow"></i> </a>
         {% else %}
             <a id="addFavorite" class="addFavorite" href="{{ path ('add_favorite' , {'id': product.id}) }}" data-product-id="{{ product.id }}"><i id="favoriteIcon{{ product.id }}" class="bi-heart favoriteIconShow"></i> </a>
         {% endif %}
+    <br>  <p>Ajouter aux favoris</p>  
+    </div>
         {% endif %}
 
 
@@ -141,7 +144,7 @@
           /5 </strong> </h2>
     <h3> Section commentaire </h3>
     {% for  review in reviews  %}
-    {{dump(review)}}
+  {#}  {{dump(review)}} #}
     <article class="review">
         <div class="commentaryTop">
        <p>Note:{{review.note}}/5</p> 
