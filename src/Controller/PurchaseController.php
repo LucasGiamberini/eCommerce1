@@ -27,9 +27,18 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class PurchaseController extends AbstractController
-{   #[Route('/purchase/edit', name: 'edit_adress')]
+{   
+
+    public function __construct(private ParameterBagInterface $param)
+    {
+
+    }
+
+
+    #[Route('/purchase/edit', name: 'edit_adress')]
     #[Route('/purchase', name: 'app_purchase')]
     public function index(Security $security, SessionInterface $session, Request $request): Response
     {
@@ -110,7 +119,7 @@ class PurchaseController extends AbstractController
 
 // payement par stripe
         #[Route('/purchase/pay', name: 'app_pay')]
-    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request ): Response
+    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request, ParameterBagInterface $param ): Response
     {    
         if (!$this->isCsrfTokenValid('pay', $request->request->get('_csrf_token'))) {// on recupere le jeton csrf et on verifie si elle est valide
             return $this->redirectToRoute('app_home');// si le jeton n'est pas valide , alors la page renvoyé est la page d'accueille
@@ -119,8 +128,9 @@ class PurchaseController extends AbstractController
 
         $total=$session->get("total");// recuperation du montant present en session
         $totalStripe= $total*100;// multiplication par 100 pour avoir le montant en centime
+            $stripeApiKey= $this->param->get('STRIPE_SECRET_KEY');
 
-        Stripe::setApiKey("sk_test_51OosdzCmZ8F0ibT38qCeNaBVbmiDqMuPF6yuwXce8A3oOIs9ki2w9CgllEUve9SoBLG8BkLnoQndmNBHfzjowYhY00ePXbUauc");
+        Stripe::setApiKey($stripeApiKey);
 
         $session = Session::create([
             'payment_method_types' => ['card'],// payement par carte

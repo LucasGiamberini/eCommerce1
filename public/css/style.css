@@ -4,6 +4,10 @@
     font-family: "Red Rose", serif;
 }
 
+:root{
+    --primary : #a1456d;
+}
+
 .h3, h3 {
     font-size: calc(1.0rem + .6vw) !important;
 }
@@ -106,6 +110,10 @@ nav a:hover i{
     flex-direction: row;
     justify-content: center;
     margin-bottom: 3vh;
+    border-top: 5px solid var(--primary);
+    border-bottom: 5px solid var(--primary);
+    padding: 1vh !important;
+    margin: 9vh;
 }
 
 
@@ -115,7 +123,11 @@ nav a:hover i{
     background-color: white;
     padding-top: 7vh;
     padding: 7vh;
-   
+    border: 6px solid;
+    border-top-right-radius: 4vw;
+    border-bottom-left-radius: 4vw;
+    padding: 4vh 1vh;
+    margin: 1vh;
 }
 
 
@@ -129,6 +141,7 @@ nav a:hover i{
 input[type=number] {
     text-align: center;
 }
+
 
 /*////////////////////////header///////////////*/
 
@@ -590,7 +603,7 @@ margin: 0 6vw;
     /* border: 2px solid black; */
     /* border-bottom: none; */
     font-size: 3vh;
-    box-shadow: 0px 0px 4px 2px #4593A1;
+    box-shadow: 0px 0px 4px 2px var(--primary);
     width: 15vw;
     text-align: center;
 }
@@ -665,7 +678,7 @@ margin: 0 6vw;
 }
 
 .ProductBox{
-    background-color: #4593A1;
+    background-color: var(--primary);
     width: 18vw;
     height: 63vh;
     display: flex;
@@ -800,7 +813,7 @@ margin: 0 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #4593A1;
+    background-color: var(--primary);
     justify-content: space-around;
     height: 42vh;
 
@@ -864,7 +877,7 @@ margin: 0 6vw;
 }
 
 #commentary{
-    background-color: #4593A1;
+    background-color: var(--primary);
     margin-top: 2vh;
 }
 /*//////carousel show//////////*/
@@ -974,7 +987,7 @@ margin: 0 6vw;
 
 .rowProducts{
 
-    background-color: #4593A1;
+    background-color: var(--primary);
     border-radius: 1vw;
     align-items: center;
     color:#000000;
@@ -1219,13 +1232,9 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
     font-size: 1.5rem;
-    border: 6px solid;
-  
 height: 71vh;
-border-top-right-radius: 2vw;
-    border-bottom-left-radius: 2vw;
+
 }
 
 .menuCenter{
@@ -1234,10 +1243,7 @@ border-top-right-radius: 2vw;
 }
 
 #editUser{
-    border: 6px solid;
     height: 71vh;
-    border-top-right-radius: 2vw;
-    border-bottom-left-radius: 2vw;
     padding: 3vh 6vw;
 }
 
@@ -1283,6 +1289,11 @@ textarea {
 
 
 /*///////////////////////////////show order//////////////////*/
+
+.productNameNavigation{
+    color:black
+}
+
 #showOrder{
     border: 5px solid;
     padding: 2vh;
@@ -1296,6 +1307,9 @@ textarea {
     margin-right: 0px !important;
 }
 
+.rowBasket{
+    border-top: 0px solid black;
+}
 
 #adress{
     display: flex;
@@ -1326,8 +1340,8 @@ textarea {
 
 #titleUserMenu{
     text-align: center;
-    border-top: solid #4593A1;
-    border-bottom: solid  #4593A1;
+    border-top: solid var(--primary);
+    border-bottom: solid  var(--primary);
   
     margin-top: 2vh;
     padding: 0em;
@@ -1363,6 +1377,14 @@ textarea {
     align-content: center;
     justify-content: center;
     margin-bottom: 3vh;
+}
+
+.userMenuReturn {
+    width: 21vw;
+}
+
+.userMenuReturn i{
+    font-size: 2rem;
 }
 /*////////////////////////////media query tablet //////////////////////*/
 
@@ -1413,7 +1435,8 @@ textarea {
     }
 
    .template{
-    padding-top: 21vh;
+    margin-top: 13vh;
+
    }
    
     .boxHomeBlog{
@@ -1752,6 +1775,8 @@ height:5vh ;
 @media (min-device-width: 320px) and (max-device-width: 767px) and (orientation:portrait) {
    .template{
     padding: 1vh;
+    border: 12px solid;
+
    }
    
     i{
@@ -1762,7 +1787,8 @@ height:5vh ;
   }
     .template{
         width: 95%;
-        padding-top: 21vh;
+        padding-top: 4vh;
+        margin-top: 18vh;
        }
        
         .boxHomeBlog{
@@ -2216,7 +2242,7 @@ height:5vh ;
     
     .rowProducts{
         display: grid !important;
-        background-color: #4593A1;
+        background-color: var(--primary);
         border-radius: 5vw;
     }
     

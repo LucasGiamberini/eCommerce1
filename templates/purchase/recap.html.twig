@@ -21,7 +21,7 @@
 <tbody>
 <div id="basketRecap">
     <thead>
-        <div class="row">
+        <div class="row rowBasket">
             <div class="col-sm">   
             </div>
             <div class="col-sm">
@@ -45,7 +45,7 @@
 
     {% for basket in baskets %}
     <div id="productBasketRecap">
-    <div class="row">
+    <div class="row rowBasket">
         <div class="col-sm">
         {% if basket.product.pictures[0] is defined %}
         <figure>
@@ -54,7 +54,7 @@
         {% endif %}
         </div>
         <div class="col-sm">
-            <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
+            <a class="productNameNavigation"  href="{{ path ('show_product' , {'id': basket.product.id})}}">
                 {{basket.product.name}}
             </a>nicotine:{{basket.nicotine.proportioning}}
           

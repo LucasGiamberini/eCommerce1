@@ -14,7 +14,7 @@
 
 
 <thead>
-    <div id="tableHeadBasket" class="row">
+    <div id="tableHeadBasket" class="row rowBasket">
         <div class="col-sm">   
         </div>
         <div class="col-sm">
@@ -38,7 +38,7 @@
 </thead>
 <tbody>
 {% for basket in baskets %}
-<div class="row rowProducts">
+<div class="row rowProducts rowBasket">
     <div class="col-sm basketPicture">
       
     {% if basket.product.pictures[0] is defined %}
@@ -48,7 +48,7 @@
     {% endif %}
     </div>
     <div class="col-sm basketName">
-        <a href="{{ path ('show_product' , {'id': basket.product.id})}}">
+        <a  class="productNameNavigation" href="{{ path ('show_product' , {'id': basket.product.id})}}">
             {{basket.product.name}}  
         </a> 
         <p>nicotine:{{basket.nicotine.proportioning}}</p>
@@ -83,7 +83,7 @@
 </tbody>
 
 <tfoot>
-    <div id="rowToValidate" class="row">
+    <div id="rowToValidate" class="row rowBasket">
     
         <div  id="amountBasket"class="col-sm" colspan="2"> 
         Total Commande:{{ '%0.2f'|format(total) }} &euro;
