@@ -1262,7 +1262,9 @@ footer{
     flex-direction: column;
     
 }
-
+#footerSocialTitle{
+    padding : 0 0;
+   }
 
 #footerLegal a{
     color:white;
