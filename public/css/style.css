@@ -115,7 +115,7 @@ nav{
 }
 
 .blue{
-    color:#00BEE0;
+    color:#0654a5;
 }
 
 .white{
@@ -498,8 +498,8 @@ right: 16vw;
 .homeTitle{
     text-align: center;
     width: 90%;
-    border-top: solid #00BEE0;
-    border-bottom: solid #00BEE0 ;
+    border-top: solid #0654a5;
+    border-bottom: solid #0654a5 ;
     margin: 10vh;
     font-size: 2.5rem !important;
 }
