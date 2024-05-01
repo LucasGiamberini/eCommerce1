@@ -585,7 +585,7 @@ article{
 
 #socialHome{
     text-align: center;
-    background-color:#00BEE0 ;
+    background-color:#0654a5 ;
     border-bottom-left-radius: 2vw;
     border-bottom-right-radius: 2vw;
 }
@@ -2225,6 +2225,9 @@ height:5vh ;
         font-size: 2rem ;
        }
     
+       #footerSocialTitle{
+        font-size: 3rem !important;
+       }
        /*////////////////////////////////nav produit//////////////////////////*/
        .productNoteNavigation {
         font-size: 2rem;
