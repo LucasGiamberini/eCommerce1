@@ -13,6 +13,19 @@
 }
 
 
+
+#titleHomeTop, #titleHomeTop::before, #titleHomeTop::after {
+    display:inline-block;
+    vertical-align: middle;
+  }
+  #titleHomeTop::before, #titleHomeTop::after {
+    height: 1vh;
+    width: 13vw;
+    margin: 0 3vw;
+    background: orange;
+    content: "";
+  }
+
 h2{
 
     padding: 2em;
@@ -69,17 +82,37 @@ nav{
   background-size: cover;
   background-attachment: fixed;
   font-size: 4rem !important;
+  padding: 11vh 0vw;
 }
 
-.blueTitle::before{
-    border-top: 2px solid black;
-    position: absolute;
-}
 
-.blueTitle::after{
-    border: 2px solid black;
-}
 
+.blueTitle, .blueTitle::before, .blueTitle::after {
+    display:inline-block;
+    vertical-align: middle;
+  }
+ 
+  .blueTitle::before {
+    height: 4px;
+    width: 3VW;
+    background: rgb(0, 0, 0);
+    content: "";
+    margin-right: 2vw
+  }
+ 
+ 
+  .blueTitle::after {
+    height: 4px;
+    width: 41vw;
+    background: rgb(0, 0, 0);
+    content: "";
+    MARGIN-left: 2vw;
+  }
+
+#titleBlog::after,#titleBlog::before{
+    height: 4px;
+    width: 14vw !important;
+}
 
 .blue{
     color:#00BEE0;
@@ -394,7 +427,13 @@ right: 16vw;
   
   
 /*///////////////////////////home page////////////////////////////////*/
-
+#homeTop{
+    margin-top:12vh;
+    padding: 0 13vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
 
 /*//////////////////////////////carousel////////////////////////////*/
 .carousel {
@@ -416,7 +455,7 @@ right: 16vw;
   
   .carousel-item img {
     width: 100%;
-    height: 100%;
+    height: 90%;
   }
   
   .carousel-item:not(.active) {
@@ -432,6 +471,19 @@ right: 16vw;
     color: #ffffff;
     font-size: 2rem;
     cursor: pointer;
+  }
+
+
+  #slide2{
+    height: 96vh;
+    top: -8vh;
+    position: relative;
+  }
+
+  #slide3{
+    height: 100vh;
+    position: relative;
+    top: -7vh;
   }
 
   .prev {
@@ -598,7 +650,8 @@ article{
 
 #allFilterHome{
 margin: 0 6vw;
-
+border-bottom: 0.5vh solid black;
+    margin-bottom: 5vh;
 }
 
 #ResultBoxHome{
@@ -1328,12 +1381,7 @@ textarea {
     color:black
 }
 
-#showOrder{
-    border: 5px solid;
-    padding: 2vh;
-    border-top-right-radius: 2vw;
-    border-bottom-left-radius: 2vw;
-}
+
 
 .row{
     border-top: 2px solid black;
@@ -1453,6 +1501,7 @@ textarea {
         right: 2vw;    
     }
 
+
 }
 
 @media only screen  and (max-width: 1367px) {
@@ -1484,6 +1533,34 @@ font-size: 2rem !important;
     flex-direction: column;
     }
 
+    .templateHome{       
+         margin-top: 15vh;   
+    }
+
+    #titleHomeTop::before, #titleHomeTop::after {
+        height: 1vh;
+        width: 10vw;
+        margin: 0 2vw;
+        background: orange;
+        content: "";
+      }
+
+      #titleBlog::after, #titleBlog::before {
+     
+        width: 11vw !important;
+    }
+
+      #homeTop {
+        margin-top: 12vh;
+        padding: 0 1vh;
+      }
+
+
+
+      .blueTitle::after {
+        height: 4px;
+        width: 36vw;
+      }
  /*//////////////////header/////////////////////////*/   
    
   header{
@@ -1610,8 +1687,25 @@ display: none;
 
 .carousel{
     margin-top: 19%;
-    height: 38rem;
+    height: 31rem;
    }
+
+   .carousel-item img {
+    width: 100%;
+    height: 31rem !important;
+  }
+
+
+  #slide2{
+        
+    position: initial !important;
+  }
+
+  #slide3{
+
+    position: initial !important;
+
+  }
 /*/////////////////////////home result///////////////////*/
 
 .formNav {
@@ -2013,6 +2107,25 @@ height:5vh ;
             font-size: 2rem;
         }
      /*//////////////home///////////////*/
+    h1{
+        
+        font-size: 3.5rem !important;
+    }
+    
+
+    #titleHomeTop::before, #titleHomeTop::after {
+        height: 10px;
+        width: 78px;
+        margin: 0 1vw;
+
+    }
+
+     #homeTop{
+        margin-top:6vh;
+        padding: 0 1vh;
+     }
+     
+     
      #allFilterHome {
         margin: 0px 2vw;
     }  
@@ -2030,6 +2143,7 @@ height:5vh ;
     
     .templateHome {
         width: 95%;
+        margin-top: 16vh;
     }
     
     .homeTitle{
@@ -2040,18 +2154,22 @@ height:5vh ;
     .carousel-control{
         font-size: 10vw !important;
     }
+
+    
     /*//////////////////home carousel////////////////*/
     
     .carousel-item img {
      
-        height: 38rem;
+        height: 38rem !important;
     }
     
     .carousel{
         margin-top: 26%;
         height: 38rem;
-        width: 108%;
+        width: 109%;
        }
+
+    
     /*/////////////////////////home result///////////////////*/
     
     .formNav{
@@ -2067,9 +2185,26 @@ height:5vh ;
     /*//////////////////home blog////////////////////*/
     .blueTitle {
         font-size: 4.5rem !important;
-        margin: 5vh 0em;
+        margin: 1vh 0em;
     }
 
+
+    .blueTitle, .blueTitle::before, .blueTitle::after {
+        display:inline-block;
+        vertical-align: middle;
+      }
+      .blueTitle::after {
+        height: 4px;
+        width: 38vw;
+        background: rgb(0, 0, 0);
+        content:""
+      }
+
+
+      #titleBlog::after, #titleBlog::before {
+        height: 4px;
+        width: 1vw !important;
+    }
 
     #pictureWhyVapoting {
         width: 58vw;
