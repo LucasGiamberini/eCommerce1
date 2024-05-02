@@ -7,6 +7,7 @@ use App\Repository\ReviewRepository;
 use App\Repository\ProductRepository;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,5 +67,41 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_moderateReview',['id' => $idProduct] );
 
 }
+
+#[Route('/m4st3rAdm1n/responseForm/{idReview}/{idProduct}', name: 'responseForm_commentary')]
+public function responseFormReview($idReview,$idProduct,ReviewRepository $reviewRepository,EntityManagerInterface $entityManager ): Response
+{
+
+   
+    $review = $reviewRepository->findOneBy(["id" => $idReview]  ) ;  
+
+
+    return $this->render('admin/responseReview.html.twig',['review' => $review , 'idProduct' => $idProduct ] );
+
+}
+
+
+
+#[Route('/m4st3rAdm1n/response/{idReview}/{idProduct}', name: 'response_commentary')]
+public function responseReview($idReview,$idProduct,ReviewRepository $reviewRepository,EntityManagerInterface $entityManager,Request $request  ): Response
+{
+
+    $response = $request->request->get('response');
+
+   
+    $review = $reviewRepository->findOneBy(["id" => $idReview]  ) ;  
+    $review->setAdminResponse($response);
+    $entityManager->persist($review);
+        $entityManager->flush();
+
+    return $this->redirectToRoute('admin_moderateReview',['id' => $idProduct] );
+
+
+}
+
+
+
+
+
 
 }

@@ -31,6 +31,9 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $Product = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $AdminResponse = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,6 +100,18 @@ class Review
     public function setProduct(?Product $Product): static
     {
         $this->Product = $Product;
+
+        return $this;
+    }
+
+    public function getAdminResponse(): ?string
+    {
+        return $this->AdminResponse;
+    }
+
+    public function setAdminResponse(?string $AdminResponse): static
+    {
+        $this->AdminResponse = $AdminResponse;
 
         return $this;
     }

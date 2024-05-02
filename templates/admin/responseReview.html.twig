@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Repondre a un commentaire{% endblock %}
+
+{% block body %}
+<h1> Repondre a un commentaire</h1>
+<p>{{review.commentary}}</p><br>
+<form action="{{ path('response_commentary',  {'idReview' : review.id ,'idProduct' : idProduct} ) }}" method="post" >
+<textarea type="text" id="text" name="response" >    </textarea>
+<input class="blueButton" type="submit">
+</form>
+{% endblock %}

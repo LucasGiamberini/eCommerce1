@@ -20,5 +20,6 @@
 
 </article>
 <a href="{{path('anonimise_review' , {'idReview' : review.id ,'idProduct' : product.id })}}"> Enlever commentaire </a>
+<a href="{{path('responseForm_commentary' , {'idReview' : review.id ,'idProduct' : product.id })}}"> Repondre  au commentaire </a>
 {% endfor %}
 {% endblock %}
