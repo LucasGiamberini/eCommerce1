@@ -1144,7 +1144,7 @@ border-bottom: 0.5vh solid black;
 }
 
 .buttonQuantityBasket:hover{
-    background-color: #00BEE0;
+    background-color: var(--secondary);
 }
 
 
@@ -1176,7 +1176,10 @@ border-bottom: 0.5vh solid black;
   
 }
 
-
+.adminResponse{
+    border-top: 23px solid white;
+    border-right: 23px solid white;
+}
 
 /*//////////////////////////purchase/////////////////////////////*/
 

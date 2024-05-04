@@ -102,10 +102,10 @@ class ProductController extends AbstractController
 
        //pour afficher un produit
        #[Route('/product/{id}/Show', name: 'show_product')]//on recupere l'id du produit
-       public function show($id,ProductRepository $productRepo, Security $security): Response
+       public function show($id,ProductRepository $productRepo): Response
        {    
           $product = $productRepo->showProduct($id);
-          $userPurchases = $security->getUser()->getPurchases();
+      
          
           
            
