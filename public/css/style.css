@@ -19,6 +19,9 @@
     display:inline-block;
     vertical-align: middle;
   }
+
+
+  
   #titleHomeTop::before, #titleHomeTop::after {
     height: 1vh;
     width: 13vw;
