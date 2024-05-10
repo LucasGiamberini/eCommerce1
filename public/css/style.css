@@ -448,8 +448,37 @@ right: 16vw;
     flex-direction: column;
     align-items: center;
     margin: 0vw 0vw !important;
+    margin-bottom: 5vh !important;
  }
 
+
+
+ #homeTop p{
+    width: 91%;
+ }
+
+ #homeTop article{
+    border: 3px solid;
+    border-top-right-radius: 4vw;
+    border-bottom-left-radius: 4vw;
+    margin-bottom: 1vh;
+    width: 93%;
+    
+    box-shadow: -1px 8px 3px 0px black;
+ }
+
+
+ #homeTop article h2{
+    color: #0654a5;
+    font-weight: bolder;   
+    text-shadow: 3px 2px #00000052;
+    font-size: 3rem !important;
+    border-top: solid #0654a5;
+    border-bottom: solid #0654a5;
+    padding: 1vh;
+    margin: 7vh;
+
+ }
 /*//////////////////////////////carousel////////////////////////////*/
 .carousel {
     position: relative;
@@ -457,6 +486,7 @@ right: 16vw;
     width: 101vw;
     height: 88vh;
     right: 6vw;
+    border: 4px solid black;
   }
   
   .carousel-inner {
@@ -1612,7 +1642,7 @@ font-size: 2rem !important;
    
   header{
     filter:brightness(1);
-    height:18vw;
+    height:14vh;
     position: fixed;
     z-index: 3;
   }
@@ -1630,7 +1660,7 @@ font-size: 2rem !important;
    }
 
    #logo{
-    width: 26%;
+    width: 22vh;
     position: fixed;
     z-index: 3;
    }
@@ -2231,7 +2261,7 @@ height:5vh ;
     .carousel{
         margin-top: 26%;
         height: 38rem;
-        width: 109%;
+        width: 110%;
        }
 
     
