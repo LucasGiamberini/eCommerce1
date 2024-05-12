@@ -334,30 +334,27 @@ transform: scale(1.2) ;
 /*///////////////////////img cloud////////////////////////////*/
 
 .cloudLeft-home{
-/* display: none; */
+
 position: relative;
 z-index: 1;
 width: 80vw;
 bottom: 20vw;
 right: 16vw;
-  /*  animation: cloud1 1s  forwards; */
    
 }
 
 .cloudRight-home{
- /*   display: none; */
+
  position: relative;
  z-index: 3;
  width: 80vw;
  bottom: 45vh;
  left: 18vw;
- /* animation: cloud2 1s ease  forwards;*/
-
 }
 
 
 .cloudLeft{
-    /* display: none; */
+
         position: absolute;
         z-index: 1;
         width: 80vw;
@@ -368,7 +365,7 @@ right: 16vw;
     }
     
     .cloudRight{
-     /*   display: none; */
+
         position: absolute;
         z-index: 3;
         width: 80vw;
@@ -795,7 +792,6 @@ border-bottom: 0.5vh solid black;
 
 .ProductBoxs{
  
-    /* padding: 5vh 0vw; */
     border-top: 3px outset;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
