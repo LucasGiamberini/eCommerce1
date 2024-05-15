@@ -41,11 +41,11 @@
 <div class="row rowProducts rowBasket">
     <div class="col-sm basketPicture">
       
-    {% if basket.product.pictures[0] is defined %}
+ 
     <figure>
     <img class="pictureBasket" src="{{ asset('/picture/' ~ basket.product.pictures[0].name) }}" alt="{{ basket.product.name }}">
     </figure>
-    {% endif %}
+
     </div>
     <div class="col-sm basketName">
         <a  class="productNameNavigation" href="{{ path ('show_product' , {'id': basket.product.id})}}">
