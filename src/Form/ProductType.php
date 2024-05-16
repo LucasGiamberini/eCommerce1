@@ -11,6 +11,7 @@ use App\Form\NicotineChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -48,9 +49,15 @@ class ProductType extends AbstractType
                 'mapped' => false,
                 
                 'required' => false,
-                'attr' => [
+                'attr' => [              
                     'accept' => '.jpg, .jpeg , .webp'
-                ] 
+                ] ,
+      //          'constraints' => [
+        //           new File([
+            //           'maxSize' => '400k', // Limite de taille de l'image (ici, 400 Ko)
+          //            'maxSizeMessage' => 'La taille de l\'image ne doit pas dépasser 400 Ko.',
+           //         ])
+             //   ],
             ])
             ->add('Valider' , SubmitType::class,[
                 'attr' => [ 'id' => 'blueButton']])

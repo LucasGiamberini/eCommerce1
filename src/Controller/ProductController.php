@@ -107,9 +107,6 @@ class ProductController extends AbstractController
           $product = $productRepo->showProduct($id);
       
          
-          
-           
-         
            return $this->render('product/show.html.twig',
        [ 'product' => $product[0],
        'description' => $product[0]->getDetail(),
