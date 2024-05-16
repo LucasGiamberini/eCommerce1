@@ -446,9 +446,15 @@ right: 16vw;
     align-items: center;
     margin: 0vw 0vw !important;
     margin-bottom: 5vh !important;
+    text-align: center;
  }
 
-
+ #homeTopPicture{
+    width: 63%;
+    box-shadow: -1px 9px 3px 0px black;
+    border-radius: 7vw;
+    border: 7px solid orange;
+ }
 
  #homeTop p{
     width: 91%;
