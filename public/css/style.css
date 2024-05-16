@@ -456,6 +456,11 @@ right: 16vw;
     box-shadow: -1px 9px 3px 0px black;
     border-radius: 7vw;
     border: 7px solid orange;
+    transition: transform  1s  ;
+ }
+
+ #homeTopPicture:hover{
+    transform:scale(1.1)
  }
 
  #homeTop p{
@@ -1586,7 +1591,9 @@ textarea {
 }
 
 @media only screen  and (max-width: 1367px) {
-   
+    #homeTopPicture:hover{
+        transform:scale(1.0)
+     }
     .favoriteIconShow {
 font-size: 2rem !important;
     }
