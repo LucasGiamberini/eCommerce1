@@ -86,13 +86,13 @@
             
         <label for="heighteen">
             <input type="checkbox" id="heighteen" name="heighteen" required>
-            En cochant cette case,j'affirme avoir plus de 18 ans.<br>.  
+            En cochant cette case, j'affirme avoir plus de 18 ans.<br>.  
         </label>
        
          </label>
         <label for="termsAgreed">
            <input type="checkbox" id="termsAgreed" name="termsAgreed" required>
-            En cochant cette case,j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a>  et les  <a href="{{ path('app_CGV') }}">CGV</a>.
+            En cochant cette case, j'accepte les  <a href="{{ path('app_CGU') }}">CGU</a>  et les  <a href="{{ path('app_CGV') }}">CGV</a>.
         </label>
         <input type="hidden" name="_csrf_token"   value="{{ csrf_token('pay') }}"  >
         <button class="confirm" type="submit">Payer</button>
