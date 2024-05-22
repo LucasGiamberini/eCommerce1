@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -74,13 +75,13 @@ class PurchaseController extends AbstractController
 
 // recapitulatif de commande avant le paiement
     #[Route('/purchase/recap', name: 'app_recap')]
-    public function recap(Security $security, SessionInterface $session, ProductRepository $productRepository, NicotineRepository $nicotineRepository): Response
+    public function recap(CsrfTokenManagerInterface $csrfTokenManager,Security $security, SessionInterface $session, ProductRepository $productRepository, NicotineRepository $nicotineRepository): Response
     {   
         // recupere toute les donnée enregistrer en session
         $basket=$session->get("basket");
         $adress=$session->get("adress");
         $total=$session->get("total");
-       
+       $csrfToken= $csrfTokenManager->getToken('pay')->getValue();
   
          // voir basket controller ligne 23
             $dataBasket= [];
@@ -101,13 +102,13 @@ class PurchaseController extends AbstractController
             $totalQuantity += $quantity;// on ajoute a la quantité total la quantité du produit
             }
         
-
+            $session->set("csrfToken", $csrfToken);
           
         return $this->render('purchase/recap.html.twig', 
         [ 'address' => $adress,
         'baskets' => $dataBasket,
          'total' => $total ,
-        
+        'csrf' =>  $csrfToken
     ]);
     }
 
@@ -119,11 +120,13 @@ class PurchaseController extends AbstractController
 
 // payement par stripe
         #[Route('/purchase/pay', name: 'app_pay')]
-    public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request, ParameterBagInterface $param ): Response
+    public function pay(CsrfTokenManagerInterface $csrfTokenManager,Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request, ParameterBagInterface $param ): Response
     {    
-        $csrfTokenForm=$request->request->get('_csrf_token');
-       
-        if (!$this->isCsrfTokenValid('pay', $csrfTokenForm )) {// on recupere le jeton csrf et on verifie si elle est valide
+        $csrfTokenForm=$request->getPayload()->get('_csrf_token');
+        $csrfToken= $session->get("csrfToken");
+        
+   
+        if ($csrfToken !==  $csrfTokenForm) {// on recupere le jeton csrf et on verifie si elle est valide
             return $this->redirectToRoute('app_home');// si le jeton n'est pas valide , alors la page renvoyé est la page d'accueille
         }
         else{
