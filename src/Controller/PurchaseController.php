@@ -121,7 +121,9 @@ class PurchaseController extends AbstractController
         #[Route('/purchase/pay', name: 'app_pay')]
     public function pay(Security $security, ProductRepository $productRepository ,SessionInterface $session,Request $request, ParameterBagInterface $param ): Response
     {    
-        if (!$this->isCsrfTokenValid('pay', $request->request->get('_csrf_token'))) {// on recupere le jeton csrf et on verifie si elle est valide
+        $csrfTokenForm=$request->request->get('_csrf_token');
+       
+        if (!$this->isCsrfTokenValid('pay', $csrfTokenForm )) {// on recupere le jeton csrf et on verifie si elle est valide
             return $this->redirectToRoute('app_home');// si le jeton n'est pas valide , alors la page renvoyé est la page d'accueille
         }
         else{
